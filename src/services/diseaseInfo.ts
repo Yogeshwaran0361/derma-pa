@@ -1655,8 +1655,9 @@ export function formatConfidencePct(confidence: number): string {
   return clamped.toFixed(1);
 }
 
-export function getLocalizedDiseaseInfo(classKey: string, lang: Language): LocalizedDiseaseDetail {
-  if (!classKey) {
+export function getLocalizedDiseaseInfo(classKey: any, lang: Language): LocalizedDiseaseDetail {
+  const safeKey = String(classKey !== undefined && classKey !== null ? classKey : '').trim();
+  if (!safeKey) {
     const fallback = diseaseDatabase['benign_other'];
     return fallback[lang] || fallback['en'];
   }
@@ -1668,7 +1669,7 @@ export function getLocalizedDiseaseInfo(classKey: string, lang: Language): Local
   };
 
   // 1. Check numeric class ID index in master knowledge base (Classes 0 to 152)
-  const numericMatch = classKey.match(/\b([0-9]{1,3})\b/);
+  const numericMatch = safeKey.match(/\b([0-9]{1,3})\b/);
   if (numericMatch) {
     const classId = parseInt(numericMatch[1], 10);
     if (combinedKB[classId]) {
@@ -1677,8 +1678,8 @@ export function getLocalizedDiseaseInfo(classKey: string, lang: Language): Local
   }
 
   // 2. Check canonical or alternate names in combined knowledge base
-  const cleanKey = classKey.toLowerCase().trim().replace(/[\s\-]+/g, '_');
-  const rawCleanKey = classKey.toLowerCase().trim();
+  const cleanKey = safeKey.toLowerCase().replace(/[\s\-]+/g, '_');
+  const rawCleanKey = safeKey.toLowerCase();
 
   for (const [id, entry] of Object.entries(combinedKB)) {
     if (!entry) continue;
@@ -1723,7 +1724,7 @@ export function getLocalizedDiseaseInfo(classKey: string, lang: Language): Local
   }
 
   // Authoritative Professional Clinical Detail (NO "UNAVAILABLE" TEXT EVER DISPLAYED)
-  const formattedName = classKey.replace(/^class_\d+_\(?|\)?$/g, '').replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+  const formattedName = safeKey.replace(/^class_\d+_\(?|\)?$/g, '').replace(/_/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase());
 
   return {
     name: formattedName,
