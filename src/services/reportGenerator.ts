@@ -60,13 +60,9 @@ export function generateClinicalReport(predictionInput: any, imageUrlInput: stri
 
   // 3. HEALTHY / NO-VISIBLE-PROBLEM SAFEGUARD
   const isExplicitlyNormal = prediction.is_normal === true || rawDiseaseResult.classId === 101 || (prediction.display_title && prediction.display_title.toLowerCase().includes('normal'));
-  const isUncertainWeakPrediction = (prediction.is_low_confidence === true || Number(confidencePct) < 25.0);
 
   let diseaseResult = rawDiseaseResult;
   if (isExplicitlyNormal) {
-    diseaseResult = resolveDisease(101);
-  } else if (isUncertainWeakPrediction) {
-    // For uncertain / weak model predictions (<25% confidence) on normal skin photos, classify as Healthy Skin
     diseaseResult = resolveDisease(101);
   }
 

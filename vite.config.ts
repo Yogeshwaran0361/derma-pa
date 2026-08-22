@@ -4,8 +4,13 @@ import tailwindcss from '@tailwindcss/vite';
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import path from 'path';
 
-export default defineConfig({
-  plugins: [react(), tailwindcss(), basicSsl()],
+export default defineConfig(({ command }) => ({
+  base: '/',
+  plugins: [
+    react(),
+    tailwindcss(),
+    ...(command === 'serve' ? [basicSsl()] : [])
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -21,4 +26,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));

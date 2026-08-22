@@ -1,6 +1,6 @@
 import { PredictionResponse, QualityCheckResult } from '../types';
 
-const GLOBAL_BACKEND_TUNNEL = 'https://statute-drives-cross-researcher.trycloudflare.com/api';
+const GLOBAL_BACKEND_TUNNEL = 'https://myrtle-frank-modular-boulevard.trycloudflare.com/api';
 
 function getEndpoints(): string[] {
   const endpoints: string[] = [];

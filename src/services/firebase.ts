@@ -35,14 +35,35 @@ import { Language } from '../i18n/translations';
 
 const env = (import.meta as any).env || {};
 
+const getValidApiKey = (val: any): string => {
+  const fallback = "AIzaSyDhgMms9zR5xEqiWby6o_0cLCxL2HvmxgU";
+  if (typeof val === 'string') {
+    const clean = val.replace(/["'\s\r\n]/g, '').trim();
+    if (clean.startsWith('AIzaSy') && clean.length >= 30) {
+      return clean;
+    }
+  }
+  return fallback;
+};
+
+const getValidEnv = (val: any, fallback: string): string => {
+  if (typeof val === 'string') {
+    const clean = val.replace(/["'\s\r\n]/g, '').trim();
+    if (clean !== '' && clean !== 'undefined' && clean !== 'null') {
+      return clean;
+    }
+  }
+  return fallback;
+};
+
 const firebaseConfig = {
-  apiKey: env.VITE_FIREBASE_API_KEY || "AIzaSyDhgMms9zR5xEqiWby6o_0cLCxL2HvmxgU",
-  authDomain: env.VITE_FIREBASE_AUTH_DOMAIN || "dermavision-ai-3417f.firebaseapp.com",
-  projectId: env.VITE_FIREBASE_PROJECT_ID || "dermavision-ai-3417f",
-  storageBucket: env.VITE_FIREBASE_STORAGE_BUCKET || "dermavision-ai-3417f.firebasestorage.app",
-  messagingSenderId: env.VITE_FIREBASE_MESSAGING_SENDER_ID || "24034671527",
-  appId: env.VITE_FIREBASE_APP_ID || "1:24034671527:web:f3dbe3a5637f778becd482",
-  measurementId: env.VITE_FIREBASE_MEASUREMENT_ID || "G-PDYYZ3EQT8"
+  apiKey: getValidApiKey(env.VITE_FIREBASE_API_KEY),
+  authDomain: getValidEnv(env.VITE_FIREBASE_AUTH_DOMAIN, "dermavision-ai-3417f.firebaseapp.com"),
+  projectId: getValidEnv(env.VITE_FIREBASE_PROJECT_ID, "dermavision-ai-3417f"),
+  storageBucket: getValidEnv(env.VITE_FIREBASE_STORAGE_BUCKET, "dermavision-ai-3417f.firebasestorage.app"),
+  messagingSenderId: getValidEnv(env.VITE_FIREBASE_MESSAGING_SENDER_ID, "24034671527"),
+  appId: getValidEnv(env.VITE_FIREBASE_APP_ID, "1:24034671527:web:f3dbe3a5637f778becd482"),
+  measurementId: getValidEnv(env.VITE_FIREBASE_MEASUREMENT_ID, "G-PDYYZ3EQT8")
 };
 
 // Initialize Firebase Singleton
