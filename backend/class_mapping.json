@@ -1,0 +1,767 @@
+{
+  "0": {
+    "class_index": 0,
+    "technical_class": "acne_&_rosacea",
+    "exact_disease_name": "Acne & Rosacea"
+  },
+  "1": {
+    "class_index": 1,
+    "technical_class": "actinic_keratosis",
+    "exact_disease_name": "Actinic Keratosis"
+  },
+  "2": {
+    "class_index": 2,
+    "technical_class": "alopecia_areata",
+    "exact_disease_name": "Alopecia Areata"
+  },
+  "3": {
+    "class_index": 3,
+    "technical_class": "androgenetic_alopecia",
+    "exact_disease_name": "Androgenetic Alopecia"
+  },
+  "4": {
+    "class_index": 4,
+    "technical_class": "angioma",
+    "exact_disease_name": "Angioma"
+  },
+  "5": {
+    "class_index": 5,
+    "technical_class": "angular_cheilitis",
+    "exact_disease_name": "Angular Cheilitis"
+  },
+  "6": {
+    "class_index": 6,
+    "technical_class": "aphthous_ulcer",
+    "exact_disease_name": "Aphthous Ulcer"
+  },
+  "7": {
+    "class_index": 7,
+    "technical_class": "apocrine_hydrocystoma",
+    "exact_disease_name": "Apocrine Hydrocystoma"
+  },
+  "8": {
+    "class_index": 8,
+    "technical_class": "balanitis_xerotica_obliterans",
+    "exact_disease_name": "Balanitis Xerotica Obliterans"
+  },
+  "9": {
+    "class_index": 9,
+    "technical_class": "basal_cell_carcinoma",
+    "exact_disease_name": "Basal Cell Carcinoma"
+  },
+  "10": {
+    "class_index": 10,
+    "technical_class": "bcc",
+    "exact_disease_name": "Bcc"
+  },
+  "11": {
+    "class_index": 11,
+    "technical_class": "beaus_lines",
+    "exact_disease_name": "Beaus Lines"
+  },
+  "12": {
+    "class_index": 12,
+    "technical_class": "behcets_syndrome",
+    "exact_disease_name": "Behcets Syndrome"
+  },
+  "13": {
+    "class_index": 13,
+    "technical_class": "blue_nevus",
+    "exact_disease_name": "Blue Nevus"
+  },
+  "14": {
+    "class_index": 14,
+    "technical_class": "bowenoid_papulosis",
+    "exact_disease_name": "Bowenoid Papulosis"
+  },
+  "15": {
+    "class_index": 15,
+    "technical_class": "bowens_disease",
+    "exact_disease_name": "Bowens Disease"
+  },
+  "16": {
+    "class_index": 16,
+    "technical_class": "bullous",
+    "exact_disease_name": "Bullous"
+  },
+  "17": {
+    "class_index": 17,
+    "technical_class": "cafe_au_lait_macule",
+    "exact_disease_name": "Cafe Au Lait Macule"
+  },
+  "18": {
+    "class_index": 18,
+    "technical_class": "callus",
+    "exact_disease_name": "Callus"
+  },
+  "19": {
+    "class_index": 19,
+    "technical_class": "candidiasis",
+    "exact_disease_name": "Candidiasis"
+  },
+  "20": {
+    "class_index": 20,
+    "technical_class": "cellulitis",
+    "exact_disease_name": "Cellulitis"
+  },
+  "21": {
+    "class_index": 21,
+    "technical_class": "chalazion",
+    "exact_disease_name": "Chalazion"
+  },
+  "22": {
+    "class_index": 22,
+    "technical_class": "clubbing_of_fingers",
+    "exact_disease_name": "Clubbing Of Fingers"
+  },
+  "23": {
+    "class_index": 23,
+    "technical_class": "crowes_sign",
+    "exact_disease_name": "Crowes Sign"
+  },
+  "24": {
+    "class_index": 24,
+    "technical_class": "cutanea_larva_migrans",
+    "exact_disease_name": "Cutanea Larva Migrans"
+  },
+  "25": {
+    "class_index": 25,
+    "technical_class": "cutaneous_horn",
+    "exact_disease_name": "Cutaneous Horn"
+  },
+  "26": {
+    "class_index": 26,
+    "technical_class": "cutaneous_t-cell_lymphoma",
+    "exact_disease_name": "Cutaneous T-Cell Lymphoma"
+  },
+  "27": {
+    "class_index": 27,
+    "technical_class": "cutis_marmorata",
+    "exact_disease_name": "Cutis Marmorata"
+  },
+  "28": {
+    "class_index": 28,
+    "technical_class": "darier-white_disease",
+    "exact_disease_name": "Darier-White Disease"
+  },
+  "29": {
+    "class_index": 29,
+    "technical_class": "dermatofibroma",
+    "exact_disease_name": "Dermatofibroma"
+  },
+  "30": {
+    "class_index": 30,
+    "technical_class": "dermatosis_papulosa_nigra",
+    "exact_disease_name": "Dermatosis Papulosa Nigra"
+  },
+  "31": {
+    "class_index": 31,
+    "technical_class": "desquamation",
+    "exact_disease_name": "Desquamation"
+  },
+  "32": {
+    "class_index": 32,
+    "technical_class": "digital_fibroma",
+    "exact_disease_name": "Digital Fibroma"
+  },
+  "33": {
+    "class_index": 33,
+    "technical_class": "dilated_pore_of_winer",
+    "exact_disease_name": "Dilated Pore Of Winer"
+  },
+  "34": {
+    "class_index": 34,
+    "technical_class": "discoid_lupus_erythematosus",
+    "exact_disease_name": "Discoid Lupus Erythematosus"
+  },
+  "35": {
+    "class_index": 35,
+    "technical_class": "drug_eruption",
+    "exact_disease_name": "Drug Eruption"
+  },
+  "36": {
+    "class_index": 36,
+    "technical_class": "drugeruption",
+    "exact_disease_name": "Drugeruption"
+  },
+  "37": {
+    "class_index": 37,
+    "technical_class": "eccrine_poroma",
+    "exact_disease_name": "Eccrine Poroma"
+  },
+  "38": {
+    "class_index": 38,
+    "technical_class": "eczema_&_dermatitis",
+    "exact_disease_name": "Eczema & Dermatitis"
+  },
+  "39": {
+    "class_index": 39,
+    "technical_class": "epidermoid_cyst",
+    "exact_disease_name": "Epidermoid Cyst"
+  },
+  "40": {
+    "class_index": 40,
+    "technical_class": "epithelioma_adenoides_cysticum",
+    "exact_disease_name": "Epithelioma Adenoides Cysticum"
+  },
+  "41": {
+    "class_index": 41,
+    "technical_class": "erythema_ab_igne",
+    "exact_disease_name": "Erythema Ab Igne"
+  },
+  "42": {
+    "class_index": 42,
+    "technical_class": "erythema_annulare_centrifigum",
+    "exact_disease_name": "Erythema Annulare Centrifigum"
+  },
+  "43": {
+    "class_index": 43,
+    "technical_class": "erythema_craquele",
+    "exact_disease_name": "Erythema Craquele"
+  },
+  "44": {
+    "class_index": 44,
+    "technical_class": "erythema_multiforme",
+    "exact_disease_name": "Normal / Healthy Skin (Benign Feature)"
+  },
+  "45": {
+    "class_index": 45,
+    "technical_class": "exfoliative_erythroderma",
+    "exact_disease_name": "Exfoliative Erythroderma"
+  },
+  "46": {
+    "class_index": 46,
+    "technical_class": "favre_racouchot",
+    "exact_disease_name": "Favre Racouchot"
+  },
+  "47": {
+    "class_index": 47,
+    "technical_class": "fibroma",
+    "exact_disease_name": "Fibroma"
+  },
+  "48": {
+    "class_index": 48,
+    "technical_class": "fibroma_molle",
+    "exact_disease_name": "Fibroma Molle"
+  },
+  "49": {
+    "class_index": 49,
+    "technical_class": "fixed_drug_eruption",
+    "exact_disease_name": "Fixed Drug Eruption"
+  },
+  "50": {
+    "class_index": 50,
+    "technical_class": "follicular_mucinosis",
+    "exact_disease_name": "Follicular Mucinosis"
+  },
+  "51": {
+    "class_index": 51,
+    "technical_class": "follicular_retention_cyst",
+    "exact_disease_name": "Follicular Retention Cyst"
+  },
+  "52": {
+    "class_index": 52,
+    "technical_class": "fordyce_spots",
+    "exact_disease_name": "Fordyce Spots"
+  },
+  "53": {
+    "class_index": 53,
+    "technical_class": "ganglion",
+    "exact_disease_name": "Ganglion"
+  },
+  "54": {
+    "class_index": 54,
+    "technical_class": "geographic_tongue",
+    "exact_disease_name": "Geographic Tongue"
+  },
+  "55": {
+    "class_index": 55,
+    "technical_class": "granulation_tissue",
+    "exact_disease_name": "Granulation Tissue"
+  },
+  "56": {
+    "class_index": 56,
+    "technical_class": "granuloma_annulare",
+    "exact_disease_name": "Granuloma Annulare"
+  },
+  "57": {
+    "class_index": 57,
+    "technical_class": "green_nail",
+    "exact_disease_name": "Green Nail"
+  },
+  "58": {
+    "class_index": 58,
+    "technical_class": "hailey_hailey_disease",
+    "exact_disease_name": "Hailey Hailey Disease"
+  },
+  "59": {
+    "class_index": 59,
+    "technical_class": "half_and_half_nail",
+    "exact_disease_name": "Half And Half Nail"
+  },
+  "60": {
+    "class_index": 60,
+    "technical_class": "herpes_simplex_virus",
+    "exact_disease_name": "Herpes Simplex Virus"
+  },
+  "61": {
+    "class_index": 61,
+    "technical_class": "herpes_zoster",
+    "exact_disease_name": "Herpes Zoster"
+  },
+  "62": {
+    "class_index": 62,
+    "technical_class": "hidradenitis_suppurativa",
+    "exact_disease_name": "Hidradenitis Suppurativa"
+  },
+  "63": {
+    "class_index": 63,
+    "technical_class": "histiocytosis_x",
+    "exact_disease_name": "Histiocytosis X"
+  },
+  "64": {
+    "class_index": 64,
+    "technical_class": "hypertrichosis",
+    "exact_disease_name": "Hypertrichosis"
+  },
+  "65": {
+    "class_index": 65,
+    "technical_class": "ichthyosis",
+    "exact_disease_name": "Ichthyosis"
+  },
+  "66": {
+    "class_index": 66,
+    "technical_class": "impetigo",
+    "exact_disease_name": "Impetigo"
+  },
+  "67": {
+    "class_index": 67,
+    "technical_class": "infestations_bites",
+    "exact_disease_name": "Infestations Bites"
+  },
+  "68": {
+    "class_index": 68,
+    "technical_class": "keloid",
+    "exact_disease_name": "Keloid"
+  },
+  "69": {
+    "class_index": 69,
+    "technical_class": "keratoacanthoma",
+    "exact_disease_name": "Keratoacanthoma"
+  },
+  "70": {
+    "class_index": 70,
+    "technical_class": "keratolysis_exfoliativa_of_wende",
+    "exact_disease_name": "Keratolysis Exfoliativa Of Wende"
+  },
+  "71": {
+    "class_index": 71,
+    "technical_class": "kerion",
+    "exact_disease_name": "Kerion"
+  },
+  "72": {
+    "class_index": 72,
+    "technical_class": "koilonychia",
+    "exact_disease_name": "Koilonychia"
+  },
+  "73": {
+    "class_index": 73,
+    "technical_class": "kyrles_disease",
+    "exact_disease_name": "Kyrles Disease"
+  },
+  "74": {
+    "class_index": 74,
+    "technical_class": "leiomyoma",
+    "exact_disease_name": "Leiomyoma"
+  },
+  "75": {
+    "class_index": 75,
+    "technical_class": "leukonychia",
+    "exact_disease_name": "Leukonychia"
+  },
+  "76": {
+    "class_index": 76,
+    "technical_class": "lichen",
+    "exact_disease_name": "Lichen"
+  },
+  "77": {
+    "class_index": 77,
+    "technical_class": "lichen_planus",
+    "exact_disease_name": "Lichen Planus"
+  },
+  "78": {
+    "class_index": 78,
+    "technical_class": "lichen_sclerosis_et_atrophicus",
+    "exact_disease_name": "Lichen Sclerosis Et Atrophicus"
+  },
+  "79": {
+    "class_index": 79,
+    "technical_class": "lichen_simplex_chronicus",
+    "exact_disease_name": "Lichen Simplex Chronicus"
+  },
+  "80": {
+    "class_index": 80,
+    "technical_class": "lichen_spinulosis",
+    "exact_disease_name": "Lichen Spinulosis"
+  },
+  "81": {
+    "class_index": 81,
+    "technical_class": "lipoma",
+    "exact_disease_name": "Lipoma"
+  },
+  "82": {
+    "class_index": 82,
+    "technical_class": "livedo_reticularis",
+    "exact_disease_name": "Livedo Reticularis"
+  },
+  "83": {
+    "class_index": 83,
+    "technical_class": "lupus",
+    "exact_disease_name": "Lupus"
+  },
+  "84": {
+    "class_index": 84,
+    "technical_class": "lymphangioma_circumscriptum",
+    "exact_disease_name": "Lymphangioma Circumscriptum"
+  },
+  "85": {
+    "class_index": 85,
+    "technical_class": "lymphocytic_infiltrate_of_jessner",
+    "exact_disease_name": "Lymphocytic Infiltrate Of Jessner"
+  },
+  "86": {
+    "class_index": 86,
+    "technical_class": "lymphomatoid_papulosis",
+    "exact_disease_name": "Lymphomatoid Papulosis"
+  },
+  "87": {
+    "class_index": 87,
+    "technical_class": "mal_perforans",
+    "exact_disease_name": "Mal Perforans"
+  },
+  "88": {
+    "class_index": 88,
+    "technical_class": "median_nail_dystrophy",
+    "exact_disease_name": "Median Nail Dystrophy"
+  },
+  "89": {
+    "class_index": 89,
+    "technical_class": "melanoma_(malignant)",
+    "exact_disease_name": "Melanoma (Malignant)"
+  },
+  "90": {
+    "class_index": 90,
+    "technical_class": "metastatic_carcinoma",
+    "exact_disease_name": "Metastatic Carcinoma"
+  },
+  "91": {
+    "class_index": 91,
+    "technical_class": "milia",
+    "exact_disease_name": "Milia"
+  },
+  "92": {
+    "class_index": 92,
+    "technical_class": "molluscum_contagiosum",
+    "exact_disease_name": "Molluscum Contagiosum"
+  },
+  "93": {
+    "class_index": 93,
+    "technical_class": "morphea",
+    "exact_disease_name": "Morphea"
+  },
+  "94": {
+    "class_index": 94,
+    "technical_class": "mucha_habermann_disease",
+    "exact_disease_name": "Mucha Habermann Disease"
+  },
+  "95": {
+    "class_index": 95,
+    "technical_class": "myxoid_cyst",
+    "exact_disease_name": "Myxoid Cyst"
+  },
+  "96": {
+    "class_index": 96,
+    "technical_class": "nail_dystrophy",
+    "exact_disease_name": "Nail Dystrophy"
+  },
+  "97": {
+    "class_index": 97,
+    "technical_class": "nail_ridging",
+    "exact_disease_name": "Nail Ridging"
+  },
+  "98": {
+    "class_index": 98,
+    "technical_class": "neurofibroma",
+    "exact_disease_name": "Neurofibroma"
+  },
+  "99": {
+    "class_index": 99,
+    "technical_class": "neurotic_excoriations",
+    "exact_disease_name": "Neurotic Excoriations"
+  },
+  "100": {
+    "class_index": 100,
+    "technical_class": "nevus_(common_mole)",
+    "exact_disease_name": "Nevus (Common Mole)"
+  },
+  "101": {
+    "class_index": 101,
+    "technical_class": "normal_/_healthy_skin_(benign_feature)",
+    "exact_disease_name": "Normal / Healthy Skin (Benign Feature)"
+  },
+  "102": {
+    "class_index": 102,
+    "technical_class": "onychogryphosis",
+    "exact_disease_name": "Onychogryphosis"
+  },
+  "103": {
+    "class_index": 103,
+    "technical_class": "onycholysis",
+    "exact_disease_name": "Onycholysis"
+  },
+  "104": {
+    "class_index": 104,
+    "technical_class": "onychomycosis",
+    "exact_disease_name": "Onychomycosis"
+  },
+  "105": {
+    "class_index": 105,
+    "technical_class": "onychoschizia",
+    "exact_disease_name": "Onychoschizia"
+  },
+  "106": {
+    "class_index": 106,
+    "technical_class": "paronychia",
+    "exact_disease_name": "Paronychia"
+  },
+  "107": {
+    "class_index": 107,
+    "technical_class": "pearl_penile_papules",
+    "exact_disease_name": "Pearl Penile Papules"
+  },
+  "108": {
+    "class_index": 108,
+    "technical_class": "pincer_nail_syndrome",
+    "exact_disease_name": "Pincer Nail Syndrome"
+  },
+  "109": {
+    "class_index": 109,
+    "technical_class": "pitted_keratolysis",
+    "exact_disease_name": "Pitted Keratolysis"
+  },
+  "110": {
+    "class_index": 110,
+    "technical_class": "pityriasis_alba",
+    "exact_disease_name": "Pityriasis Alba"
+  },
+  "111": {
+    "class_index": 111,
+    "technical_class": "pityriasis_rosea",
+    "exact_disease_name": "Normal / Healthy Skin (Benign Feature)"
+  },
+  "112": {
+    "class_index": 112,
+    "technical_class": "pityrosporum_folliculitis",
+    "exact_disease_name": "Pityrosporum Folliculitis"
+  },
+  "113": {
+    "class_index": 113,
+    "technical_class": "pseudofolliculitis_barbae",
+    "exact_disease_name": "Pseudofolliculitis Barbae"
+  },
+  "114": {
+    "class_index": 114,
+    "technical_class": "pseudorhinophyma",
+    "exact_disease_name": "Pseudorhinophyma"
+  },
+  "115": {
+    "class_index": 115,
+    "technical_class": "psoriasis",
+    "exact_disease_name": "Psoriasis"
+  },
+  "116": {
+    "class_index": 116,
+    "technical_class": "pyoderma_gangrenosum",
+    "exact_disease_name": "Pyoderma Gangrenosum"
+  },
+  "117": {
+    "class_index": 117,
+    "technical_class": "pyogenic_granuloma",
+    "exact_disease_name": "Pyogenic Granuloma"
+  },
+  "118": {
+    "class_index": 118,
+    "technical_class": "racquet_nail",
+    "exact_disease_name": "Racquet Nail"
+  },
+  "119": {
+    "class_index": 119,
+    "technical_class": "rhinophyma",
+    "exact_disease_name": "Rhinophyma"
+  },
+  "120": {
+    "class_index": 120,
+    "technical_class": "scar",
+    "exact_disease_name": "Scar"
+  },
+  "121": {
+    "class_index": 121,
+    "technical_class": "scarring_alopecia",
+    "exact_disease_name": "Scarring Alopecia"
+  },
+  "122": {
+    "class_index": 122,
+    "technical_class": "schambergs_disease",
+    "exact_disease_name": "Schambergs Disease"
+  },
+  "123": {
+    "class_index": 123,
+    "technical_class": "sebaceous_gland_hyperplasia",
+    "exact_disease_name": "Sebaceous Gland Hyperplasia"
+  },
+  "124": {
+    "class_index": 124,
+    "technical_class": "seborrh_keratoses",
+    "exact_disease_name": "Seborrh Keratoses"
+  },
+  "125": {
+    "class_index": 125,
+    "technical_class": "seborrheic_keratosis",
+    "exact_disease_name": "Seborrheic Keratosis"
+  },
+  "126": {
+    "class_index": 126,
+    "technical_class": "skin_tag",
+    "exact_disease_name": "Skin Tag"
+  },
+  "127": {
+    "class_index": 127,
+    "technical_class": "skincancer",
+    "exact_disease_name": "Skincancer"
+  },
+  "128": {
+    "class_index": 128,
+    "technical_class": "solar_lentigo",
+    "exact_disease_name": "Solar Lentigo"
+  },
+  "129": {
+    "class_index": 129,
+    "technical_class": "stasis_edema",
+    "exact_disease_name": "Stasis Edema"
+  },
+  "130": {
+    "class_index": 130,
+    "technical_class": "stasis_ulcer",
+    "exact_disease_name": "Stasis Ulcer"
+  },
+  "131": {
+    "class_index": 131,
+    "technical_class": "steroid_striae",
+    "exact_disease_name": "Steroid Striae"
+  },
+  "132": {
+    "class_index": 132,
+    "technical_class": "stomatitis",
+    "exact_disease_name": "Stomatitis"
+  },
+  "133": {
+    "class_index": 133,
+    "technical_class": "strawberry_hemangioma",
+    "exact_disease_name": "Strawberry Hemangioma"
+  },
+  "134": {
+    "class_index": 134,
+    "technical_class": "striae",
+    "exact_disease_name": "Striae"
+  },
+  "135": {
+    "class_index": 135,
+    "technical_class": "subungual_hematoma",
+    "exact_disease_name": "Subungual Hematoma"
+  },
+  "136": {
+    "class_index": 136,
+    "technical_class": "sun_sunlight_damage",
+    "exact_disease_name": "Sun Sunlight Damage"
+  },
+  "137": {
+    "class_index": 137,
+    "technical_class": "syringoma",
+    "exact_disease_name": "Syringoma"
+  },
+  "138": {
+    "class_index": 138,
+    "technical_class": "terrys_nails",
+    "exact_disease_name": "Terrys Nails"
+  },
+  "139": {
+    "class_index": 139,
+    "technical_class": "tinea_/_fungal_infection",
+    "exact_disease_name": "Tinea / Fungal Infection"
+  },
+  "140": {
+    "class_index": 140,
+    "technical_class": "toe_deformity",
+    "exact_disease_name": "Toe Deformity"
+  },
+  "141": {
+    "class_index": 141,
+    "technical_class": "trichilemmal_cyst",
+    "exact_disease_name": "Trichilemmal Cyst"
+  },
+  "142": {
+    "class_index": 142,
+    "technical_class": "trichofolliculoma",
+    "exact_disease_name": "Trichofolliculoma"
+  },
+  "143": {
+    "class_index": 143,
+    "technical_class": "trichostasis_spinulosa",
+    "exact_disease_name": "Trichostasis Spinulosa"
+  },
+  "144": {
+    "class_index": 144,
+    "technical_class": "ulcer",
+    "exact_disease_name": "Ulcer"
+  },
+  "145": {
+    "class_index": 145,
+    "technical_class": "urticaria",
+    "exact_disease_name": "Urticaria"
+  },
+  "146": {
+    "class_index": 146,
+    "technical_class": "varicella",
+    "exact_disease_name": "Varicella"
+  },
+  "147": {
+    "class_index": 147,
+    "technical_class": "vascular_lesion_/_hemangioma",
+    "exact_disease_name": "Vascular Lesion / Hemangioma"
+  },
+  "148": {
+    "class_index": 148,
+    "technical_class": "verruca_vulgaris",
+    "exact_disease_name": "Verruca Vulgaris"
+  },
+  "149": {
+    "class_index": 149,
+    "technical_class": "vitiligo",
+    "exact_disease_name": "Vitiligo"
+  },
+  "150": {
+    "class_index": 150,
+    "technical_class": "warts",
+    "exact_disease_name": "Warts"
+  },
+  "151": {
+    "class_index": 151,
+    "technical_class": "wound_infection",
+    "exact_disease_name": "Wound Infection"
+  },
+  "152": {
+    "class_index": 152,
+    "technical_class": "xerosis",
+    "exact_disease_name": "Xerosis"
+  }
+}

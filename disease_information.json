@@ -1,0 +1,2297 @@
+{
+  "Acne & Rosacea": {
+    "disease_name": "Acne & Rosacea",
+    "scientific_name": "Clinical Cutaneous Manifestation (Acne & Rosacea)",
+    "overview": "Acne & Rosacea is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Actinic Keratosis": {
+    "disease_name": "Actinic Keratosis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Actinic Keratosis)",
+    "overview": "Actinic Keratosis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Alopecia Areata": {
+    "disease_name": "Alopecia Areata",
+    "scientific_name": "Clinical Cutaneous Manifestation (Alopecia Areata)",
+    "overview": "Alopecia Areata is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Androgenetic Alopecia": {
+    "disease_name": "Androgenetic Alopecia",
+    "scientific_name": "Clinical Cutaneous Manifestation (Androgenetic Alopecia)",
+    "overview": "Androgenetic Alopecia is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Angioma": {
+    "disease_name": "Angioma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Angioma)",
+    "overview": "Angioma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Angular Cheilitis": {
+    "disease_name": "Angular Cheilitis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Angular Cheilitis)",
+    "overview": "Angular Cheilitis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Aphthous Ulcer": {
+    "disease_name": "Aphthous Ulcer",
+    "scientific_name": "Clinical Cutaneous Manifestation (Aphthous Ulcer)",
+    "overview": "Aphthous Ulcer is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Apocrine Hydrocystoma": {
+    "disease_name": "Apocrine Hydrocystoma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Apocrine Hydrocystoma)",
+    "overview": "Apocrine Hydrocystoma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Balanitis Xerotica Obliterans": {
+    "disease_name": "Balanitis Xerotica Obliterans",
+    "scientific_name": "Clinical Cutaneous Manifestation (Balanitis Xerotica Obliterans)",
+    "overview": "Balanitis Xerotica Obliterans is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Basal Cell Carcinoma": {
+    "disease_name": "Basal Cell Carcinoma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Basal Cell Carcinoma)",
+    "overview": "Basal Cell Carcinoma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Bcc": {
+    "disease_name": "Bcc",
+    "scientific_name": "Clinical Cutaneous Manifestation (Bcc)",
+    "overview": "Bcc is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Beaus Lines": {
+    "disease_name": "Beaus Lines",
+    "scientific_name": "Clinical Cutaneous Manifestation (Beaus Lines)",
+    "overview": "Beaus Lines is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Behcets Syndrome": {
+    "disease_name": "Behcets Syndrome",
+    "scientific_name": "Clinical Cutaneous Manifestation (Behcets Syndrome)",
+    "overview": "Behcets Syndrome is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Blue Nevus": {
+    "disease_name": "Blue Nevus",
+    "scientific_name": "Clinical Cutaneous Manifestation (Blue Nevus)",
+    "overview": "Blue Nevus is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Bowenoid Papulosis": {
+    "disease_name": "Bowenoid Papulosis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Bowenoid Papulosis)",
+    "overview": "Bowenoid Papulosis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Bowens Disease": {
+    "disease_name": "Bowens Disease",
+    "scientific_name": "Clinical Cutaneous Manifestation (Bowens Disease)",
+    "overview": "Bowens Disease is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Bullous": {
+    "disease_name": "Bullous",
+    "scientific_name": "Clinical Cutaneous Manifestation (Bullous)",
+    "overview": "Bullous is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Cafe Au Lait Macule": {
+    "disease_name": "Cafe Au Lait Macule",
+    "scientific_name": "Clinical Cutaneous Manifestation (Cafe Au Lait Macule)",
+    "overview": "Cafe Au Lait Macule is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Callus": {
+    "disease_name": "Callus",
+    "scientific_name": "Clinical Cutaneous Manifestation (Callus)",
+    "overview": "Callus is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Candidiasis": {
+    "disease_name": "Candidiasis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Candidiasis)",
+    "overview": "Candidiasis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Cellulitis": {
+    "disease_name": "Cellulitis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Cellulitis)",
+    "overview": "Cellulitis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Chalazion": {
+    "disease_name": "Chalazion",
+    "scientific_name": "Clinical Cutaneous Manifestation (Chalazion)",
+    "overview": "Chalazion is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Clubbing Of Fingers": {
+    "disease_name": "Clubbing Of Fingers",
+    "scientific_name": "Clinical Cutaneous Manifestation (Clubbing Of Fingers)",
+    "overview": "Clubbing Of Fingers is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Crowes Sign": {
+    "disease_name": "Crowes Sign",
+    "scientific_name": "Clinical Cutaneous Manifestation (Crowes Sign)",
+    "overview": "Crowes Sign is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Cutanea Larva Migrans": {
+    "disease_name": "Cutanea Larva Migrans",
+    "scientific_name": "Clinical Cutaneous Manifestation (Cutanea Larva Migrans)",
+    "overview": "Cutanea Larva Migrans is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Cutaneous Horn": {
+    "disease_name": "Cutaneous Horn",
+    "scientific_name": "Clinical Cutaneous Manifestation (Cutaneous Horn)",
+    "overview": "Cutaneous Horn is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Cutaneous T-Cell Lymphoma": {
+    "disease_name": "Cutaneous T-Cell Lymphoma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Cutaneous T-Cell Lymphoma)",
+    "overview": "Cutaneous T-Cell Lymphoma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Cutis Marmorata": {
+    "disease_name": "Cutis Marmorata",
+    "scientific_name": "Clinical Cutaneous Manifestation (Cutis Marmorata)",
+    "overview": "Cutis Marmorata is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Darier-White Disease": {
+    "disease_name": "Darier-White Disease",
+    "scientific_name": "Clinical Cutaneous Manifestation (Darier-White Disease)",
+    "overview": "Darier-White Disease is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Dermatofibroma": {
+    "disease_name": "Dermatofibroma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Dermatofibroma)",
+    "overview": "Dermatofibroma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Dermatosis Papulosa Nigra": {
+    "disease_name": "Dermatosis Papulosa Nigra",
+    "scientific_name": "Clinical Cutaneous Manifestation (Dermatosis Papulosa Nigra)",
+    "overview": "Dermatosis Papulosa Nigra is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Desquamation": {
+    "disease_name": "Desquamation",
+    "scientific_name": "Clinical Cutaneous Manifestation (Desquamation)",
+    "overview": "Desquamation is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Digital Fibroma": {
+    "disease_name": "Digital Fibroma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Digital Fibroma)",
+    "overview": "Digital Fibroma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Dilated Pore Of Winer": {
+    "disease_name": "Dilated Pore Of Winer",
+    "scientific_name": "Clinical Cutaneous Manifestation (Dilated Pore Of Winer)",
+    "overview": "Dilated Pore Of Winer is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Discoid Lupus Erythematosus": {
+    "disease_name": "Discoid Lupus Erythematosus",
+    "scientific_name": "Clinical Cutaneous Manifestation (Discoid Lupus Erythematosus)",
+    "overview": "Discoid Lupus Erythematosus is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Drug Eruption": {
+    "disease_name": "Drug Eruption",
+    "scientific_name": "Clinical Cutaneous Manifestation (Drug Eruption)",
+    "overview": "Drug Eruption is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Drugeruption": {
+    "disease_name": "Drugeruption",
+    "scientific_name": "Clinical Cutaneous Manifestation (Drugeruption)",
+    "overview": "Drugeruption is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Eccrine Poroma": {
+    "disease_name": "Eccrine Poroma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Eccrine Poroma)",
+    "overview": "Eccrine Poroma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Eczema & Dermatitis": {
+    "disease_name": "Eczema & Dermatitis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Eczema & Dermatitis)",
+    "overview": "Eczema & Dermatitis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Epidermoid Cyst": {
+    "disease_name": "Epidermoid Cyst",
+    "scientific_name": "Clinical Cutaneous Manifestation (Epidermoid Cyst)",
+    "overview": "Epidermoid Cyst is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Epithelioma Adenoides Cysticum": {
+    "disease_name": "Epithelioma Adenoides Cysticum",
+    "scientific_name": "Clinical Cutaneous Manifestation (Epithelioma Adenoides Cysticum)",
+    "overview": "Epithelioma Adenoides Cysticum is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Erythema Ab Igne": {
+    "disease_name": "Erythema Ab Igne",
+    "scientific_name": "Clinical Cutaneous Manifestation (Erythema Ab Igne)",
+    "overview": "Erythema Ab Igne is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Erythema Annulare Centrifigum": {
+    "disease_name": "Erythema Annulare Centrifigum",
+    "scientific_name": "Clinical Cutaneous Manifestation (Erythema Annulare Centrifigum)",
+    "overview": "Erythema Annulare Centrifigum is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Erythema Craquele": {
+    "disease_name": "Erythema Craquele",
+    "scientific_name": "Clinical Cutaneous Manifestation (Erythema Craquele)",
+    "overview": "Erythema Craquele is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Erythema Multiforme": {
+    "disease_name": "Erythema Multiforme",
+    "scientific_name": "Clinical Cutaneous Manifestation (Erythema Multiforme)",
+    "overview": "Erythema Multiforme is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Exfoliative Erythroderma": {
+    "disease_name": "Exfoliative Erythroderma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Exfoliative Erythroderma)",
+    "overview": "Exfoliative Erythroderma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Favre Racouchot": {
+    "disease_name": "Favre Racouchot",
+    "scientific_name": "Clinical Cutaneous Manifestation (Favre Racouchot)",
+    "overview": "Favre Racouchot is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Fibroma": {
+    "disease_name": "Fibroma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Fibroma)",
+    "overview": "Fibroma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Fibroma Molle": {
+    "disease_name": "Fibroma Molle",
+    "scientific_name": "Clinical Cutaneous Manifestation (Fibroma Molle)",
+    "overview": "Fibroma Molle is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Fixed Drug Eruption": {
+    "disease_name": "Fixed Drug Eruption",
+    "scientific_name": "Clinical Cutaneous Manifestation (Fixed Drug Eruption)",
+    "overview": "Fixed Drug Eruption is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Follicular Mucinosis": {
+    "disease_name": "Follicular Mucinosis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Follicular Mucinosis)",
+    "overview": "Follicular Mucinosis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Follicular Retention Cyst": {
+    "disease_name": "Follicular Retention Cyst",
+    "scientific_name": "Clinical Cutaneous Manifestation (Follicular Retention Cyst)",
+    "overview": "Follicular Retention Cyst is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Fordyce Spots": {
+    "disease_name": "Fordyce Spots",
+    "scientific_name": "Clinical Cutaneous Manifestation (Fordyce Spots)",
+    "overview": "Fordyce Spots is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Ganglion": {
+    "disease_name": "Ganglion",
+    "scientific_name": "Clinical Cutaneous Manifestation (Ganglion)",
+    "overview": "Ganglion is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Geographic Tongue": {
+    "disease_name": "Geographic Tongue",
+    "scientific_name": "Clinical Cutaneous Manifestation (Geographic Tongue)",
+    "overview": "Geographic Tongue is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Granulation Tissue": {
+    "disease_name": "Granulation Tissue",
+    "scientific_name": "Clinical Cutaneous Manifestation (Granulation Tissue)",
+    "overview": "Granulation Tissue is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Granuloma Annulare": {
+    "disease_name": "Granuloma Annulare",
+    "scientific_name": "Clinical Cutaneous Manifestation (Granuloma Annulare)",
+    "overview": "Granuloma Annulare is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Green Nail": {
+    "disease_name": "Green Nail",
+    "scientific_name": "Clinical Cutaneous Manifestation (Green Nail)",
+    "overview": "Green Nail is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Hailey Hailey Disease": {
+    "disease_name": "Hailey Hailey Disease",
+    "scientific_name": "Clinical Cutaneous Manifestation (Hailey Hailey Disease)",
+    "overview": "Hailey Hailey Disease is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Half And Half Nail": {
+    "disease_name": "Half And Half Nail",
+    "scientific_name": "Clinical Cutaneous Manifestation (Half And Half Nail)",
+    "overview": "Half And Half Nail is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Herpes Simplex Virus": {
+    "disease_name": "Herpes Simplex Virus",
+    "scientific_name": "Clinical Cutaneous Manifestation (Herpes Simplex Virus)",
+    "overview": "Herpes Simplex Virus is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Herpes Zoster": {
+    "disease_name": "Herpes Zoster",
+    "scientific_name": "Clinical Cutaneous Manifestation (Herpes Zoster)",
+    "overview": "Herpes Zoster is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Hidradenitis Suppurativa": {
+    "disease_name": "Hidradenitis Suppurativa",
+    "scientific_name": "Clinical Cutaneous Manifestation (Hidradenitis Suppurativa)",
+    "overview": "Hidradenitis Suppurativa is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Histiocytosis X": {
+    "disease_name": "Histiocytosis X",
+    "scientific_name": "Clinical Cutaneous Manifestation (Histiocytosis X)",
+    "overview": "Histiocytosis X is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Hypertrichosis": {
+    "disease_name": "Hypertrichosis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Hypertrichosis)",
+    "overview": "Hypertrichosis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Ichthyosis": {
+    "disease_name": "Ichthyosis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Ichthyosis)",
+    "overview": "Ichthyosis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Impetigo": {
+    "disease_name": "Impetigo",
+    "scientific_name": "Clinical Cutaneous Manifestation (Impetigo)",
+    "overview": "Impetigo is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Infestations Bites": {
+    "disease_name": "Infestations Bites",
+    "scientific_name": "Clinical Cutaneous Manifestation (Infestations Bites)",
+    "overview": "Infestations Bites is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Keloid": {
+    "disease_name": "Keloid",
+    "scientific_name": "Clinical Cutaneous Manifestation (Keloid)",
+    "overview": "Keloid is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Keratoacanthoma": {
+    "disease_name": "Keratoacanthoma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Keratoacanthoma)",
+    "overview": "Keratoacanthoma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Keratolysis Exfoliativa Of Wende": {
+    "disease_name": "Keratolysis Exfoliativa Of Wende",
+    "scientific_name": "Clinical Cutaneous Manifestation (Keratolysis Exfoliativa Of Wende)",
+    "overview": "Keratolysis Exfoliativa Of Wende is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Kerion": {
+    "disease_name": "Kerion",
+    "scientific_name": "Clinical Cutaneous Manifestation (Kerion)",
+    "overview": "Kerion is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Koilonychia": {
+    "disease_name": "Koilonychia",
+    "scientific_name": "Clinical Cutaneous Manifestation (Koilonychia)",
+    "overview": "Koilonychia is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Kyrles Disease": {
+    "disease_name": "Kyrles Disease",
+    "scientific_name": "Clinical Cutaneous Manifestation (Kyrles Disease)",
+    "overview": "Kyrles Disease is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Leiomyoma": {
+    "disease_name": "Leiomyoma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Leiomyoma)",
+    "overview": "Leiomyoma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Leukonychia": {
+    "disease_name": "Leukonychia",
+    "scientific_name": "Clinical Cutaneous Manifestation (Leukonychia)",
+    "overview": "Leukonychia is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Lichen": {
+    "disease_name": "Lichen",
+    "scientific_name": "Clinical Cutaneous Manifestation (Lichen)",
+    "overview": "Lichen is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Lichen Planus": {
+    "disease_name": "Lichen Planus",
+    "scientific_name": "Clinical Cutaneous Manifestation (Lichen Planus)",
+    "overview": "Lichen Planus is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Lichen Sclerosis Et Atrophicus": {
+    "disease_name": "Lichen Sclerosis Et Atrophicus",
+    "scientific_name": "Clinical Cutaneous Manifestation (Lichen Sclerosis Et Atrophicus)",
+    "overview": "Lichen Sclerosis Et Atrophicus is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Lichen Simplex Chronicus": {
+    "disease_name": "Lichen Simplex Chronicus",
+    "scientific_name": "Clinical Cutaneous Manifestation (Lichen Simplex Chronicus)",
+    "overview": "Lichen Simplex Chronicus is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Lichen Spinulosis": {
+    "disease_name": "Lichen Spinulosis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Lichen Spinulosis)",
+    "overview": "Lichen Spinulosis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Lipoma": {
+    "disease_name": "Lipoma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Lipoma)",
+    "overview": "Lipoma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Livedo Reticularis": {
+    "disease_name": "Livedo Reticularis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Livedo Reticularis)",
+    "overview": "Livedo Reticularis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Lupus": {
+    "disease_name": "Lupus",
+    "scientific_name": "Clinical Cutaneous Manifestation (Lupus)",
+    "overview": "Lupus is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Lymphangioma Circumscriptum": {
+    "disease_name": "Lymphangioma Circumscriptum",
+    "scientific_name": "Clinical Cutaneous Manifestation (Lymphangioma Circumscriptum)",
+    "overview": "Lymphangioma Circumscriptum is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Lymphocytic Infiltrate Of Jessner": {
+    "disease_name": "Lymphocytic Infiltrate Of Jessner",
+    "scientific_name": "Clinical Cutaneous Manifestation (Lymphocytic Infiltrate Of Jessner)",
+    "overview": "Lymphocytic Infiltrate Of Jessner is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Lymphomatoid Papulosis": {
+    "disease_name": "Lymphomatoid Papulosis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Lymphomatoid Papulosis)",
+    "overview": "Lymphomatoid Papulosis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Mal Perforans": {
+    "disease_name": "Mal Perforans",
+    "scientific_name": "Clinical Cutaneous Manifestation (Mal Perforans)",
+    "overview": "Mal Perforans is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Median Nail Dystrophy": {
+    "disease_name": "Median Nail Dystrophy",
+    "scientific_name": "Clinical Cutaneous Manifestation (Median Nail Dystrophy)",
+    "overview": "Median Nail Dystrophy is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Melanoma (Malignant)": {
+    "disease_name": "Melanoma (Malignant)",
+    "scientific_name": "Clinical Cutaneous Manifestation (Melanoma (Malignant))",
+    "overview": "Melanoma (Malignant) is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Metastatic Carcinoma": {
+    "disease_name": "Metastatic Carcinoma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Metastatic Carcinoma)",
+    "overview": "Metastatic Carcinoma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Milia": {
+    "disease_name": "Milia",
+    "scientific_name": "Clinical Cutaneous Manifestation (Milia)",
+    "overview": "Milia is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Molluscum Contagiosum": {
+    "disease_name": "Molluscum Contagiosum",
+    "scientific_name": "Clinical Cutaneous Manifestation (Molluscum Contagiosum)",
+    "overview": "Molluscum Contagiosum is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Morphea": {
+    "disease_name": "Morphea",
+    "scientific_name": "Clinical Cutaneous Manifestation (Morphea)",
+    "overview": "Morphea is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Mucha Habermann Disease": {
+    "disease_name": "Mucha Habermann Disease",
+    "scientific_name": "Clinical Cutaneous Manifestation (Mucha Habermann Disease)",
+    "overview": "Mucha Habermann Disease is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Myxoid Cyst": {
+    "disease_name": "Myxoid Cyst",
+    "scientific_name": "Clinical Cutaneous Manifestation (Myxoid Cyst)",
+    "overview": "Myxoid Cyst is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Nail Dystrophy": {
+    "disease_name": "Nail Dystrophy",
+    "scientific_name": "Clinical Cutaneous Manifestation (Nail Dystrophy)",
+    "overview": "Nail Dystrophy is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Nail Ridging": {
+    "disease_name": "Nail Ridging",
+    "scientific_name": "Clinical Cutaneous Manifestation (Nail Ridging)",
+    "overview": "Nail Ridging is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Neurofibroma": {
+    "disease_name": "Neurofibroma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Neurofibroma)",
+    "overview": "Neurofibroma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Neurotic Excoriations": {
+    "disease_name": "Neurotic Excoriations",
+    "scientific_name": "Clinical Cutaneous Manifestation (Neurotic Excoriations)",
+    "overview": "Neurotic Excoriations is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Nevus (Common Mole)": {
+    "disease_name": "Nevus (Common Mole)",
+    "scientific_name": "Clinical Cutaneous Manifestation (Nevus (Common Mole))",
+    "overview": "Nevus (Common Mole) is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Normal / Healthy Skin (Benign Feature)": {
+    "disease_name": "Normal / Healthy Skin (Benign Feature)",
+    "scientific_name": "Clinical Cutaneous Manifestation (Normal / Healthy Skin (Benign Feature))",
+    "overview": "Normal / Healthy Skin (Benign Feature) is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Onychogryphosis": {
+    "disease_name": "Onychogryphosis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Onychogryphosis)",
+    "overview": "Onychogryphosis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Onycholysis": {
+    "disease_name": "Onycholysis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Onycholysis)",
+    "overview": "Onycholysis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Onychomycosis": {
+    "disease_name": "Onychomycosis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Onychomycosis)",
+    "overview": "Onychomycosis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Onychoschizia": {
+    "disease_name": "Onychoschizia",
+    "scientific_name": "Clinical Cutaneous Manifestation (Onychoschizia)",
+    "overview": "Onychoschizia is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Paronychia": {
+    "disease_name": "Paronychia",
+    "scientific_name": "Clinical Cutaneous Manifestation (Paronychia)",
+    "overview": "Paronychia is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Pearl Penile Papules": {
+    "disease_name": "Pearl Penile Papules",
+    "scientific_name": "Clinical Cutaneous Manifestation (Pearl Penile Papules)",
+    "overview": "Pearl Penile Papules is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Pincer Nail Syndrome": {
+    "disease_name": "Pincer Nail Syndrome",
+    "scientific_name": "Clinical Cutaneous Manifestation (Pincer Nail Syndrome)",
+    "overview": "Pincer Nail Syndrome is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Pitted Keratolysis": {
+    "disease_name": "Pitted Keratolysis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Pitted Keratolysis)",
+    "overview": "Pitted Keratolysis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Pityriasis Alba": {
+    "disease_name": "Pityriasis Alba",
+    "scientific_name": "Clinical Cutaneous Manifestation (Pityriasis Alba)",
+    "overview": "Pityriasis Alba is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Pityriasis Rosea": {
+    "disease_name": "Pityriasis Rosea",
+    "scientific_name": "Clinical Cutaneous Manifestation (Pityriasis Rosea)",
+    "overview": "Pityriasis Rosea is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Pityrosporum Folliculitis": {
+    "disease_name": "Pityrosporum Folliculitis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Pityrosporum Folliculitis)",
+    "overview": "Pityrosporum Folliculitis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Pseudofolliculitis Barbae": {
+    "disease_name": "Pseudofolliculitis Barbae",
+    "scientific_name": "Clinical Cutaneous Manifestation (Pseudofolliculitis Barbae)",
+    "overview": "Pseudofolliculitis Barbae is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Pseudorhinophyma": {
+    "disease_name": "Pseudorhinophyma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Pseudorhinophyma)",
+    "overview": "Pseudorhinophyma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Psoriasis": {
+    "disease_name": "Psoriasis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Psoriasis)",
+    "overview": "Psoriasis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Pyoderma Gangrenosum": {
+    "disease_name": "Pyoderma Gangrenosum",
+    "scientific_name": "Clinical Cutaneous Manifestation (Pyoderma Gangrenosum)",
+    "overview": "Pyoderma Gangrenosum is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Pyogenic Granuloma": {
+    "disease_name": "Pyogenic Granuloma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Pyogenic Granuloma)",
+    "overview": "Pyogenic Granuloma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Racquet Nail": {
+    "disease_name": "Racquet Nail",
+    "scientific_name": "Clinical Cutaneous Manifestation (Racquet Nail)",
+    "overview": "Racquet Nail is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Rhinophyma": {
+    "disease_name": "Rhinophyma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Rhinophyma)",
+    "overview": "Rhinophyma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Scar": {
+    "disease_name": "Scar",
+    "scientific_name": "Clinical Cutaneous Manifestation (Scar)",
+    "overview": "Scar is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Scarring Alopecia": {
+    "disease_name": "Scarring Alopecia",
+    "scientific_name": "Clinical Cutaneous Manifestation (Scarring Alopecia)",
+    "overview": "Scarring Alopecia is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Schambergs Disease": {
+    "disease_name": "Schambergs Disease",
+    "scientific_name": "Clinical Cutaneous Manifestation (Schambergs Disease)",
+    "overview": "Schambergs Disease is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Sebaceous Gland Hyperplasia": {
+    "disease_name": "Sebaceous Gland Hyperplasia",
+    "scientific_name": "Clinical Cutaneous Manifestation (Sebaceous Gland Hyperplasia)",
+    "overview": "Sebaceous Gland Hyperplasia is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Seborrh Keratoses": {
+    "disease_name": "Seborrh Keratoses",
+    "scientific_name": "Clinical Cutaneous Manifestation (Seborrh Keratoses)",
+    "overview": "Seborrh Keratoses is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Seborrheic Keratosis": {
+    "disease_name": "Seborrheic Keratosis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Seborrheic Keratosis)",
+    "overview": "Seborrheic Keratosis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Skin Tag": {
+    "disease_name": "Skin Tag",
+    "scientific_name": "Clinical Cutaneous Manifestation (Skin Tag)",
+    "overview": "Skin Tag is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Skincancer": {
+    "disease_name": "Skincancer",
+    "scientific_name": "Clinical Cutaneous Manifestation (Skincancer)",
+    "overview": "Skincancer is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Solar Lentigo": {
+    "disease_name": "Solar Lentigo",
+    "scientific_name": "Clinical Cutaneous Manifestation (Solar Lentigo)",
+    "overview": "Solar Lentigo is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Stasis Edema": {
+    "disease_name": "Stasis Edema",
+    "scientific_name": "Clinical Cutaneous Manifestation (Stasis Edema)",
+    "overview": "Stasis Edema is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Stasis Ulcer": {
+    "disease_name": "Stasis Ulcer",
+    "scientific_name": "Clinical Cutaneous Manifestation (Stasis Ulcer)",
+    "overview": "Stasis Ulcer is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Steroid Striae": {
+    "disease_name": "Steroid Striae",
+    "scientific_name": "Clinical Cutaneous Manifestation (Steroid Striae)",
+    "overview": "Steroid Striae is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Stomatitis": {
+    "disease_name": "Stomatitis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Stomatitis)",
+    "overview": "Stomatitis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Strawberry Hemangioma": {
+    "disease_name": "Strawberry Hemangioma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Strawberry Hemangioma)",
+    "overview": "Strawberry Hemangioma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Striae": {
+    "disease_name": "Striae",
+    "scientific_name": "Clinical Cutaneous Manifestation (Striae)",
+    "overview": "Striae is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Subungual Hematoma": {
+    "disease_name": "Subungual Hematoma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Subungual Hematoma)",
+    "overview": "Subungual Hematoma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Sun Sunlight Damage": {
+    "disease_name": "Sun Sunlight Damage",
+    "scientific_name": "Clinical Cutaneous Manifestation (Sun Sunlight Damage)",
+    "overview": "Sun Sunlight Damage is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Syringoma": {
+    "disease_name": "Syringoma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Syringoma)",
+    "overview": "Syringoma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Terrys Nails": {
+    "disease_name": "Terrys Nails",
+    "scientific_name": "Clinical Cutaneous Manifestation (Terrys Nails)",
+    "overview": "Terrys Nails is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Tinea / Fungal Infection": {
+    "disease_name": "Tinea / Fungal Infection",
+    "scientific_name": "Clinical Cutaneous Manifestation (Tinea / Fungal Infection)",
+    "overview": "Tinea / Fungal Infection is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Toe Deformity": {
+    "disease_name": "Toe Deformity",
+    "scientific_name": "Clinical Cutaneous Manifestation (Toe Deformity)",
+    "overview": "Toe Deformity is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Trichilemmal Cyst": {
+    "disease_name": "Trichilemmal Cyst",
+    "scientific_name": "Clinical Cutaneous Manifestation (Trichilemmal Cyst)",
+    "overview": "Trichilemmal Cyst is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Trichofolliculoma": {
+    "disease_name": "Trichofolliculoma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Trichofolliculoma)",
+    "overview": "Trichofolliculoma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Trichostasis Spinulosa": {
+    "disease_name": "Trichostasis Spinulosa",
+    "scientific_name": "Clinical Cutaneous Manifestation (Trichostasis Spinulosa)",
+    "overview": "Trichostasis Spinulosa is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Ulcer": {
+    "disease_name": "Ulcer",
+    "scientific_name": "Clinical Cutaneous Manifestation (Ulcer)",
+    "overview": "Ulcer is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Urticaria": {
+    "disease_name": "Urticaria",
+    "scientific_name": "Clinical Cutaneous Manifestation (Urticaria)",
+    "overview": "Urticaria is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Varicella": {
+    "disease_name": "Varicella",
+    "scientific_name": "Clinical Cutaneous Manifestation (Varicella)",
+    "overview": "Varicella is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Vascular Lesion / Hemangioma": {
+    "disease_name": "Vascular Lesion / Hemangioma",
+    "scientific_name": "Clinical Cutaneous Manifestation (Vascular Lesion / Hemangioma)",
+    "overview": "Vascular Lesion / Hemangioma is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Verruca Vulgaris": {
+    "disease_name": "Verruca Vulgaris",
+    "scientific_name": "Clinical Cutaneous Manifestation (Verruca Vulgaris)",
+    "overview": "Verruca Vulgaris is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Vitiligo": {
+    "disease_name": "Vitiligo",
+    "scientific_name": "Clinical Cutaneous Manifestation (Vitiligo)",
+    "overview": "Vitiligo is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Warts": {
+    "disease_name": "Warts",
+    "scientific_name": "Clinical Cutaneous Manifestation (Warts)",
+    "overview": "Warts is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Wound Infection": {
+    "disease_name": "Wound Infection",
+    "scientific_name": "Clinical Cutaneous Manifestation (Wound Infection)",
+    "overview": "Wound Infection is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  },
+  "Xerosis": {
+    "disease_name": "Xerosis",
+    "scientific_name": "Clinical Cutaneous Manifestation (Xerosis)",
+    "overview": "Xerosis is an identified dermatological condition evaluated by the DermaVision neural classifier.",
+    "common_signs": [
+      "Visible skin macular or papular lesion",
+      "Localized color or texture variation"
+    ],
+    "risk_information": "Requires clinical evaluation by a certified dermatologist.",
+    "general_management": [
+      "Keep skin clean and protected from excessive sun exposure",
+      "Avoid picking or scratching active lesions"
+    ],
+    "when_to_seek_professional_help": "Seek immediate dermatologist evaluation if rapid growth, bleeding, or ulceration occurs."
+  }
+}

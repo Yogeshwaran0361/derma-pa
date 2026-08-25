@@ -1,0 +1,15 @@
+{
+  "model_name": "DermaVision PyTorch Multi-Dataset ResNet50/EfficientNet",
+  "model_version": "2.0.0-Colab-Fast",
+  "training_date": "2026-08-19 15:07:14",
+  "number_of_classes": 153,
+  "total_training_images": 31717,
+  "image_size": [
+    224,
+    224
+  ],
+  "architecture": "efficientnet_b0",
+  "test_accuracy_pct": 23.25,
+  "balanced_accuracy_pct": 62.6,
+  "macro_f1_pct": 41.16
+}
