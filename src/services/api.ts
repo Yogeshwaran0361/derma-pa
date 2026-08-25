@@ -1,11 +1,9 @@
 import { PredictionResponse, QualityCheckResult } from '../types';
 
-const GLOBAL_BACKEND_TUNNEL = 'https://myrtle-frank-modular-boulevard.trycloudflare.com/api';
-
 function getEndpoints(): string[] {
   const endpoints: string[] = [];
 
-  // 1. Prioritize environment variable VITE_API_URL or VITE_BACKEND_URL
+  // 1. Prioritize environment variables VITE_API_URL or VITE_BACKEND_URL
   const metaEnv = (import.meta as any).env || {};
   const envApi = metaEnv.VITE_API_URL || metaEnv.VITE_BACKEND_URL;
 
@@ -13,7 +11,7 @@ function getEndpoints(): string[] {
     endpoints.push(envApi.trim().replace(/\/$/, ''));
   }
 
-  // 2. Relative API path for same-origin proxy setups
+  // 2. Relative API path for same-origin proxy setups (e.g. FastAPI serving dist statically)
   endpoints.push('/api');
 
   if (typeof window !== 'undefined' && window.location && window.location.origin) {
@@ -23,8 +21,7 @@ function getEndpoints(): string[] {
     }
   }
 
-  // 3. Fallback active global HTTPS AI Backend tunnel and local development addresses
-  endpoints.push(GLOBAL_BACKEND_TUNNEL);
+  // 3. Development local backend addresses
   endpoints.push('http://localhost:8000/api');
   endpoints.push('http://127.0.0.1:8000/api');
   return Array.from(new Set(endpoints));
