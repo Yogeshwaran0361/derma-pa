@@ -37,7 +37,6 @@ export function isInvalidOrBouncingEmail(email: string): boolean {
   if (!email || typeof email !== 'string') return true;
   const clean = email.trim().toLowerCase();
   if (!clean.includes('@') || clean.length < 5) return true;
-  if (clean.includes('yogeshwaran0361')) return true;
   if (clean.endsWith('@invalid') || clean.includes('example.com') || clean.includes('test.com')) return true;
   return false;
 }

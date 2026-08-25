@@ -3,6 +3,7 @@ import io
 import uuid
 import datetime
 import requests
+import random
 from PIL import Image
 from fastapi import APIRouter, File, UploadFile, HTTPException, Query
 from fastapi.responses import JSONResponse, Response
@@ -223,28 +224,70 @@ def predict_skin_disease(file: UploadFile = File(...), model_name: str = None):
         print(f"[REQ-{request_id}] Inference Pipeline ERROR: {str(e)}")
         raise HTTPException(status_code=500, detail=f"AI model inference failed: {str(e)}")
 
-# ==========================================================================
-# OTP EMAIL VERIFICATION API ENDPOINTS
-# ==========================================================================
-
-import random
+# Global OTP Storage Dictionary
 _otp_store = {}
+
+EMAILJS_SERVICE_ID = "service_cewmx9g"
+EMAILJS_TEMPLATE_ID = "template_zroecde"
+EMAILJS_PUBLIC_KEY = "nxUvzKECwpq3Hx8KN"
+EMAILJS_PRIVATE_KEY = "E9SYs1z-XAVck-r43-NYE"
 
 @router.post("/v1/otp/send-email")
 @router.post("/send-email")
 def send_otp_email(data: dict = None):
-    email = (data.get("email") or data.get("to") or "user@example.com").strip().lower() if data else "user@example.com"
+    global _otp_store
+    data = data or {}
+    email = (data.get("email") or data.get("to") or data.get("patient_email") or "yogeshwaranm919@gmail.com").strip().lower()
     otp_code = str(random.randint(100000, 999999))
     _otp_store[email] = otp_code
+
+    template_params = data.get("template_params", {
+        "to_email": email,
+        "patient_email": email,
+        "user_email": email,
+        "email": email,
+        "patient_name": "DermaVision Patient",
+        "notification_title": "DermaVision AI Security OTP Verification",
+        "message": f"Your DermaVision 6-digit login security code is {otp_code}. It will expire in 5 minutes.",
+        "otp_code": otp_code,
+        "otp": otp_code,
+        "code": otp_code
+    })
+
+    # Ensure otp_code is set in template params
+    if isinstance(template_params, dict):
+        template_params["otp_code"] = otp_code
+        template_params["otp"] = otp_code
+        template_params["code"] = otp_code
+
+    payload = {
+        "service_id": data.get("service_id", EMAILJS_SERVICE_ID),
+        "template_id": data.get("template_id", EMAILJS_TEMPLATE_ID),
+        "user_id": data.get("user_id", EMAILJS_PUBLIC_KEY),
+        "accessToken": EMAILJS_PRIVATE_KEY,
+        "template_params": template_params
+    }
+
+    emailjs_status = "LOCAL_LOG"
+    try:
+        r = requests.post("https://api.emailjs.com/api/v1.0/email/send", json=payload, headers={"Content-Type": "application/json"}, timeout=8)
+        emailjs_status = f"HTTP {r.status_code}: {r.text}"
+        print(f"[EMAILJS SERVER DISPATCH]: Status={r.status_code}, Response={r.text}")
+    except Exception as ex:
+        print(f"[EMAILJS SERVER NOTICE]: {ex}")
+
     print("==================================================")
-    print(f"[OTP GENERATED & SENT] Destination: {email}")
+    print(f"[OTP GENERATED & DISPATCHED] Destination: {email}")
     print(f"[OTP CODE]: {otp_code}")
+    print(f"[EMAILJS STATUS]: {emailjs_status}")
     print("==================================================")
+
     return {
         "success": True,
         "message": f"6-Digit OTP security code sent to {email}",
         "otp": otp_code,
-        "email": email
+        "email": email,
+        "emailjs_status": emailjs_status
     }
 
 @router.post("/v1/otp/verify")
