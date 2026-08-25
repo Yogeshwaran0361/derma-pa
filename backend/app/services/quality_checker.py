@@ -24,23 +24,7 @@ from app.config import (
 _neural_skin_model = None
 
 def _get_neural_skin_model():
-    global _neural_skin_model
-    if _neural_skin_model is None:
-        try:
-            m_path = os.path.join(BASE_DIR, "skin_vs_nonskin_model.pth")
-            if not os.path.exists(m_path):
-                m_path = os.path.join(os.path.dirname(BASE_DIR), "skin_vs_nonskin_model.pth")
-            if os.path.exists(m_path):
-                model = models.mobilenet_v3_small(weights=None)
-                in_features = model.classifier[3].in_features
-                model.classifier[3] = nn.Linear(in_features, 2)
-                model.load_state_dict(torch.load(m_path, map_location='cpu'))
-                model.eval()
-                _neural_skin_model = model
-                print(f"[NEURAL SKIN GATE] Loaded PyTorch Neural Skin Classifier from {m_path}")
-        except Exception as e:
-            print(f"[NEURAL SKIN GATE NOTICE] {e}")
-    return _neural_skin_model
+    return None
 
 
 class ImageQualityChecker:
