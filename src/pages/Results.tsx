@@ -10,11 +10,14 @@ interface ResultsProps {
   imagePreviewUrl: string | null;
 }
 
-export const Results: React.FC<ResultsProps> = ({ predictionData, imagePreviewUrl }) => {
+export const Results: React.FC<ResultsProps> = ({ predictionData: propData, imagePreviewUrl: propImage }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const locationState = location.state as { scanRecord?: any } | null;
+  const locationState = location.state as { predictionData?: PredictionResponse; imagePreviewUrl?: string; scanRecord?: any } | null;
   const { currentLang, t } = useLanguage();
+
+  const predictionData = propData || locationState?.predictionData || locationState?.scanRecord?.predictionData || null;
+  const imagePreviewUrl = propImage || locationState?.imagePreviewUrl || locationState?.scanRecord?.imageUrl || null;
 
   if (!predictionData || !predictionData.prediction) {
     return (

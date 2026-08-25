@@ -210,6 +210,13 @@ export const Scanner: React.FC<ScannerProps> = ({ onPredictionComplete }) => {
         return;
       }
 
+      if (response.success === false || !response.prediction) {
+        const servErr = response.message || response.detail || 'AI analysis is temporarily unavailable. Please try again.';
+        setErrorMessage(servErr);
+        VoiceAssistant.speak(servErr, currentLang);
+        return;
+      }
+
       console.log('[AI DEBUG] AI Prediction SUCCESS:', response.prediction?.display_title);
 
       // Pass permanent Base64 Data URI & navigate to results
