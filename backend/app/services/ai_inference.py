@@ -252,55 +252,68 @@ class SkinAIInferenceEngine:
         print(f"TOP 5 CLASSES         : {[self.class_names[i] for i in top5_i[:3]]}")
         print("==================================================")
 
-        # 3. ROUTING & MODEL SELECTION LOGIC (Restored to exact 5:39 PM state)
+        # 3. ROUTING & MODEL SELECTION LOGIC
         selected_model_source = "153_CLASS_MODEL"
         is_normal = False
         is_low_confidence = False
 
-        # RULE 1: Map Cutanea Larva Migrans (24), Cutaneous Horn (25), Erythema Multiforme (44), and Pityriasis Rosea (111) to Healthy / Normal Skin as requested!
-        if top153_idx in [24, 25, 44, 111, 101]:
-            selected_model_source = "153_CLASS_MODEL"
+        # If Model A's top class is 0 (Acne & Rosacea) but Model B says it is NOT acne (acne_prob < 0.50),
+        # select Model A's next best non-acne disease class!
+        effective_top_idx = top153_idx
+        effective_top_class = top153_class
+        effective_top_prob = top153_prob
+
+        if top153_idx == 0 and model_b_evaluated and acne_prob < 0.50:
+            for alt_idx in top5_i[1:]:
+                if alt_idx != 0:
+                    effective_top_idx = int(alt_idx)
+                    effective_top_class = self.class_names[effective_top_idx]
+                    effective_top_prob = float(probs_a[effective_top_idx])
+                    break
+
+        # RULE 1: Direct Normal / Healthy Skin class indices (24, 25, 44, 111, 101)
+        if effective_top_idx in [24, 25, 44, 111, 101] or (model_b_evaluated and normal_prob >= 0.60 and acne_prob < 0.50):
+            selected_model_source = "NORMAL_HEALTHY_SKIN"
             final_class_index = 101 # Unified 153-Class mapping index for Normal / Healthy Skin!
             final_class_name = "Normal / Healthy Skin"
             display_title = "Healthy / Normal Skin"
             exact_disease_name = "Healthy / Normal Skin"
-            raw_confidence = top153_prob
-            confidence_pct = top153_pct
+            raw_confidence = max(normal_prob, effective_top_prob) if model_b_evaluated else effective_top_prob
+            confidence_pct = round(raw_confidence * 100.0, 1)
             is_normal = True
             risk_level = "Low Risk (Healthy)"
             risk_color = "emerald"
             description = "No supported skin abnormality identified by the AI screening system. Your uploaded image appears consistent with healthy skin."
             action = "Maintain regular skin hygiene, moisturize as needed, and protect skin from excessive UV exposure."
 
-        # RULE 2: If Model B evaluates NORMAL with high confidence (normal_prob >= 0.60)
-        elif model_b_evaluated and normal_prob >= 0.60 and (top153_idx == 0 or top153_prob < 0.70):
-            selected_model_source = "NORMAL_ACNE_MODEL"
-            final_class_index = 101 # Class 101 in unified 153-class mapping represents Normal / Healthy Skin!
-            final_class_name = "Normal / Healthy Skin"
-            display_title = "Healthy / Normal Skin"
-            exact_disease_name = "Healthy / Normal Skin"
-            raw_confidence = normal_prob
-            confidence_pct = round(normal_prob * 100.0, 1)
-            is_normal = True
-            risk_level = "Low Risk (Healthy)"
-            risk_color = "emerald"
-            description = "No supported skin abnormality identified by the AI screening system. Your uploaded image appears consistent with healthy skin."
-            action = "Maintain regular skin hygiene, moisturize as needed, and protect skin from excessive UV exposure."
+        # RULE 2: Genuine Acne / Pimples Image (Evaluated by Model B acne_prob >= 0.55 or Model A top_class == 0 with acne_prob >= 0.50)
+        elif model_b_evaluated and acne_prob >= 0.55:
+            selected_model_source = "ACNE_BINARY_MODEL"
+            final_class_index = 0 # Class 0 in 153-class mapping represents Acne & Rosacea!
+            final_class_name = "Acne & Rosacea"
+            display_title = "Pimples / Acne"
+            exact_disease_name = "Pimples / Acne"
+            raw_confidence = acne_prob
+            confidence_pct = round(acne_prob * 100.0, 1)
+            is_normal = False
+            risk_level = "Low Risk"
+            risk_color = "cyan"
+            description = "Pimple / acne lesion pattern evaluated by AI screening model."
+            action = "Avoid squeezing or picking the affected area. Maintain gentle skin care and consult a dermatologist if persistent or painful."
 
-        # RULE 3: If Model A (153-Class Model) detects a specific disease (top153_idx != 101 & top153_idx != 0) with top153_prob >= 0.35,
-        # PRESERVE Model A's 153-class disease prediction.
-        elif top153_prob >= 0.35 and top153_idx not in [0, 101]:
+        # RULE 3: 153-Class Master Dermatology Classifier (For all other skin disease images!)
+        else:
             selected_model_source = "153_CLASS_MODEL"
-            final_class_index = top153_idx
-            final_class_name = top153_class
-            raw_confidence = top153_prob
-            confidence_pct = top153_pct
+            final_class_index = effective_top_idx
+            final_class_name = effective_top_class
+            raw_confidence = effective_top_prob
+            confidence_pct = round(effective_top_prob * 100.0, 1)
             is_normal = False
 
-            canonical_key = top153_class.lower().replace(" ", "_")
-            canonical_disease_name = CANONICAL_NAME_MAP.get(canonical_key, top153_class)
+            canonical_key = effective_top_class.lower().replace(" ", "_")
+            canonical_disease_name = CANONICAL_NAME_MAP.get(canonical_key, effective_top_class)
 
-            top_info = CLASS_CLINICAL_INFO.get(top153_class, {
+            top_info = CLASS_CLINICAL_INFO.get(effective_top_class, {
                 "title": canonical_disease_name,
                 "risk_level": "Low Risk",
                 "risk_color": "emerald",
@@ -314,38 +327,6 @@ class SkinAIInferenceEngine:
             action = top_info["action"]
             risk_level = top_info["risk_level"]
             risk_color = top_info["risk_color"]
-
-        # RULE 4: If Model B evaluates ACNE with high confidence (acne_prob >= 0.60)
-        elif model_b_evaluated and acne_prob >= 0.60 and top153_idx == 0:
-            selected_model_source = "NORMAL_ACNE_MODEL"
-            final_class_index = 0 # Class 0 in 153-class mapping represents Acne & Rosacea!
-            final_class_name = "ACNE"
-            display_title = "Pimples / Acne"
-            exact_disease_name = "Pimples / Acne"
-            raw_confidence = acne_prob
-            confidence_pct = round(acne_prob * 100.0, 1)
-            is_normal = False
-            risk_level = "Low Risk"
-            risk_color = "cyan"
-            description = "Pimple / acne lesion pattern evaluated by AI screening model."
-            action = "Avoid squeezing or picking the affected area. Maintain gentle skin care and consult a dermatologist if persistent or painful."
-
-        # RULE 4: Low Confidence / Uncertain State — NEVER CONVERT UNCERTAIN PREDICTIONS TO HEALTHY SKIN
-        else:
-            selected_model_source = "UNABLE_TO_CLASSIFY"
-            final_class_index = top153_idx
-            final_class_name = top153_class
-            raw_confidence = max(top153_prob, normal_prob if model_b_evaluated else 0.0)
-            confidence_pct = round(raw_confidence * 100.0, 1)
-            is_normal = False
-            is_low_confidence = True
-
-            display_title = "Unable to reliably classify this image"
-            exact_disease_name = "Unable to reliably classify this image"
-            description = "The AI screening model could not determine a reliable classification for this image. Please upload a clear, well-lit image of the skin area."
-            action = "Ensure good lighting, clear focus, and upload a well-lit image of the affected skin area or consult a healthcare professional for clinical evaluation."
-            risk_level = "Attention Required"
-            risk_color = "amber"
 
         # Build Top 3 candidate predictions from Model A probabilities
         prob_breakdown = []
