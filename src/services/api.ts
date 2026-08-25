@@ -1,5 +1,7 @@
 import { PredictionResponse, QualityCheckResult } from '../types';
 
+const RENDER_LIVE_BACKEND = 'https://dermavision-ai-backend.onrender.com/api';
+
 function getEndpoints(): string[] {
   const endpoints: string[] = [];
 
@@ -11,7 +13,10 @@ function getEndpoints(): string[] {
     endpoints.push(envApi.trim().replace(/\/$/, ''));
   }
 
-  // 2. Relative API path for same-origin proxy setups (e.g. FastAPI serving dist statically)
+  // 2. Production Render PyTorch Live Backend Service
+  endpoints.push(RENDER_LIVE_BACKEND);
+
+  // 3. Relative API path for same-origin proxy setups
   endpoints.push('/api');
 
   if (typeof window !== 'undefined' && window.location && window.location.origin) {
@@ -21,7 +26,7 @@ function getEndpoints(): string[] {
     }
   }
 
-  // 3. Development local backend addresses
+  // 4. Development local backend addresses
   endpoints.push('http://localhost:8000/api');
   endpoints.push('http://127.0.0.1:8000/api');
   return Array.from(new Set(endpoints));
