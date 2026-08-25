@@ -272,9 +272,24 @@ class SkinAIInferenceEngine:
             description = "No supported skin abnormality identified by the AI screening system. Your uploaded image appears consistent with healthy skin."
             action = "Maintain regular skin hygiene, moisturize as needed, and protect skin from excessive UV exposure."
 
-        # RULE 2: If Model A (153-Class Model) detects a specific disease (top153_idx != 101) with top153_prob >= 0.30,
-        # PRESERVE Model A's 153-class disease prediction. IT MUST NEVER BE OVERWRITTEN BY NORMAL / HEALTHY SKIN.
-        elif top153_prob >= 0.30 and top153_idx != 101:
+        # RULE 2: If Model B evaluates NORMAL with high confidence (normal_prob >= 0.60)
+        elif model_b_evaluated and normal_prob >= 0.60 and (top153_idx == 0 or top153_prob < 0.70):
+            selected_model_source = "NORMAL_ACNE_MODEL"
+            final_class_index = 101 # Class 101 in unified 153-class mapping represents Normal / Healthy Skin!
+            final_class_name = "Normal / Healthy Skin"
+            display_title = "Healthy / Normal Skin"
+            exact_disease_name = "Healthy / Normal Skin"
+            raw_confidence = normal_prob
+            confidence_pct = round(normal_prob * 100.0, 1)
+            is_normal = True
+            risk_level = "Low Risk (Healthy)"
+            risk_color = "emerald"
+            description = "No supported skin abnormality identified by the AI screening system. Your uploaded image appears consistent with healthy skin."
+            action = "Maintain regular skin hygiene, moisturize as needed, and protect skin from excessive UV exposure."
+
+        # RULE 3: If Model A (153-Class Model) detects a specific disease (top153_idx != 101 & top153_idx != 0) with top153_prob >= 0.35,
+        # PRESERVE Model A's 153-class disease prediction.
+        elif top153_prob >= 0.35 and top153_idx not in [0, 101]:
             selected_model_source = "153_CLASS_MODEL"
             final_class_index = top153_idx
             final_class_name = top153_class
@@ -300,8 +315,8 @@ class SkinAIInferenceEngine:
             risk_level = top_info["risk_level"]
             risk_color = top_info["risk_color"]
 
-        # RULE 3: If Model B evaluates ACNE with high confidence (acne_prob >= 0.65)
-        elif model_b_evaluated and acne_prob >= 0.65 and (top153_idx == 0 or top153_prob < 0.30):
+        # RULE 4: If Model B evaluates ACNE with high confidence (acne_prob >= 0.60)
+        elif model_b_evaluated and acne_prob >= 0.60 and top153_idx == 0:
             selected_model_source = "NORMAL_ACNE_MODEL"
             final_class_index = 0 # Class 0 in 153-class mapping represents Acne & Rosacea!
             final_class_name = "ACNE"
@@ -314,21 +329,6 @@ class SkinAIInferenceEngine:
             risk_color = "cyan"
             description = "Pimple / acne lesion pattern evaluated by AI screening model."
             action = "Avoid squeezing or picking the affected area. Maintain gentle skin care and consult a dermatologist if persistent or painful."
-
-        # RULE 4: If Model B evaluates NORMAL with high confidence (normal_prob >= 0.70) AND Model A does NOT detect a 153-class disease (top153_prob < 0.30)
-        elif model_b_evaluated and normal_prob >= 0.70 and top153_prob < 0.30:
-            selected_model_source = "NORMAL_ACNE_MODEL"
-            final_class_index = 101 # Class 101 in unified 153-class mapping represents Normal / Healthy Skin!
-            final_class_name = "Normal / Healthy Skin"
-            display_title = "Healthy / Normal Skin"
-            exact_disease_name = "Healthy / Normal Skin"
-            raw_confidence = normal_prob
-            confidence_pct = round(normal_prob * 100.0, 1)
-            is_normal = True
-            risk_level = "Low Risk (Healthy)"
-            risk_color = "emerald"
-            description = "No supported skin abnormality identified by the AI screening system. Your uploaded image appears consistent with healthy skin."
-            action = "Maintain regular skin hygiene, moisturize as needed, and protect skin from excessive UV exposure."
 
         # RULE 4: Low Confidence / Uncertain State — NEVER CONVERT UNCERTAIN PREDICTIONS TO HEALTHY SKIN
         else:
