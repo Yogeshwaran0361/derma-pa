@@ -257,28 +257,26 @@ class SkinAIInferenceEngine:
         is_normal = False
         is_low_confidence = False
 
-        # If Model A's top class is 0 (Acne & Rosacea) but Model B says it is NOT acne (acne_prob < 0.50),
-        # select Model A's next best non-acne disease class!
-        effective_top_idx = top153_idx
-        effective_top_class = top153_class
-        effective_top_prob = top153_prob
+        # Filter out Class 0 (Acne & Rosacea) from Model A's raw logit bias so it never dominates non-acne diseases!
+        non_acne_top_idx = top153_idx
+        non_acne_top_class = top153_class
+        non_acne_top_prob = top153_prob
 
-        if top153_idx == 0 and model_b_evaluated and acne_prob < 0.50:
-            for alt_idx in top5_i[1:]:
-                if alt_idx != 0:
-                    effective_top_idx = int(alt_idx)
-                    effective_top_class = self.class_names[effective_top_idx]
-                    effective_top_prob = float(probs_a[effective_top_idx])
-                    break
+        for alt_idx in top5_i:
+            if int(alt_idx) != 0 and int(alt_idx) not in [24, 25, 44, 111]:
+                non_acne_top_idx = int(alt_idx)
+                non_acne_top_class = self.class_names[non_acne_top_idx]
+                non_acne_top_prob = float(probs_a[non_acne_top_idx])
+                break
 
-        # RULE 1: Direct Normal / Healthy Skin class indices (24, 25, 44, 111, 101)
-        if effective_top_idx in [24, 25, 44, 111, 101] or (model_b_evaluated and normal_prob >= 0.60 and acne_prob < 0.50):
+        # RULE 1: Direct Normal / Healthy Skin class indices or Model B normal_prob >= 0.55
+        if top153_idx in [24, 25, 44, 111, 101] or (model_b_evaluated and normal_prob >= 0.55 and acne_prob < 0.45):
             selected_model_source = "NORMAL_HEALTHY_SKIN"
             final_class_index = 101 # Unified 153-Class mapping index for Normal / Healthy Skin!
             final_class_name = "Normal / Healthy Skin"
             display_title = "Healthy / Normal Skin"
             exact_disease_name = "Healthy / Normal Skin"
-            raw_confidence = max(normal_prob, effective_top_prob) if model_b_evaluated else effective_top_prob
+            raw_confidence = max(normal_prob, non_acne_top_prob) if model_b_evaluated else non_acne_top_prob
             confidence_pct = round(raw_confidence * 100.0, 1)
             is_normal = True
             risk_level = "Low Risk (Healthy)"
@@ -286,8 +284,8 @@ class SkinAIInferenceEngine:
             description = "No supported skin abnormality identified by the AI screening system. Your uploaded image appears consistent with healthy skin."
             action = "Maintain regular skin hygiene, moisturize as needed, and protect skin from excessive UV exposure."
 
-        # RULE 2: Genuine Acne / Pimples Image (Evaluated by Model B acne_prob >= 0.55 or Model A top_class == 0 with acne_prob >= 0.50)
-        elif model_b_evaluated and acne_prob >= 0.55:
+        # RULE 2: Genuine Acne / Pimples Image (ONLY if Model B explicitly evaluates acne_prob >= 0.70)
+        elif model_b_evaluated and acne_prob >= 0.70:
             selected_model_source = "ACNE_BINARY_MODEL"
             final_class_index = 0 # Class 0 in 153-class mapping represents Acne & Rosacea!
             final_class_name = "Acne & Rosacea"
@@ -301,19 +299,19 @@ class SkinAIInferenceEngine:
             description = "Pimple / acne lesion pattern evaluated by AI screening model."
             action = "Avoid squeezing or picking the affected area. Maintain gentle skin care and consult a dermatologist if persistent or painful."
 
-        # RULE 3: 153-Class Master Dermatology Classifier (For all other skin disease images!)
+        # RULE 3: Direct Access to 153 Trained Dermatology Classes (For all other skin disease images!)
         else:
             selected_model_source = "153_CLASS_MODEL"
-            final_class_index = effective_top_idx
-            final_class_name = effective_top_class
-            raw_confidence = effective_top_prob
-            confidence_pct = round(effective_top_prob * 100.0, 1)
+            final_class_index = non_acne_top_idx
+            final_class_name = non_acne_top_class
+            raw_confidence = non_acne_top_prob
+            confidence_pct = round(non_acne_top_prob * 100.0, 1)
             is_normal = False
 
-            canonical_key = effective_top_class.lower().replace(" ", "_")
-            canonical_disease_name = CANONICAL_NAME_MAP.get(canonical_key, effective_top_class)
+            canonical_key = non_acne_top_class.lower().replace(" ", "_")
+            canonical_disease_name = CANONICAL_NAME_MAP.get(canonical_key, non_acne_top_class)
 
-            top_info = CLASS_CLINICAL_INFO.get(effective_top_class, {
+            top_info = CLASS_CLINICAL_INFO.get(non_acne_top_class, {
                 "title": canonical_disease_name,
                 "risk_level": "Low Risk",
                 "risk_color": "emerald",
