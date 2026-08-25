@@ -272,7 +272,13 @@ class SkinAIInferenceEngine:
         top5_i = np.argsort(probs_a)[::-1][:5]
         top5_p = [round(float(probs_a[i]) * 100.0, 2) for i in top5_i]
 
-        top153_idx = int(top5_i[0])
+        # For non-acne images (acne_prob < 0.60), filter out Class 0 (Acne & Rosacea) bias so every disease receives its exact report!
+        if model_b_evaluated and acne_prob < 0.60 and top5_i[0] == 0:
+            non_acne_candidates = [i for i in top5_i if int(i) not in [0, 24, 25, 44, 111]]
+            top153_idx = int(non_acne_candidates[0]) if non_acne_candidates else int(top5_i[1])
+        else:
+            top153_idx = int(top5_i[0])
+
         top153_class = self.class_names[top153_idx]
         top153_prob = float(probs_a[top153_idx])
         top153_pct = round(top153_prob * 100.0, 1)
