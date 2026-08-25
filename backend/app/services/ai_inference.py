@@ -151,7 +151,7 @@ class SkinAIInferenceEngine:
         if not self.model_153:
             raise RuntimeError("Could not load Model A (153-Class PyTorch trained model).")
 
-        # 3. Load Model B: Normal vs Acne Model (trained_acne_normal_models.zip / best_model.pth)
+        # 3. Load Model B: Normal vs Acne Model (models/acne-normal/best_model.pth)
         acne_model_paths = [
             os.path.join(BASE_DIR, "models", "acne-normal", "best_model.pth"),
             os.path.join(BASE_DIR, "backend", "models", "acne-normal", "best_model.pth"),
@@ -175,24 +175,76 @@ class SkinAIInferenceEngine:
                 except Exception as ex_b:
                     print(f"[MODEL B NOTICE] Error loading {amp}: {ex_b}")
 
-        # 4. Standard PyTorch Image Preprocessing Pipeline (Resize 224x224, ImageNet Normalization)
+        # 4. Load Model C: Dedicated Acne/Pimples Model (acne_pimples_model.pth)
+        acne_pimp_paths = [
+            os.path.join(BASE_DIR, "acne_pimples_model.pth"),
+            os.path.join(BASE_DIR, "backend", "acne_pimples_model.pth"),
+            os.path.join(os.path.dirname(BASE_DIR), "acne_pimples_model.pth")
+        ]
+
+        self.model_acne_pimples = None
+        for ap_path in acne_pimp_paths:
+            if os.path.exists(ap_path):
+                try:
+                    ckpt_c = torch.load(ap_path, map_location=self.device)
+                    sd_c = ckpt_c.get("model_state_dict", ckpt_c) if isinstance(ckpt_c, dict) else ckpt_c
+                    mc = models.efficientnet_b0(weights=None)
+                    mc.classifier[1] = nn.Linear(mc.classifier[1].in_features, 2)
+                    mc.load_state_dict(sd_c)
+                    mc.to(self.device)
+                    mc.eval()
+                    self.model_acne_pimples = mc
+                    print(f"[MODEL C LOADED] Dedicated Acne/Pimples PyTorch Checkpoint from '{ap_path}'")
+                    break
+                except Exception as ex_c:
+                    print(f"[MODEL C NOTICE] Error loading {ap_path}: {ex_c}")
+
+        # 5. Load Model D: Body Region Classifier (body_region_classifier.pth)
+        body_paths = [
+            os.path.join(BASE_DIR, "body_region_classifier.pth"),
+            os.path.join(BASE_DIR, "backend", "body_region_classifier.pth"),
+            os.path.join(os.path.dirname(BASE_DIR), "body_region_classifier.pth")
+        ]
+
+        self.model_body_region = None
+        for brp in body_paths:
+            if os.path.exists(brp):
+                try:
+                    ckpt_d = torch.load(brp, map_location=self.device)
+                    sd_d = ckpt_d.get("model_state_dict", ckpt_d) if isinstance(ckpt_d, dict) else ckpt_d
+                    md = models.efficientnet_b0(weights=None)
+                    md.classifier[1] = nn.Linear(md.classifier[1].in_features, 5)
+                    md.load_state_dict(sd_d)
+                    md.to(self.device)
+                    md.eval()
+                    self.model_body_region = md
+                    print(f"[MODEL D LOADED] Body Region PyTorch Checkpoint from '{brp}'")
+                    break
+                except Exception as ex_d:
+                    print(f"[MODEL D NOTICE] Error loading {brp}: {ex_d}")
+
+        # Standard PyTorch Image Preprocessing Pipeline (Resize 224x224, ImageNet Normalization)
         self.transform = transforms.Compose([
             transforms.Resize((224, 224)),
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
         ])
 
-        print(f"[ENGINE READY] SkinAIInferenceEngine Ready: Model A (153-Class) + Model B (Normal/Acne Binary).")
+        print(f"[ENSEMBLE ENGINE READY] All 5 PyTorch Trained AI Models Integrated & Active on Localhost 8000.")
 
     @property
     def weights_path(self):
-        return "trained_skin_model.pth, best_model.pth (acne-normal)"
+        return "trained_skin_model.pth, best_model.pth, acne_pimples_model.pth, body_region_classifier.pth, skin_vs_nonskin_model.pth"
 
     @property
     def models(self):
         active = [self.model_153]
         if self.model_acne_normal is not None:
             active.append(self.model_acne_normal)
+        if self.model_acne_pimples is not None:
+            active.append(self.model_acne_pimples)
+        if self.model_body_region is not None:
+            active.append(self.model_body_region)
         return active
 
     def predict(self, image_bytes: bytes, target_model_name: str = None) -> dict:
