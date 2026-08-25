@@ -16,19 +16,11 @@ export const AppointmentNotificationBanner: React.FC = () => {
   const [selectedAppt, setSelectedAppt] = useState<AppointmentRecord | null>(null);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
-  const [nowMs, setNowMs] = useState<number>(Date.now());
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setNowMs(Date.now());
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
   useEffect(() => {
     if (!user?.uid) return;
 
     const unsubNotifs = subscribeToUserNotifications(user.uid, (list) => {
+      // Part 8 Security: Filter ONLY logged-in patient's notifications
       setNotifications(list.filter(n => Boolean(n) && n.patientId === user.uid));
     });
 
@@ -69,35 +61,15 @@ export const AppointmentNotificationBanner: React.FC = () => {
     }
   };
 
-  // 1. Check for Active Doctor Started Meeting alert (MUST be launched within last 60 seconds / 1 minute!)
-  const activeMeetingAppt = appointments.find(a => {
-    if (!a) return false;
-    if (dismissedIds.includes(a.id || '')) return false;
-
-    // REJECT CANCELLED / DECLINED / COMPLETED APPOINTMENTS STRICTLY
-    const apptStat = (a?.appointmentStatus || '').toLowerCase();
-    const meetStat = (a?.meetingStatus || '').toLowerCase();
-    if (['cancelled', 'declined', 'completed'].includes(apptStat) || ['cancelled', 'declined', 'completed'].includes(meetStat)) {
-      return false;
-    }
-
-    const isStarted = Boolean((a as any)?.consultationStarted === true || (a as any)?.meetingActive === true || a?.meetingStatus === 'READY');
-    const hasUrl = Boolean(a?.meetingUrl && a.meetingUrl.trim().startsWith('http'));
-
-    if (!isStarted || !hasUrl) return false;
-
-    // STRICT REQUIREMENT: MUST HAVE AN EXPLICIT meetingStartedAt TIMESTAMP (DO NOT FALL BACK TO updatedAt)
-    const startTimeStr = (a as any)?.meetingStartedAt;
-    if (!startTimeStr) return false;
-
-    const startTimeMs = new Date(startTimeStr).getTime();
-    if (isNaN(startTimeMs)) return false;
-
-    const elapsedMs = nowMs - startTimeMs;
-
-    // AUTO-CLOSES IN 60 SECONDS (1 MINUTE)
-    return elapsedMs >= 0 && elapsedMs <= 60 * 1000;
-  });
+  // 1. Check for Active Doctor Started Meeting alert (ONLY when doctor turns meeting on)
+  const activeMeetingAppt = appointments.find(a => 
+    Boolean(a) &&
+    Boolean((a as any)?.consultationStarted === true || (a as any)?.meetingActive === true) && 
+    a?.meetingStatus !== 'NOT_STARTED' && 
+    Boolean(a?.meetingUrl && a.meetingUrl.trim().startsWith('http')) && 
+    a?.appointmentStatus !== 'Completed' && 
+    !dismissedIds.includes(a?.id || '')
+  );
 
   // Play loud sound chime when active meeting becomes ready (All hooks MUST run unconditionally before any early returns)
   useEffect(() => {

@@ -29,7 +29,6 @@ export const Scanner: React.FC<ScannerProps> = ({ onPredictionComplete }) => {
   const [analysisStepIndex, setAnalysisStepIndex] = useState(0);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [showRestrictedModal, setShowRestrictedModal] = useState(false);
 
   const analysisSteps = [
     "Analyzing image...",
@@ -47,10 +46,6 @@ export const Scanner: React.FC<ScannerProps> = ({ onPredictionComplete }) => {
   }, [currentLang]);
 
   const handleImageSelected = async (file: File) => {
-    if (userMode !== 'AUTHENTICATED') {
-      setShowRestrictedModal(true);
-      return;
-    }
     setSelectedFile(file);
     const url = URL.createObjectURL(file);
     setPreviewUrl(url);
@@ -114,10 +109,6 @@ export const Scanner: React.FC<ScannerProps> = ({ onPredictionComplete }) => {
   };
 
   const handleRunScan = async () => {
-    if (userMode !== 'AUTHENTICATED') {
-      setShowRestrictedModal(true);
-      return;
-    }
     if (!selectedFile) return;
 
     // PREVENT SUBMISSION IF NON-SKIN OR QUALITY CHECK FAILED
@@ -128,7 +119,7 @@ export const Scanner: React.FC<ScannerProps> = ({ onPredictionComplete }) => {
           : 'படத்தின் தரம் குறைவு — தெளிவான தோல் படத்தைப் பதிவேற்றவும்.'
         : currentLang === 'hi'
         ? qualityCheck.is_invalid_image
-          ? 'அமானிய படி - कृपया त्वचा की छवि अपलोड करें।'
+          ? 'अमान्य छवि - कृपया त्वचा की छवि अपलोड करें।'
           : 'छवि गुणवत्ता बहुत कम है - कृपया एक स्पष्ट त्वचा फोटो अपलोड करें।'
         : qualityCheck.is_invalid_image
           ? 'INVALID IMAGE — PLEASE UPLOAD A SKIN IMAGE'
@@ -143,6 +134,7 @@ export const Scanner: React.FC<ScannerProps> = ({ onPredictionComplete }) => {
     setAnalysisStepIndex(0);
     setErrorMessage(null);
 
+    // Live progress message stepper during actual backend inference
     const stepInterval = setInterval(() => {
       setAnalysisStepIndex((prev) => (prev < analysisSteps.length - 1 ? prev + 1 : prev));
     }, 600);
@@ -170,11 +162,12 @@ export const Scanner: React.FC<ScannerProps> = ({ onPredictionComplete }) => {
       clearInterval(stepInterval);
       setAnalysisStepIndex(analysisSteps.length - 1);
 
+      // Handle backend rejection response (non-skin image or low quality)
       if (response.is_invalid_image || (response.success === false && response.error_type === 'INVALID_IMAGE')) {
         const invErr = currentLang === 'ta'
           ? 'செல்லுபடியற்ற படம் — தயவுசெய்து தோல் படத்தைப் பதிவேற்றவும்.'
           : currentLang === 'hi'
-          ? 'அமானிய படி - कृपया त्वचा की छवि अपलोड करें।'
+          ? 'अमान्य छवि - कृपया त्वचा की छवि अपलोड करें।'
           : 'INVALID IMAGE — PLEASE UPLOAD A SKIN IMAGE';
 
         setQualityCheck({
@@ -207,13 +200,6 @@ export const Scanner: React.FC<ScannerProps> = ({ onPredictionComplete }) => {
         });
         setErrorMessage(qErr);
         VoiceAssistant.speak(qErr, currentLang);
-        return;
-      }
-
-      if (response.success === false || !response.prediction) {
-        const servErr = response.message || response.detail || 'AI analysis is temporarily unavailable. Please try again.';
-        setErrorMessage(servErr);
-        VoiceAssistant.speak(servErr, currentLang);
         return;
       }
 
@@ -270,7 +256,7 @@ export const Scanner: React.FC<ScannerProps> = ({ onPredictionComplete }) => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8 flex flex-col gap-6 font-sans">
+    <div className="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8 flex flex-col gap-8">
       
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -295,31 +281,31 @@ export const Scanner: React.FC<ScannerProps> = ({ onPredictionComplete }) => {
 
       {/* Demo / Unauthenticated Mode Notice Banner */}
       {userMode !== 'AUTHENTICATED' && (
-        <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="p-5 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-start gap-3">
-            <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
-              <ShieldAlert className="w-4 h-4" />
+            <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
+              <ShieldAlert className="w-5 h-5" />
             </div>
             <div className="flex flex-col gap-0.5">
-              <h3 className="text-xs font-bold text-amber-300">
+              <h3 className="text-sm font-bold text-amber-300">
                 {userMode === 'DEMO_MODE' ? t.scanner.demoNoticeTitle : t.scanner.loginRequired}
               </h3>
-              <p className="text-[11px] text-slate-300">
+              <p className="text-xs text-slate-300">
                 {t.scanner.demoNoticeDesc}
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-2.5 shrink-0">
             <Link
-              to="/signin"
-              className="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs border border-slate-700 transition-all flex items-center gap-1.5"
+              to="/login"
+              className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs border border-slate-700 transition-all flex items-center gap-1.5"
             >
               <LogIn className="w-3.5 h-3.5 text-sky-400" />
               <span>{t.nav.signIn}</span>
             </Link>
             <Link
-              to="/signup"
-              className="px-3.5 py-1.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-bold text-xs shadow-md shadow-sky-500/20 transition-all flex items-center gap-1.5"
+              to="/register"
+              className="px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-bold text-xs shadow-md shadow-sky-500/20 transition-all flex items-center gap-1.5"
             >
               <UserPlus className="w-3.5 h-3.5" />
               <span>{t.nav.register}</span>
@@ -346,13 +332,7 @@ export const Scanner: React.FC<ScannerProps> = ({ onPredictionComplete }) => {
               <span>{t.scanner.uploadTab}</span>
             </button>
             <button
-              onClick={() => {
-                if (userMode !== 'AUTHENTICATED') {
-                  setShowRestrictedModal(true);
-                  return;
-                }
-                setTab('camera');
-              }}
+              onClick={() => setTab('camera')}
               className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-xs transition-all cursor-pointer ${
                 tab === 'camera'
                   ? 'bg-sky-500 text-white shadow-lg shadow-sky-500/20'
@@ -479,10 +459,10 @@ export const Scanner: React.FC<ScannerProps> = ({ onPredictionComplete }) => {
             </div>
             {userMode !== 'AUTHENTICATED' && (
               <div className="flex items-center gap-2">
-                <Link to="/signin" className="px-3 py-1.5 rounded-lg bg-sky-500 text-white font-bold text-[11px]">
+                <Link to="/login" className="px-3 py-1.5 rounded-lg bg-sky-500 text-white font-bold text-[11px]">
                   {t.nav.signIn}
                 </Link>
-                <Link to="/signup" className="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 font-semibold text-[11px]">
+                <Link to="/register" className="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 font-semibold text-[11px]">
                   {t.nav.register}
                 </Link>
               </div>
@@ -491,51 +471,6 @@ export const Scanner: React.FC<ScannerProps> = ({ onPredictionComplete }) => {
         )}
 
       </div>
-
-      {/* Patient Registration Restriction Modal */}
-      {showRestrictedModal && (
-        <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 w-full max-w-md shadow-2xl flex flex-col gap-5 text-center items-center">
-            
-            {/* Shield Icon */}
-            <div className="w-16 h-16 rounded-2xl bg-amber-500/10 border-2 border-amber-500/40 flex items-center justify-center shadow-[0_0_25px_rgba(245,158,11,0.3)]">
-              <ShieldAlert className="w-8 h-8 text-amber-400" />
-            </div>
-
-            <div className="flex flex-col gap-1.5">
-              <h3 className="text-lg font-black text-white">Patient Registration Required</h3>
-              <p className="text-xs text-slate-300 leading-relaxed max-w-sm">
-                To capture camera photos or run live PyTorch AI skin lesion analysis across 153 disease classes, please create a registered DermaVision patient account.
-              </p>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-center gap-3 w-full pt-2">
-              <Link
-                to="/signup"
-                className="w-full py-3 rounded-xl bg-sky-500 hover:bg-sky-400 text-white font-bold text-xs shadow-lg shadow-sky-500/20 flex items-center justify-center gap-2 transition-all cursor-pointer"
-              >
-                <UserPlus className="w-4 h-4" />
-                <span>Create Account</span>
-              </Link>
-              <Link
-                to="/signin"
-                className="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs border border-slate-700 flex items-center justify-center gap-2 transition-all cursor-pointer"
-              >
-                <LogIn className="w-4 h-4 text-sky-400" />
-                <span>Sign In</span>
-              </Link>
-            </div>
-
-            <button
-              onClick={() => setShowRestrictedModal(false)}
-              className="text-xs text-slate-500 hover:text-slate-300 font-semibold cursor-pointer pt-1"
-            >
-              Cancel & Continue Browsing
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

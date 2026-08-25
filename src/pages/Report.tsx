@@ -217,11 +217,10 @@ export const Report: React.FC<ReportProps> = ({
     classKey.toLowerCase().includes('normal') || 
     classKey.toLowerCase().includes('healthy') ||
     classKey.toLowerCase().includes('class_101') ||
-    classKey.toLowerCase().includes('cutaneous_horn') ||
-    classKey.toLowerCase().includes('cutanea_larva') ||
-    classKey.toLowerCase().includes('erythema_multiforme') ||
     scanRecord?.displayTitle?.toLowerCase().includes('healthy') ||
-    scanRecord?.displayTitle?.toLowerCase().includes('normal')
+    scanRecord?.displayTitle?.toLowerCase().includes('normal') ||
+    scanRecord?.diseaseName?.toLowerCase().includes('healthy') ||
+    scanRecord?.diseaseName?.toLowerCase().includes('normal')
   );
 
   const isLowConfidence = predictionData?.is_low_confidence || predictionData?.prediction?.is_low_confidence || (Number(pred?.confidence || 0) < 0.5 && !isNormalSkin);

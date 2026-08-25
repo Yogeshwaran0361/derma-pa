@@ -72,39 +72,17 @@ export const AppointmentDetailsModal: React.FC<AppointmentDetailsModalProps> = (
           </button>
         </div>
 
-        {/* Doctor Acceptance & Details Box */}
-        {appointment?.acceptedByDoctorId || (appointment?.appointmentStatus && appointment.appointmentStatus !== 'PENDING_ACCEPTANCE' && appointment.appointmentStatus !== 'Scheduled') ? (
-          <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center font-bold text-lg shrink-0">
-              <CheckCircle2 className="w-6 h-6" />
-            </div>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-2">
-                <h3 className="font-bold text-white text-sm">{appointment?.doctorName || 'Dr. Sarah Smith, MD'}</h3>
-                <span className="px-2 py-0.5 rounded text-[10px] font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
-                  ACCEPTED BY DOCTOR
-                </span>
-              </div>
-              <span className="text-xs text-emerald-400 font-medium">{appointment?.doctorTitle || 'Attending Senior Dermatologist'}</span>
-              <span className="text-[10px] text-slate-400">{appointment?.doctorHospital || 'DermaVision Clinical Center'}</span>
-            </div>
+        {/* Doctor Info Box */}
+        <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 flex items-center gap-4">
+          <div className="w-12 h-12 rounded-xl bg-sky-500/20 text-sky-400 border border-sky-500/30 flex items-center justify-center font-bold text-lg shrink-0">
+            DR
           </div>
-        ) : (
-          <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center font-bold text-lg shrink-0">
-              <Clock className="w-6 h-6 animate-pulse text-amber-400" />
-            </div>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-2">
-                <h3 className="font-bold text-amber-300 text-sm">Waiting List / Pending Acceptance</h3>
-                <span className="px-2 py-0.5 rounded text-[10px] font-extrabold bg-amber-500/20 text-amber-300 border border-amber-500/40">
-                  WAITING LIST
-                </span>
-              </div>
-              <span className="text-xs text-slate-300 mt-0.5">Awaiting any dermatologist in the Doctor Portal to claim and accept your appointment.</span>
-            </div>
+          <div className="flex flex-col">
+            <h3 className="font-bold text-white text-sm">{appointment?.doctorName || 'Dr. Sarah Smith'}</h3>
+            <span className="text-xs text-sky-400">Senior Consultant Dermatologist</span>
+            <span className="text-[10px] text-slate-400">DermaVision Tele-Health Center</span>
           </div>
-        )}
+        </div>
 
         {/* Telemetry & Details Grid */}
         <div className="grid grid-cols-2 gap-3 text-xs font-mono">

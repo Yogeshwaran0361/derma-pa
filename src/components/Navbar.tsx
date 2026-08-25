@@ -1,13 +1,12 @@
 import React from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
 import { LanguageSelector } from './LanguageSelector';
-import { ScanLine, LogOut, User, Eye, UserPlus, LogIn, Stethoscope } from 'lucide-react';
+import { ScanLine, LogOut, User, Eye, UserPlus, LogIn } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const { user, userProfile, userMode, logout, exitDemoMode } = useAuth();
   const { t } = useLanguage();
 
@@ -35,7 +34,7 @@ export const Navbar: React.FC = () => {
       <div className="hidden md:flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 items-center justify-between">
         
         {/* Brand Logo */}
-        <Link to="/home" className="flex items-center gap-3 group">
+        <Link to="/" className="flex items-center gap-3 group">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-teal-400 p-0.5 shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
             <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center text-sky-400">
               <ScanLine className="w-5 h-5" />
@@ -52,9 +51,9 @@ export const Navbar: React.FC = () => {
         {/* Nav Links */}
         <nav className="flex items-center gap-1">
           <Link
-            to="/home"
+            to="/"
             className={`px-3 py-2 rounded-lg text-xs font-semibold transition-colors ${
-              isActive('/home') || isActive('/') ? 'bg-slate-800 text-sky-400' : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
+              isActive('/') ? 'bg-slate-800 text-sky-400' : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
             }`}
           >
             {t.nav.home}
@@ -99,6 +98,15 @@ export const Navbar: React.FC = () => {
           </Link>
 
           <Link
+            to="/doctor"
+            className={`px-3 py-2 rounded-lg text-xs font-semibold transition-colors ${
+              isActive('/doctor') ? 'bg-slate-800 text-sky-400' : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
+            }`}
+          >
+            {t.nav.doctorHub}
+          </Link>
+
+          <Link
             to="/about"
             className={`px-3 py-2 rounded-lg text-xs font-semibold transition-colors ${
               isActive('/about') ? 'bg-slate-800 text-sky-400' : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
@@ -120,8 +128,6 @@ export const Navbar: React.FC = () => {
 
           <LanguageSelector />
 
-
-
           {userMode === 'AUTHENTICATED' && user ? (
             <div className="flex items-center gap-2">
               <Link
@@ -135,10 +141,7 @@ export const Navbar: React.FC = () => {
               </Link>
 
               <button
-                onClick={() => {
-                  logout();
-                  navigate('/signin');
-                }}
+                onClick={logout}
                 className="p-2 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-slate-800 transition-colors cursor-pointer"
                 title={t.nav.signOut}
               >
@@ -147,14 +150,11 @@ export const Navbar: React.FC = () => {
             </div>
           ) : userMode === 'DEMO_MODE' ? (
             <button
-              onClick={() => {
-                exitDemoMode();
-                navigate('/signin');
-              }}
-              className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-slate-950 text-xs font-black shadow-[0_0_20px_rgba(245,158,11,0.45)] flex items-center gap-2 cursor-pointer transition-all hover:scale-105"
+              onClick={exitDemoMode}
+              className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
             >
-              <LogOut className="w-4 h-4 stroke-[2.5]" />
-              <span>EXIT DEMO MODE</span>
+              <LogOut className="w-3.5 h-3.5 text-amber-400" />
+              <span>{t.nav.exitDemo}</span>
             </button>
           ) : (
             <div className="flex items-center gap-2">

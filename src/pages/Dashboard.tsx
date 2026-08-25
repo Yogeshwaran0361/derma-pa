@@ -2,44 +2,44 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
-import {
-  subscribeToUserConsultations,
-  subscribeToUserAppointments,
-  PatientConsultation,
-  AppointmentRecord
-} from '../services/firebase';
-import { Activity, ArrowRight, Sparkles, Stethoscope, Pill, Clock, MessageSquare, Calendar, Video, FileText } from 'lucide-react';
+import { getUserScanHistory, SavedScanRecord, subscribeToUserConsultations, PatientConsultation } from '../services/firebase';
+import { getLocalizedDiseaseInfo, formatConfidencePct } from '../services/diseaseInfo';
+import { Activity, ShieldCheck, FileText, ArrowRight, Sparkles, AlertCircle, Stethoscope, Pill, Clock, CheckCircle2 } from 'lucide-react';
 
 export const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const { user, userProfile } = useAuth();
   const { currentLang, t } = useLanguage();
 
+  const [scans, setScans] = useState<SavedScanRecord[]>([]);
   const [consultations, setConsultations] = useState<PatientConsultation[]>([]);
-  const [appointments, setAppointments] = useState<AppointmentRecord[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Subscribe to Shared Doctor Consultations & Live Chat
   useEffect(() => {
-    if (!user?.uid) {
-      setLoading(false);
-      return;
-    }
-
-    const unsubConsultations = subscribeToUserConsultations(user.uid, (data) => {
-      setConsultations(data);
-      setLoading(false);
-    });
-
-    const unsubAppointments = subscribeToUserAppointments(user.uid, (list) => {
-      const patientOnly = list.filter(a => Boolean(a) && a.patientId === user.uid);
-      setAppointments(patientOnly);
-    });
-
-    return () => {
-      unsubConsultations();
-      unsubAppointments();
+    const fetchScans = async () => {
+      if (user?.uid) {
+        try {
+          const records = await getUserScanHistory(user.uid);
+          setScans(records);
+        } catch (err) {
+          console.warn('Dashboard fetchScans notice:', err);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        setLoading(false);
+      }
     };
+    fetchScans();
+  }, [user]);
+
+  // Subscribe to Doctor Consultations & Prescriptions
+  useEffect(() => {
+    if (!user?.uid) return;
+    const unsub = subscribeToUserConsultations(user.uid, (data) => {
+      setConsultations(data);
+    });
+    return () => unsub();
   }, [user?.uid]);
 
   const userName = userProfile?.name || user?.displayName || user?.email?.split('@')[0] || 'User';
@@ -47,7 +47,7 @@ export const Dashboard: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 flex flex-col gap-8">
       
-      {/* 1. Header Greeting Banner */}
+      {/* Header Greeting Banner */}
       <div className="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-2xl">
         <div className="flex items-center gap-4">
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-sky-500 to-teal-400 p-0.5 shadow-lg shadow-sky-500/20">
@@ -60,7 +60,7 @@ export const Dashboard: React.FC = () => {
               {t.dashboard.greeting}, {userName}!
             </h1>
             <p className="text-xs md:text-sm text-slate-400 mt-1">
-              Welcome to your dedicated DermaVision AI Tele-Health Dashboard.
+              {t.dashboard.sub}
             </p>
           </div>
         </div>
@@ -75,186 +75,138 @@ export const Dashboard: React.FC = () => {
         </button>
       </div>
 
-      {/* 2. SECTION 1: DOCTOR SHARED REPORTS & REAL-TIME LIVE CHAT */}
-      <div className="bg-slate-900/90 border-2 border-sky-500/30 rounded-3xl p-6 flex flex-col gap-5 shadow-2xl">
-        <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-2xl bg-sky-500/10 text-sky-400 border border-sky-500/20">
-              <Stethoscope className="w-6 h-6" />
-            </div>
-            <div>
-              <h2 className="font-extrabold text-lg text-white tracking-tight">Doctor Shared Reports & Live Chat</h2>
-              <p className="text-xs text-slate-400">Shared AI screening records and direct real-time physician messaging</p>
-            </div>
+      {/* DOCTOR CONSULTATIONS & PRESCRIPTIONS CARD */}
+      {consultations.length > 0 && (
+        <div className="bg-slate-900/90 border-2 border-emerald-500/40 rounded-3xl p-6 flex flex-col gap-5 shadow-2xl">
+          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+            <h2 className="font-bold text-base text-white flex items-center gap-2">
+              <Stethoscope className="w-5 h-5 text-emerald-400" />
+              <span>Doctor Tele-Health Consultations & Prescriptions</span>
+            </h2>
+            <span className="text-xs font-mono text-emerald-400 font-bold bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/30">
+              {consultations.length} Active Consultations
+            </span>
           </div>
 
-          <button
-            onClick={() => navigate('/history')}
-            className="px-4 py-2 rounded-xl bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 border border-sky-500/30 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
-          >
-            <span>View All Shared Reports</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
-        </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {consultations.filter(Boolean).map((c) => (
+              <div key={c.id} className="p-4 rounded-2xl bg-slate-950 border border-slate-800 flex flex-col gap-3">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h3 className="font-bold text-sm text-white">{c.displayTitle}</h3>
+                    <p className="text-xs text-slate-400">Doctor: <span className="text-emerald-400 font-bold">{c.doctorName || 'Dr. Sarah Smith, MD'}</span></p>
+                  </div>
+                  <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase ${
+                    c.status === 'COMPLETED' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-sky-500/20 text-sky-400 border border-sky-500/30'
+                  }`}>
+                    {c.status === 'COMPLETED' ? 'Prescription Ready' : c.status}
+                  </span>
+                </div>
 
-        {consultations.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-10 text-center gap-3 bg-slate-950/60 rounded-2xl border border-slate-800 p-6">
-            <MessageSquare className="w-12 h-12 text-slate-600" />
-            <h3 className="text-base font-bold text-slate-200">No Reports Shared with Doctor Yet</h3>
-            <p className="text-xs text-slate-400 max-w-md">Share your AI skin screening scan records with certified dermatologists to start a live 2-way consultation.</p>
+                {c.prescriptionNote && (
+                  <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 font-mono text-emerald-300 text-xs leading-relaxed whitespace-pre-line">
+                    <strong className="block mb-1 text-emerald-400">Rx Prescription:</strong>
+                    {c.prescriptionNote}
+                  </div>
+                )}
+
+                <button
+                  onClick={() => navigate('/report', { state: { scanRecord: { topClass: c.topClass, displayTitle: c.displayTitle, confidence: c.confidence, riskLevel: c.riskLevel, riskColor: c.riskColor, imageUrl: c.imageUrl, scanDate: c.createdAt } } })}
+                  className="w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer mt-1"
+                >
+                  <FileText className="w-3.5 h-3.5 text-sky-400" />
+                  <span>Open Full Doctor Report & Live Chat</span>
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Recent Scans Grid */}
+      <div className="flex flex-col gap-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-bold text-white flex items-center gap-2">
+            <FileText className="w-5 h-5 text-sky-400" />
+            <span>{t.dashboard.recentScans}</span>
+          </h2>
+          {scans.length > 0 && (
             <button
               onClick={() => navigate('/history')}
-              className="mt-2 px-5 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-bold text-xs shadow-md shadow-sky-500/20 cursor-pointer"
+              className="text-xs font-bold text-sky-400 hover:text-sky-300 transition-colors flex items-center gap-1 cursor-pointer"
             >
-              Share Scan Report with Doctor
+              <span>{t.nav.history}</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          )}
+        </div>
+
+        {loading ? (
+          <div className="flex flex-col items-center justify-center py-12 gap-3 text-slate-400">
+            <div className="w-8 h-8 border-3 border-sky-400 border-t-transparent rounded-full animate-spin"></div>
+            <span className="text-xs font-semibold">{t.common.loading}</span>
+          </div>
+        ) : scans.length === 0 ? (
+          <div className="bg-slate-900/60 border border-slate-800 rounded-3xl p-10 text-center flex flex-col items-center gap-4">
+            <AlertCircle className="w-10 h-10 text-slate-500" />
+            <div className="flex flex-col gap-1">
+              <h3 className="font-bold text-white text-base">{t.dashboard.noScansYet}</h3>
+              <p className="text-xs text-slate-400 max-w-md">{t.dashboard.noScansSub}</p>
+            </div>
+            <button
+              onClick={() => navigate('/scanner')}
+              className="mt-2 px-5 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-bold text-xs shadow-md shadow-sky-500/20"
+            >
+              {t.dashboard.startNewScan}
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {consultations.filter(Boolean).map((c) => {
-              const doctorDisplayName = c.acceptedByDoctorId || (c.doctorName && !c.doctorName.includes('Awaiting'))
-                ? c.doctorName
-                : 'Awaiting Doctor Acceptance...';
-
-              const isAccepted = Boolean(c.acceptedByDoctorId || c.status === 'ACCEPTED' || c.status === 'reviewed');
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {scans.filter(Boolean).map((scan) => {
+              const localizedInfo = getLocalizedDiseaseInfo(scan.topClass || scan.displayTitle, currentLang);
+              const confidencePctStr = formatConfidencePct(scan.confidence);
+              const scanDateStr = new Date(scan.scanDate).toLocaleDateString(currentLang === 'ta' ? 'ta-IN' : currentLang === 'hi' ? 'hi-IN' : 'en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+              });
 
               return (
-                <div key={c.id} className="p-5 rounded-2xl bg-slate-950 border border-slate-800 flex flex-col justify-between gap-4 hover:border-slate-700 transition-all shadow-lg">
+                <div
+                  key={scan.id}
+                  onClick={() => navigate('/report', { state: { scanRecord: scan } })}
+                  className="bg-slate-900/90 border border-slate-800 hover:border-sky-500/50 rounded-3xl p-5 flex flex-col justify-between gap-4 transition-all hover:shadow-xl hover:shadow-sky-500/5 cursor-pointer group"
+                >
                   <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                      {c.imageUrl ? (
-                        <img src={c.imageUrl} alt={c.displayTitle} className="w-12 h-12 rounded-xl object-cover border border-slate-800 shrink-0" />
-                      ) : (
-                        <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 shrink-0">
-                          <FileText className="w-6 h-6" />
-                        </div>
-                      )}
-                      <div>
-                        <h4 className="font-bold text-sm text-white">{c.displayTitle}</h4>
-                        <p className="text-xs text-slate-400">
-                          Doctor: <span className={isAccepted ? 'text-emerald-400 font-bold' : 'text-amber-400 font-bold'}>{doctorDisplayName}</span>
-                        </p>
-                      </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] font-mono text-slate-500">{scanDateStr}</span>
+                      <h3 className="font-bold text-base text-white group-hover:text-sky-400 transition-colors mt-0.5">
+                        {localizedInfo.name}
+                      </h3>
+                      <span className="text-xs text-slate-400">{localizedInfo.category}</span>
                     </div>
 
-                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase ${
-                      isAccepted
-                        ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
-                        : 'bg-amber-500/10 text-amber-400 border border-amber-500/30 animate-pulse'
+                    <span className={`px-2.5 py-1 rounded-xl text-[10px] font-black uppercase tracking-wider ${
+                      scan.riskLevel === 'High'
+                        ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40'
+                        : scan.riskLevel === 'Moderate'
+                        ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
+                        : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
                     }`}>
-                      {isAccepted ? 'Doctor Accepted' : 'Awaiting Acceptance'}
+                      {scan.riskLevel === 'High' ? t.common.highRisk : scan.riskLevel === 'Moderate' ? t.common.moderateRisk : t.common.lowRisk}
                     </span>
                   </div>
 
-                  {c.prescriptionNote && (
-                    <div className="p-3 rounded-xl bg-blue-950/40 border border-blue-800/50 flex flex-col gap-1">
-                      <div className="flex items-center gap-1.5 text-xs font-bold text-blue-400">
-                        <Pill className="w-3.5 h-3.5" />
-                        <span>Doctor Prescription Note ({c.doctorName})</span>
-                      </div>
-                      <p className="text-xs text-slate-300 italic">{c.prescriptionNote}</p>
+                  {scan.imageUrl && (
+                    <div className="h-36 rounded-2xl overflow-hidden bg-black border border-slate-800">
+                      <img src={scan.imageUrl} alt={localizedInfo.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                     </div>
                   )}
 
-                  <button
-                    onClick={() => navigate('/history')}
-                    className="w-full py-2.5 rounded-xl bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 font-bold text-xs border border-sky-500/30 flex items-center justify-center gap-2 transition-colors cursor-pointer mt-1"
-                  >
-                    <MessageSquare className="w-4 h-4" />
-                    <span>{isAccepted ? `Open Live Chat with ${c.doctorName}` : 'View Shared Report Status'}</span>
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
-
-      {/* 3. SECTION 2: DOCTOR APPOINTMENTS & SCHEDULED VIDEO CONSULTATIONS */}
-      <div className="bg-slate-900/90 border-2 border-emerald-500/30 rounded-3xl p-6 flex flex-col gap-5 shadow-2xl">
-        <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-2xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              <Clock className="w-6 h-6" />
-            </div>
-            <div>
-              <h2 className="font-extrabold text-lg text-white tracking-tight">Doctor Appointments & Scheduled Consultations</h2>
-              <p className="text-xs text-slate-400">Upcoming tele-dermatology video appointments and meeting links</p>
-            </div>
-          </div>
-
-          <button
-            onClick={() => navigate('/appointments')}
-            className="px-4 py-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
-          >
-            <span>View All Appointments</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
-        </div>
-
-        {appointments.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-10 text-center gap-3 bg-slate-950/60 rounded-2xl border border-slate-800 p-6">
-            <Calendar className="w-12 h-12 text-slate-600" />
-            <h3 className="text-base font-bold text-slate-200">No Scheduled Appointments</h3>
-            <p className="text-xs text-slate-400 max-w-md">Schedule a formal video consultation with a certified dermatologist directly linked to your screening results.</p>
-            <button
-              onClick={() => navigate('/appointments')}
-              className="mt-2 px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-500/20 cursor-pointer"
-            >
-              Book Dermatology Appointment
-            </button>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {appointments.map((appt) => {
-              if (!appt) return null;
-              const isAccepted = Boolean(appt.acceptedByDoctorId || (appt.doctorName && !appt.doctorName.includes('Awaiting')));
-              const doctorDisplayName = isAccepted ? `Confirmed by ${appt.doctorName}` : '⏳ Awaiting Doctor Acceptance (Waiting List)';
-
-              const isReady = Boolean((appt as any)?.consultationStarted === true || (appt as any)?.meetingActive === true) && 
-                appt?.meetingStatus !== 'NOT_STARTED' && 
-                Boolean(appt?.meetingUrl && appt.meetingUrl.trim().startsWith('http'));
-
-              return (
-                <div key={appt.id} className="p-5 rounded-2xl bg-slate-950 border border-slate-800 flex flex-col justify-between gap-4 hover:border-slate-700 transition-all shadow-lg">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center font-bold text-base shrink-0">
-                        <Stethoscope className="w-6 h-6" />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-sm text-white">{doctorDisplayName}</h4>
-                        <p className="text-xs text-slate-400 font-mono flex items-center gap-2 mt-0.5">
-                          <span className="text-slate-200">{appt.appointmentDate}</span>
-                          <span>•</span>
-                          <span className="text-emerald-400 font-bold">{appt.appointmentTime}</span>
-                        </p>
-                      </div>
-                    </div>
-
-                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase ${
-                      isReady
-                        ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 animate-pulse'
-                        : isAccepted
-                        ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
-                        : 'bg-amber-500/10 text-amber-400 border border-amber-500/30 animate-pulse'
-                    }`}>
-                      {isReady ? 'Ready for Call' : isAccepted ? 'Confirmed' : 'Pending Acceptance'}
-                    </span>
+                  <div className="flex items-center justify-between pt-2 border-t border-slate-800/80 text-xs font-mono">
+                    <span className="text-slate-400">{t.report.confidenceScore}:</span>
+                    <span className="text-sky-400 font-bold">{confidencePctStr}%</span>
                   </div>
-
-                  <p className="text-xs text-slate-400 flex items-center gap-1.5">
-                    <FileText className="w-3.5 h-3.5 text-sky-400 shrink-0" />
-                    <span>Linked Report: <strong className="text-slate-200">{appt.diseaseName}</strong> ({appt.confidence}%)</span>
-                  </p>
-
-                  <button
-                    onClick={() => navigate('/appointments')}
-                    className="w-full py-2.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 font-bold text-xs border border-emerald-500/30 flex items-center justify-center gap-2 transition-colors cursor-pointer mt-1"
-                  >
-                    {isReady ? <Video className="w-4 h-4 text-emerald-300 animate-pulse" /> : <Clock className="w-4 h-4" />}
-                    <span>{isReady ? 'Join Google Meet Video Call' : 'View Appointment Details'}</span>
-                  </button>
                 </div>
               );
             })}

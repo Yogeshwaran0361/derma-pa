@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Home, Camera, FileText, Calendar, User } from 'lucide-react';
+import { Home, Camera, FileText, Stethoscope, User } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
 
@@ -17,7 +17,7 @@ export const BottomNav: React.FC = () => {
       id: 'home',
       label: t.nav.home || 'Home',
       icon: Home,
-      path: '/home'
+      path: userMode === 'AUTHENTICATED' ? '/dashboard' : '/'
     },
     {
       id: 'scan',
@@ -32,28 +32,29 @@ export const BottomNav: React.FC = () => {
       path: '/history'
     },
     {
-      id: 'appointments',
-      label: 'Appointments',
-      icon: Calendar,
-      path: '/appointments'
+      id: 'doctor',
+      label: t.nav.doctorHub || 'Doctor',
+      icon: Stethoscope,
+      path: '/doctor'
     },
     {
       id: 'profile',
       label: t.nav.profile || 'Profile',
       icon: User,
-      path: userMode === 'AUTHENTICATED' ? '/profile' : '/signin'
+      path: userMode === 'AUTHENTICATED' ? '/profile' : '/login'
     }
   ];
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-xl border-t border-slate-800 shadow-2xl px-2 py-1.5 font-sans">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-slate-900/95 backdrop-blur-xl border-t border-slate-800 shadow-2xl px-2 py-1.5">
       <div className="flex items-center justify-around max-w-md mx-auto">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive =
             currentPath === item.path ||
             (item.id === 'reports' && (currentPath.startsWith('/report') || currentPath === '/history' || currentPath === '/reports')) ||
-            (item.id === 'home' && (currentPath === '/' || currentPath === '/home' || currentPath === '/dashboard'));
+            (item.id === 'doctor' && (currentPath === '/doctor' || currentPath === '/appointments' || currentPath === '/messages')) ||
+            (item.id === 'home' && (currentPath === '/' || currentPath === '/dashboard'));
 
           return (
             <button
