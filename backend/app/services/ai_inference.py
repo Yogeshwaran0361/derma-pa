@@ -168,9 +168,30 @@ class SkinAIInferenceEngine:
             m.eval()
             self.model_153 = m
 
-        # 3. Model B: Optional Normal vs Acne Binary Model (Lazy Loaded to minimize RAM footprint)
+        # 3. Load Model B: Normal vs Acne Model (models/acne-normal/best_model.pth)
+        acne_model_paths = [
+            os.path.join(BASE_DIR, "models", "acne-normal", "best_model.pth"),
+            os.path.join(BASE_DIR, "backend", "models", "acne-normal", "best_model.pth"),
+            os.path.join(os.path.dirname(BASE_DIR), "models", "acne-normal", "best_model.pth"),
+            os.path.join(cwd, "backend", "models", "acne-normal", "best_model.pth")
+        ]
+
         self.model_acne_normal = None
-        print(f"[ENGINE READY] SkinAIInferenceEngine Ready: Lightweight Master 153-Class Dermatology Engine initialized.")
+        for amp in acne_model_paths:
+            if amp and os.path.exists(amp):
+                try:
+                    ckpt_b = torch.load(amp, map_location=self.device)
+                    sd_b = ckpt_b.get("model_state_dict", ckpt_b) if isinstance(ckpt_b, dict) else ckpt_b
+                    mb = models.efficientnet_b0(weights=None)
+                    mb.classifier[1] = nn.Linear(mb.classifier[1].in_features, 2)
+                    mb.load_state_dict(sd_b)
+                    mb.to(self.device)
+                    mb.eval()
+                    self.model_acne_normal = mb
+                    print(f"[MODEL B LOADED] Normal vs Acne Binary PyTorch Checkpoint from '{amp}'")
+                    break
+                except Exception as ex_b:
+                    print(f"[MODEL B NOTICE] Error loading {amp}: {ex_b}")
 
         # 4. Standard PyTorch Image Preprocessing Pipeline (Resize 224x224, ImageNet Normalization)
         self.transform = transforms.Compose([
