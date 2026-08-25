@@ -75,27 +75,18 @@ load_disease_info()
 
 class SkinAIInferenceEngine:
     def __init__(self):
-        try:
-            torch.set_num_threads(2)
-        except Exception:
-            pass
-
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
         # 1. Load 153-Class Model Mapping
-        cwd = os.getcwd()
         mapping_paths = [
             os.path.join(BASE_DIR, "class_mapping.json"),
-            os.path.join(BASE_DIR, "backend", "class_mapping.json"),
             os.path.join(os.path.dirname(BASE_DIR), "class_mapping.json"),
-            os.path.join(cwd, "class_mapping.json"),
-            os.path.join(cwd, "backend", "class_mapping.json"),
             MAPPING_PATH
         ]
 
         self.mapping_path = None
         for mp in mapping_paths:
-            if mp and os.path.exists(mp):
+            if os.path.exists(mp):
                 self.mapping_path = mp
                 break
 
@@ -121,17 +112,14 @@ class SkinAIInferenceEngine:
 
         # 2. Load Model A: 153-Class Master Model (trained_skin_model.pth)
         model_paths = [
-            os.path.join(BASE_DIR, "trained_skin_model.pth"),
             os.path.join(BASE_DIR, "backend", "trained_skin_model.pth"),
-            os.path.join(os.path.dirname(BASE_DIR), "trained_skin_model.pth"),
-            os.path.join(os.path.dirname(BASE_DIR), "backend", "trained_skin_model.pth"),
-            os.path.join(cwd, "trained_skin_model.pth"),
-            os.path.join(cwd, "backend", "trained_skin_model.pth")
+            os.path.join(BASE_DIR, "trained_skin_model.pth"),
+            os.path.join(os.path.dirname(BASE_DIR), "backend", "trained_skin_model.pth")
         ]
 
         self.model_153 = None
         for p in model_paths:
-            if p and os.path.exists(p):
+            if os.path.exists(p):
                 try:
                     checkpoint = torch.load(p, map_location=self.device)
                     sd = checkpoint.get("model_state_dict", checkpoint) if isinstance(checkpoint, dict) else checkpoint
@@ -161,24 +149,18 @@ class SkinAIInferenceEngine:
                     print(f"[MODEL A NOTICE] Error loading {p}: {ex}")
 
         if not self.model_153:
-            print("[MODEL A WARNING] Primary model weights not loaded from standard paths, creating default classifier structure.")
-            m = models.efficientnet_b0(weights=None)
-            m.classifier[1] = nn.Linear(m.classifier[1].in_features, self.num_classes)
-            m.to(self.device)
-            m.eval()
-            self.model_153 = m
+            raise RuntimeError("Could not load Model A (153-Class PyTorch trained model).")
 
-        # 3. Load Model B: Normal vs Acne Model (models/acne-normal/best_model.pth)
+        # 3. Load Model B: Normal vs Acne Model (trained_acne_normal_models.zip / best_model.pth)
         acne_model_paths = [
             os.path.join(BASE_DIR, "models", "acne-normal", "best_model.pth"),
             os.path.join(BASE_DIR, "backend", "models", "acne-normal", "best_model.pth"),
-            os.path.join(os.path.dirname(BASE_DIR), "models", "acne-normal", "best_model.pth"),
-            os.path.join(cwd, "backend", "models", "acne-normal", "best_model.pth")
+            os.path.join(os.path.dirname(BASE_DIR), "models", "acne-normal", "best_model.pth")
         ]
 
         self.model_acne_normal = None
         for amp in acne_model_paths:
-            if amp and os.path.exists(amp):
+            if os.path.exists(amp):
                 try:
                     ckpt_b = torch.load(amp, map_location=self.device)
                     sd_b = ckpt_b.get("model_state_dict", ckpt_b) if isinstance(ckpt_b, dict) else ckpt_b
@@ -252,66 +234,40 @@ class SkinAIInferenceEngine:
         print(f"TOP 5 CLASSES         : {[self.class_names[i] for i in top5_i[:3]]}")
         print("==================================================")
 
-        # 3. ROUTING & MODEL SELECTION LOGIC
+        # 3. ROUTING & MODEL SELECTION LOGIC (Sections 4, 5, 6, 7, 8, 9, 12, 13, 15)
         selected_model_source = "153_CLASS_MODEL"
         is_normal = False
         is_low_confidence = False
 
-        # Filter out Class 0 (Acne & Rosacea) from Model A's raw logit bias so it never dominates non-acne diseases!
-        non_acne_top_idx = top153_idx
-        non_acne_top_class = top153_class
-        non_acne_top_prob = top153_prob
-
-        for alt_idx in top5_i:
-            if int(alt_idx) != 0 and int(alt_idx) not in [24, 25, 44, 111]:
-                non_acne_top_idx = int(alt_idx)
-                non_acne_top_class = self.class_names[non_acne_top_idx]
-                non_acne_top_prob = float(probs_a[non_acne_top_idx])
-                break
-
-        # RULE 1: Direct Normal / Healthy Skin class indices or Model B normal_prob >= 0.55
-        if top153_idx in [24, 25, 44, 111, 101] or (model_b_evaluated and normal_prob >= 0.55 and acne_prob < 0.45):
-            selected_model_source = "NORMAL_HEALTHY_SKIN"
+        # RULE 1: Map Cutanea Larva Migrans (24), Cutaneous Horn (25), Erythema Multiforme (44), and Pityriasis Rosea (111) to Healthy / Normal Skin as requested!
+        if top153_idx in [24, 25, 44, 111, 101]:
+            selected_model_source = "153_CLASS_MODEL"
             final_class_index = 101 # Unified 153-Class mapping index for Normal / Healthy Skin!
             final_class_name = "Normal / Healthy Skin"
             display_title = "Healthy / Normal Skin"
             exact_disease_name = "Healthy / Normal Skin"
-            raw_confidence = max(normal_prob, non_acne_top_prob) if model_b_evaluated else non_acne_top_prob
-            confidence_pct = round(raw_confidence * 100.0, 1)
+            raw_confidence = top153_prob
+            confidence_pct = top153_pct
             is_normal = True
             risk_level = "Low Risk (Healthy)"
             risk_color = "emerald"
             description = "No supported skin abnormality identified by the AI screening system. Your uploaded image appears consistent with healthy skin."
             action = "Maintain regular skin hygiene, moisturize as needed, and protect skin from excessive UV exposure."
 
-        # RULE 2: Genuine Acne / Pimples Image (ONLY if Model B explicitly evaluates acne_prob >= 0.70)
-        elif model_b_evaluated and acne_prob >= 0.70:
-            selected_model_source = "ACNE_BINARY_MODEL"
-            final_class_index = 0 # Class 0 in 153-class mapping represents Acne & Rosacea!
-            final_class_name = "Acne & Rosacea"
-            display_title = "Pimples / Acne"
-            exact_disease_name = "Pimples / Acne"
-            raw_confidence = acne_prob
-            confidence_pct = round(acne_prob * 100.0, 1)
-            is_normal = False
-            risk_level = "Low Risk"
-            risk_color = "cyan"
-            description = "Pimple / acne lesion pattern evaluated by AI screening model."
-            action = "Avoid squeezing or picking the affected area. Maintain gentle skin care and consult a dermatologist if persistent or painful."
-
-        # RULE 3: Direct Access to 153 Trained Dermatology Classes (For all other skin disease images!)
-        else:
+        # RULE 2: If Model A (153-Class Model) detects a specific disease (top153_idx != 101) with top153_prob >= 0.30,
+        # PRESERVE Model A's 153-class disease prediction. IT MUST NEVER BE OVERWRITTEN BY NORMAL / HEALTHY SKIN.
+        elif top153_prob >= 0.30 and top153_idx != 101:
             selected_model_source = "153_CLASS_MODEL"
-            final_class_index = non_acne_top_idx
-            final_class_name = non_acne_top_class
-            raw_confidence = non_acne_top_prob
-            confidence_pct = round(non_acne_top_prob * 100.0, 1)
+            final_class_index = top153_idx
+            final_class_name = top153_class
+            raw_confidence = top153_prob
+            confidence_pct = top153_pct
             is_normal = False
 
-            canonical_key = non_acne_top_class.lower().replace(" ", "_")
-            canonical_disease_name = CANONICAL_NAME_MAP.get(canonical_key, non_acne_top_class)
+            canonical_key = top153_class.lower().replace(" ", "_")
+            canonical_disease_name = CANONICAL_NAME_MAP.get(canonical_key, top153_class)
 
-            top_info = CLASS_CLINICAL_INFO.get(non_acne_top_class, {
+            top_info = CLASS_CLINICAL_INFO.get(top153_class, {
                 "title": canonical_disease_name,
                 "risk_level": "Low Risk",
                 "risk_color": "emerald",
@@ -325,6 +281,53 @@ class SkinAIInferenceEngine:
             action = top_info["action"]
             risk_level = top_info["risk_level"]
             risk_color = top_info["risk_color"]
+
+        # RULE 2: If Model B evaluates ACNE with high confidence (acne_prob >= 0.65)
+        elif model_b_evaluated and acne_prob >= 0.65 and (top153_idx == 0 or top153_prob < 0.30):
+            selected_model_source = "NORMAL_ACNE_MODEL"
+            final_class_index = 0 # Class 0 in 153-class mapping represents Acne & Rosacea!
+            final_class_name = "ACNE"
+            display_title = "Pimples / Acne"
+            exact_disease_name = "Pimples / Acne"
+            raw_confidence = acne_prob
+            confidence_pct = round(acne_prob * 100.0, 1)
+            is_normal = False
+            risk_level = "Low Risk"
+            risk_color = "cyan"
+            description = "Pimple / acne lesion pattern evaluated by AI screening model."
+            action = "Avoid squeezing or picking the affected area. Maintain gentle skin care and consult a dermatologist if persistent or painful."
+
+        # RULE 3: If Model B evaluates NORMAL with high confidence (normal_prob >= 0.70) AND Model A does NOT detect a 153-class disease (top153_prob < 0.30)
+        elif model_b_evaluated and normal_prob >= 0.70 and top153_prob < 0.30:
+            selected_model_source = "NORMAL_ACNE_MODEL"
+            final_class_index = 101 # Class 101 in unified 153-class mapping represents Normal / Healthy Skin!
+            final_class_name = "Normal / Healthy Skin"
+            display_title = "Healthy / Normal Skin"
+            exact_disease_name = "Healthy / Normal Skin"
+            raw_confidence = normal_prob
+            confidence_pct = round(normal_prob * 100.0, 1)
+            is_normal = True
+            risk_level = "Low Risk (Healthy)"
+            risk_color = "emerald"
+            description = "No supported skin abnormality identified by the AI screening system. Your uploaded image appears consistent with healthy skin."
+            action = "Maintain regular skin hygiene, moisturize as needed, and protect skin from excessive UV exposure."
+
+        # RULE 4: Low Confidence / Uncertain State — NEVER CONVERT UNCERTAIN PREDICTIONS TO HEALTHY SKIN
+        else:
+            selected_model_source = "UNABLE_TO_CLASSIFY"
+            final_class_index = top153_idx
+            final_class_name = top153_class
+            raw_confidence = max(top153_prob, normal_prob if model_b_evaluated else 0.0)
+            confidence_pct = round(raw_confidence * 100.0, 1)
+            is_normal = False
+            is_low_confidence = True
+
+            display_title = "Unable to reliably classify this image"
+            exact_disease_name = "Unable to reliably classify this image"
+            description = "The AI screening model could not determine a reliable classification for this image. Please upload a clear, well-lit image of the skin area."
+            action = "Ensure good lighting, clear focus, and upload a well-lit image of the affected skin area or consult a healthcare professional for clinical evaluation."
+            risk_level = "Attention Required"
+            risk_color = "amber"
 
         # Build Top 3 candidate predictions from Model A probabilities
         prob_breakdown = []
