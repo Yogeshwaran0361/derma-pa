@@ -189,13 +189,19 @@ class ImageQualityChecker:
                 "edge_density": round(edge_density * 100, 2)
             })
 
-            # 1. HARD GATE: PyTorch Neural SkinValidationModel prediction (100% Authoritative Neural Gate)
-            if neural_model is not None:
-                if neural_nonskin_prob >= 20.0 or neural_skin_prob < 80.0:
-                    return "INVALID_IMAGE", f"Identified as non-skin object ({neural_nonskin_prob:.1f}% non-skin score) by PyTorch Neural Gate.", metrics
-                return "VALID_SKIN", "Valid human skin verified by PyTorch Neural Validation Gate.", metrics
+            # 1. HARD REJECTION GATE: Screen / Wallpaper / Phone UI / Non-Skin Color Signals
+            if paper_ratio > 3.0 or mono_ratio > 20.0 or green_ratio > 12.0 or blue_ratio > 12.0 or red_food_ratio > 10.0:
+                return "INVALID_IMAGE", "Identified as a non-skin image (screenshot, wallpaper, UI elements, or background object).", metrics
 
-            return "INVALID_IMAGE", "No visible human skin was detected anywhere in this image.", metrics
+            if skin_ratio < 15.0 and max_patch_ratio < 30.0:
+                return "INVALID_IMAGE", "No visible human skin region detected in this image.", metrics
+
+            # 2. HARD REJECTION GATE: PyTorch Neural Skin Validation Gate
+            if neural_model is not None:
+                if neural_nonskin_prob >= 25.0 or neural_skin_prob < 75.0:
+                    return "INVALID_IMAGE", f"Identified as non-skin object ({neural_nonskin_prob:.1f}% non-skin score) by PyTorch Neural Gate.", metrics
+
+            return "VALID_SKIN", "Image quality passed clarity, focus, and human skin verification checks.", metrics
 
         except Exception as e:
             return "UNCERTAIN", f"Skin detection analysis error: {str(e)}", metrics
