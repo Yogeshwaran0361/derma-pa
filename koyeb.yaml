@@ -1,0 +1,20 @@
+name: dermavision-ai-backend
+type: web
+routes:
+  - path: /
+    port: 8000
+definition:
+  name: dermavision-ai-backend
+  git:
+    repository: github.com/Yogeshwaran0361/derma-pa
+    branch: main
+  instance_type: free
+  regions:
+    - fra
+  build:
+    type: buildpack
+    build_command: pip install --upgrade pip && pip install -r backend/requirements.txt
+    run_command: uvicorn backend.main:app --host 0.0.0.0 --port 8000
+  ports:
+    - port: 8000
+      protocol: http
