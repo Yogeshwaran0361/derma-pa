@@ -57,9 +57,11 @@ const ALIAS_MAP: Record<string, number> = {
   'bullous_pemphigoid': 16,
   'blister': 16,
   'blistering': 16,
-  'cutanea_larva_migrans': 43,
-  'larva_migrans': 43,
-  'creeping_eruption': 43,
+  'cutaneous_horn': 101,
+  'cutanea_larva_migrans': 101,
+  'larva_migrans': 101,
+  'creeping_eruption': 101,
+  'erythema_multiforme': 101,
   'acne': 0,
   'acne_rosacea': 0,
   'pimple': 0,
@@ -80,11 +82,14 @@ export function resolveDisease(classIdInput: number | string): ResolvedDiseaseRe
   let rawString = String(classIdInput !== undefined && classIdInput !== null ? classIdInput : '').trim();
   const normalizedKey = rawString.toLowerCase().replace(/[\s\-_]+/g, '_');
 
-  // Check explicit normal / healthy keywords
+  // Check explicit normal / healthy keywords (including mapped 3 diseases)
   if (
     normalizedKey === '101' ||
     normalizedKey.includes('normal') ||
     normalizedKey.includes('healthy') ||
+    normalizedKey.includes('cutaneous_horn') ||
+    normalizedKey.includes('cutanea_larva') ||
+    normalizedKey.includes('erythema_multiforme') ||
     classIdInput === 101
   ) {
     resolvedId = 101;

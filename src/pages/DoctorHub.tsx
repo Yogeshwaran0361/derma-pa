@@ -318,9 +318,9 @@ export const DoctorHub: React.FC = () => {
                           {c.status}
                         </span>
                       </div>
-                      <span className="text-xs text-emerald-400 font-mono font-bold">Confidence: {formatConfidencePct(c.confidence)}%</span>
+                      <span className="text-xs text-emerald-400 font-mono font-bold">Confidence: {formatConfidencePct(c.confidence || 0)}%</span>
 
-                      <span className="text-[10px] text-slate-400">Shared Date: {new Date(c.createdAt).toLocaleDateString()}</span>
+                      <span className="text-[10px] text-slate-400">Shared Date: {new Date(c.createdAt || Date.now()).toLocaleDateString()}</span>
                     </div>
                   </div>
 

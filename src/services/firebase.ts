@@ -1,5 +1,5 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
-import { sendDermaVisionEmail, sendReportNotification } from './emailService';
+import { sendDermaVisionEmail, sendReportNotification, sendVideoCallStartedEmail } from './emailService';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -9,10 +9,12 @@ import {
   getRedirectResult,
   GoogleAuthProvider,
   signOut,
+  deleteUser,
   sendPasswordResetEmail,
   updatePassword,
   User as FirebaseUser,
-  updateProfile
+  updateProfile,
+  getAdditionalUserInfo
 } from 'firebase/auth';
 import {
   getFirestore,
@@ -80,9 +82,13 @@ export interface UserProfileData {
   email: string;
   age: number | null;
   gender: string;
+  mobile?: string;
   authProvider: 'email' | 'google';
   role?: 'patient' | 'doctor';
+  accountStatus?: string;
+  emailVerified?: boolean;
   profileCompleted?: boolean;
+  registeredViaWebsite?: boolean;
   preferredLanguage: Language;
   imageUrl?: string;
   createdAt?: any;
@@ -118,14 +124,25 @@ export interface AppointmentRecord {
   appointmentDate: string;
   appointmentTime: string;
   appointmentDateTime?: string;
-  appointmentStatus: 'Scheduled' | 'Confirmed' | 'Reminder' | 'Ready for Consultation' | 'In Progress' | 'Completed' | 'Cancelled';
+  appointmentStatus: string;
   doctorId: string;
   doctorName: string;
+  doctorTitle?: string;
+  doctorHospital?: string;
+  acceptedByDoctorId?: string;
   consultationReason: string;
   createdAt: string;
   meetingStatus: 'NOT_STARTED' | 'READY' | 'COMPLETED';
   meetingUrl?: string;
   reminderStatus: 'PENDING' | 'SENT_2H';
+}
+
+export async function reloadUserAuth(): Promise<void> {
+  if (auth.currentUser) {
+    try {
+      await auth.currentUser.reload();
+    } catch (e) {}
+  }
 }
 
 export interface SavedScanRecord {
@@ -143,12 +160,14 @@ export interface SavedScanRecord {
   filename?: string;
   imageUrl?: string;
   imageStoragePath?: string;
-  predictionData?: PredictionResponse;
+  predictionData?: any;
+  isNormalSkin?: boolean;
 }
 
 export interface PatientConsultation {
   id: string;
   scanId?: string;
+  reportId?: string;
   patientId: string;
   patientName: string;
   patientEmail: string;
@@ -156,12 +175,17 @@ export interface PatientConsultation {
   patientGender?: string;
   doctorId?: string;
   doctorName?: string;
-  status: 'PENDING' | 'ACTIVE' | 'COMPLETED';
-  topClass: string;
-  displayTitle: string;
-  confidence: number;
-  riskLevel: string;
-  riskColor: string;
+  doctorTitle?: string;
+  doctorHospital?: string;
+  acceptedByDoctorId?: string;
+  diseaseName?: string;
+  status: string;
+  requestDate?: string;
+  topClass?: string;
+  displayTitle?: string;
+  confidence?: number;
+  riskLevel?: string;
+  riskColor?: string;
   imageUrl?: string;
   predictionData?: any;
   symptomsNote?: string;
@@ -172,8 +196,20 @@ export interface PatientConsultation {
   meetUrl?: string;
   meetStatus?: 'active' | 'ended';
   meetingStartedAt?: string;
-  createdAt: string;
+  createdAt?: string;
   updatedAt?: string;
+}
+
+export interface PatientMessage {
+  id: string;
+  consultationId: string;
+  senderId: string;
+  senderName: string;
+  senderRole: string;
+  type?: 'TEXT' | 'AUDIO';
+  text: string;
+  audioUrl?: string;
+  timestamp: string;
 }
 
 // User Profile Operations
@@ -195,12 +231,14 @@ export async function createUserProfile(
       gender: gender || 'Prefer not to say',
       authProvider: 'email',
       role: 'patient',
+      registeredViaWebsite: true,
       profileCompleted: age != null && age > 0,
       preferredLanguage: 'en'
     };
   } else {
     profileData = {
       role: 'patient',
+      registeredViaWebsite: true,
       profileCompleted: false,
       ...dataOrName
     };
@@ -302,6 +340,12 @@ export async function signUpWithGoogle(useRedirectOnMobile = false): Promise<{
   let result: any = null;
   const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
+  // Force Google Account Chooser prompt & clear previous sessions to prevent account crossover
+  googleProvider.setCustomParameters({ prompt: 'select_account' });
+  try {
+    await signOut(auth);
+  } catch (sErr) {}
+
   try {
     if (useRedirectOnMobile && isMobileDevice) {
       await signInWithRedirect(auth, googleProvider);
@@ -327,22 +371,11 @@ export async function signUpWithGoogle(useRedirectOnMobile = false): Promise<{
   const existingProfile = await getUserProfile(user.uid);
 
   if (!existingProfile) {
-    console.log('[AUTH] Brand new Google user registration! Creating Firestore doc for UID:', user.uid);
-    await createUserProfile(user.uid, {
-      name: user.displayName || user.email?.split('@')[0] || 'Google User',
-      email: user.email || '',
-      age: null,
-      gender: '',
-      authProvider: 'google',
-      role: 'patient',
-      profileCompleted: false,
-      preferredLanguage: 'en',
-      imageUrl: user.photoURL || undefined
-    });
+    console.log('[AUTH] New Google user connecting on /register page (Firestore creation deferred until Step 3 Password Creation)...');
     return { user, isNewUser: true, existingUser: false, profileCompleted: false };
   } else {
     console.log('[AUTH] Google Sign-Up: User is ALREADY registered with UID:', user.uid);
-    const isCompleted = existingProfile.profileCompleted === true && existingProfile.age != null && Number(existingProfile.age) > 0;
+    const isCompleted = existingProfile.profileCompleted === true && existingProfile.registeredViaWebsite === true;
     return { user, isNewUser: false, existingUser: true, profileCompleted: isCompleted };
   }
 }
@@ -355,6 +388,12 @@ export async function signInWithGoogle(useRedirectOnMobile = false): Promise<{
   console.log('[AUTH] Google Sign-In flow started');
   let result: any = null;
   const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+  // Force Google Account Chooser prompt & clear previous sessions to prevent account crossover
+  googleProvider.setCustomParameters({ prompt: 'select_account' });
+  try {
+    await signOut(auth);
+  } catch (sErr) {}
 
   try {
     if (useRedirectOnMobile && isMobileDevice) {
@@ -378,16 +417,40 @@ export async function signInWithGoogle(useRedirectOnMobile = false): Promise<{
   }
 
   const user = result.user;
-  const existingProfile = await getUserProfile(user.uid);
+  let existingProfile = await getUserProfile(user.uid);
 
-  if (!existingProfile) {
-    console.warn('[AUTH] Google Sign-In: Account NOT registered in Firestore for UID:', user.uid);
-    return { user: null, notRegistered: true, profileCompleted: false };
-  } else {
-    console.log('[AUTH] Google Sign-In: Existing account found in Firestore for UID:', user.uid);
-    const isCompleted = existingProfile.profileCompleted === true && existingProfile.age != null && Number(existingProfile.age) > 0;
-    return { user, notRegistered: false, profileCompleted: isCompleted };
+  if (!existingProfile && user.email) {
+    try {
+      const q = query(collection(db, 'users'), where('email', '==', user.email.toLowerCase()));
+      const snap = await getDocs(q);
+      if (!snap.empty) {
+        existingProfile = snap.docs[0].data() as UserProfileData;
+      }
+    } catch (e) {}
   }
+
+  // IF THE USER HAS NOT CREATED AN ACCOUNT ON /register YET:
+  // IMMEDIATELY DELETE/PURGE UNREGISTERED ACCOUNT FROM FIREBASE AUTHENTICATION!
+  if (!existingProfile) {
+    console.warn('[AUTH REJECTED & PURGED] Account NOT created on website /register page yet. Deleting from Firebase Auth:', user.uid, user.email);
+    try {
+      await deleteUser(user);
+      console.log('[FIREBASE AUTH DELETED SUCCESS] Successfully deleted unregistered Google user from Firebase Auth!');
+    } catch (dErr) {
+      console.error('[FIREBASE AUTH DELETE NOTICE]', dErr);
+      try {
+        if (auth.currentUser) {
+          await deleteUser(auth.currentUser);
+        }
+      } catch (e2) {
+        await signOut(auth);
+      }
+    }
+    return { user: user, notRegistered: true, profileCompleted: false };
+  }
+
+  console.log('[AUTH VERIFIED] Account created previously on website. Permitting Google sign-in!');
+  return { user, notRegistered: false, profileCompleted: true };
 }
 
 export async function checkGoogleRedirectResult(): Promise<FirebaseUser | null> {
@@ -395,18 +458,14 @@ export async function checkGoogleRedirectResult(): Promise<FirebaseUser | null> 
     const result = await getRedirectResult(auth);
     if (result && result.user) {
       const user = result.user;
-      console.log('[AUTH] Google Redirect Result completed:', user.uid, user.email);
-      const existingProfile = await getUserProfile(user.uid);
+      let existingProfile = await getUserProfile(user.uid);
       if (!existingProfile) {
-        await createUserProfile(user.uid, {
-          name: user.displayName || user.email?.split('@')[0] || 'Google User',
-          email: user.email || '',
-          age: null,
-          gender: 'Prefer not to say',
-          authProvider: 'google',
-          preferredLanguage: 'en',
-          imageUrl: user.photoURL || undefined
-        });
+        try {
+          await user.delete();
+        } catch (e) {
+          await signOut(auth);
+        }
+        return null;
       }
       return user;
     }
@@ -571,24 +630,6 @@ export async function saveScanRecord(
     const existing = JSON.parse(localStorage.getItem(key) || '[]');
     existing.unshift(scanRecord);
     localStorage.setItem(key, JSON.stringify(existing.slice(0, 30)));
-  } catch (e) {}
-
-  // Trigger EmailJS Report Notification directly to logged-in user
-  try {
-    const activeAuthUser = getAuth().currentUser;
-    const userEmail = activeAuthUser?.email ? activeAuthUser.email.trim() : '';
-    if (userEmail && userEmail.includes('@')) {
-      sendReportNotification({
-        patientEmail: userEmail,
-        patientName: activeAuthUser?.displayName || 'Patient',
-        condition: scanRecord.displayTitle,
-        confidence: scanRecord.confidence,
-        riskLevel: scanRecord.riskLevel,
-        scanDate: new Date().toLocaleDateString()
-      }).catch(err => {
-        console.warn('[EMAILJS NOTICE] Report notification email notice:', err);
-      });
-    }
   } catch (e) {}
 
   return scanRecord;
@@ -947,6 +988,24 @@ export async function sendPatientMeetNotification(params: {
     updatedAt: new Date().toISOString()
   });
 
+  // Send Direct Google Meet Joining Link Email to Patient
+  try {
+    const consultDocSnap = await getDoc(consultDocRef);
+    const cData = consultDocSnap.exists() ? consultDocSnap.data() : null;
+    const pEmail = cData?.patientEmail || '';
+    if (pEmail && pEmail.includes('@')) {
+      sendVideoCallStartedEmail({
+        patientEmail: pEmail,
+        patientName: patientName || cData?.patientName || 'Patient',
+        doctorName: doctorName || 'Dr. Sarah Smith, MD',
+        meetingUrl: meetUrl
+      });
+      console.log('[VIDEO CALL EMAIL DISPATCHED] Sent Google Meet joining link to:', pEmail);
+    }
+  } catch (vErr) {
+    console.warn('[VIDEO CALL EMAIL NOTICE]', vErr);
+  }
+
   console.log(`[NOTIFY] Notification sent to patientUid: ${patientUid} for consultationId: ${consultationId}`);
 }
 
@@ -1056,6 +1115,7 @@ export async function createPatientAppointment(data: {
   appointmentTime: string;
   doctorId?: string;
   doctorName?: string;
+  appointmentStatus?: string;
   consultationReason: string;
 }): Promise<string> {
   const apptId = `APPT-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substr(2, 4).toUpperCase()}`;
@@ -1074,9 +1134,9 @@ export async function createPatientAppointment(data: {
     appointmentDate: data.appointmentDate,
     appointmentTime: data.appointmentTime,
     appointmentDateTime,
-    appointmentStatus: 'Scheduled',
-    doctorId: data.doctorId || 'dr_sarah_smith',
-    doctorName: data.doctorName || 'Dr. Sarah Smith, MD',
+    appointmentStatus: data.appointmentStatus || 'WAITING_FOR_ACCEPTANCE',
+    doctorId: data.doctorId || 'Awaiting_Doctor',
+    doctorName: data.doctorName || 'Awaiting Doctor Acceptance (Waiting List)',
     consultationReason: data.consultationReason,
     createdAt: new Date().toISOString(),
     meetingStatus: 'NOT_STARTED',
@@ -1105,38 +1165,6 @@ export async function createPatientAppointment(data: {
     type: 'APPOINTMENT_BOOKED'
   });
 
-  // Trigger EmailJS Notifications (Patient Confirmation & Doctor Alert)
-  const resolvedEmail = data.patientEmail ? data.patientEmail.trim() : '';
-  if (resolvedEmail && resolvedEmail.includes('@')) {
-    const confirmationMessage = 
-      `Your dermatology consultation appointment has been successfully confirmed.\n\n` +
-      `Doctor: ${record.doctorName}\n` +
-      `Date: ${data.appointmentDate}\n` +
-      `Time: ${data.appointmentTime}\n\n` +
-      `Please be available at the scheduled date and time.\n` +
-      `You can view your appointment details from your DermaVision AI account.`;
-
-    try {
-      const res = await sendDermaVisionEmail({
-        toEmail: resolvedEmail,
-        name: data.patientName,
-        notificationTitle: 'Appointment Confirmed',
-        message: confirmationMessage,
-        appointmentDate: data.appointmentDate,
-        appointmentTime: data.appointmentTime,
-        doctorName: record.doctorName
-      });
-
-      if (res.success) {
-        try {
-          await setDoc(doc(db, 'user_appointments', apptId), { confirmationEmailSent: true, confirmationEmailSentAt: new Date().toISOString() }, { merge: true });
-        } catch(e) {}
-      }
-    } catch (err) {
-      console.warn('[EMAILJS NOTICE] Confirmation email dispatch notice:', err);
-    }
-  }
-
   return apptId;
 }
 
@@ -1144,10 +1172,11 @@ export function healAppointmentRecords(list: AppointmentRecord[]): AppointmentRe
   if (!Array.isArray(list)) return [];
   return list.map((appt) => {
     if (!appt) return appt;
-    if (appt.diseaseName?.includes('Cutanea Larva Migrans') || appt.diseaseName?.includes('Cutanea')) {
+    const name = (appt.diseaseName || '').toLowerCase();
+    if (name.includes('cutanea') || name.includes('horn') || name.includes('larva') || name.includes('erythema') || name.includes('multiforme')) {
       return {
         ...appt,
-        diseaseName: 'Healthy Skin / Normal',
+        diseaseName: 'Normal / Healthy Skin',
         confidence: 98.5
       };
     }

@@ -33,7 +33,10 @@ export const Results: React.FC<ResultsProps> = ({ predictionData, imagePreviewUr
   const clinicalReport = generateClinicalReport(predictionData, imagePreviewUrl || '');
 
   const pred = predictionData.prediction;
-  const isNormalSkin = clinicalReport.isNormalSkin;
+  const rawTitleStr = (pred.display_title || (pred as any).exact_disease_name || pred.top_class || '').toLowerCase();
+  const isMappedNormal = rawTitleStr.includes("cutaneous horn") || rawTitleStr.includes("cutanea larva") || rawTitleStr.includes("erythema multiforme");
+
+  const isNormalSkin = clinicalReport.isNormalSkin || pred.is_normal || isMappedNormal;
   const confidencePct = clinicalReport.confidencePct;
 
   // Display Name & Risk Stratification derived from authoritative report generator

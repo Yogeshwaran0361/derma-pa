@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
-import { User, Mail, Calendar, Globe, Shield, Edit2, Save, CheckCircle2, AlertCircle } from 'lucide-react';
+import { User, Mail, Calendar, Globe, Shield, Edit2, Save, CheckCircle2, AlertCircle, Camera, LogOut } from 'lucide-react';
 import { Language } from '../i18n/translations';
 
-import { Camera } from 'lucide-react';
-
 export const Profile: React.FC = () => {
-  const { user, userProfile, updateProfile } = useAuth();
+  const navigate = useNavigate();
+  const { user, userProfile, updateProfile, logout } = useAuth();
   const { currentLang, setLanguage, t } = useLanguage();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -226,8 +226,8 @@ export const Profile: React.FC = () => {
 
           </div>
 
-          {/* Edit Actions */}
-          {isEditing && (
+          {/* Edit Actions / Sign Out Button */}
+          {isEditing ? (
             <div className="flex justify-end gap-3 pt-4 border-t border-slate-800">
               <button
                 type="button"
@@ -243,6 +243,20 @@ export const Profile: React.FC = () => {
               >
                 <Save className="w-4 h-4" />
                 <span>{isSaving ? t.profile.saving : t.profile.saveToFirestore}</span>
+              </button>
+            </div>
+          ) : (
+            <div className="flex justify-end pt-4 border-t border-slate-800">
+              <button
+                type="button"
+                onClick={() => {
+                  logout();
+                  navigate('/signin');
+                }}
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 font-bold border border-rose-500/30 transition-all cursor-pointer shadow-md"
+              >
+                <LogOut className="w-4 h-4" />
+                <span>Sign Out & Go to Login</span>
               </button>
             </div>
           )}

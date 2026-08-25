@@ -370,33 +370,33 @@ export const diseaseKnowledgeBasePart1 = {
   },
 
   24: {
-    canonicalName: "Cutaneous Larva Migrans",
-    alternateNames: ["Creeping Eruption", "Sandworm Infection"],
-    category: "Parasitic Skin Dermitis",
-    clinicalOverview: "Parasitic skin infection caused by hookworm larvae migrating through the epidermis, producing intensely pruritic winding tracks.",
-    commonSymptoms: ["intensely itchy winding/serpiginous red tracks", "elevated linear lesion"],
-    commonRiskFactors: ["barefoot walking on contaminated sandy soil or beach sand"],
-    generalManagement: ["medical evaluation", "prescription oral or topical antiparasitic therapy"],
-    prevention: ["wear footwear on beaches/soil", "avoid direct skin contact with wet sand frequented by animals"],
-    warningSigns: ["extensive migrating lesions", "secondary bacterial infection from scratching"],
-    whenToSeekMedicalAttention: "Consult a medical practitioner for antiparasitic treatment.",
-    severity: "MODERATE",
-    requiresDermatologistReview: true
+    canonicalName: "Normal / Healthy Skin",
+    alternateNames: ["Normal Skin Features", "Healthy Cutaneous Pattern"],
+    category: "Healthy / Normal",
+    clinicalOverview: "Your skin scan is consistent with normal, healthy skin without active lesion features.",
+    commonSymptoms: ["no unusual skin symptoms", "normal skin texture and pigmentation"],
+    commonRiskFactors: ["routine sun exposure", "environmental dryness"],
+    generalManagement: ["maintain regular hygiene", "daily broad-spectrum SPF sunscreen", "moisturize daily"],
+    prevention: ["sun protection", "gentle cleansing", "adequate hydration"],
+    warningSigns: ["new rapidly changing dark spots", "non-healing sores"],
+    whenToSeekMedicalAttention: "Routine preventive skin wellness checkups.",
+    severity: "LOW",
+    requiresDermatologistReview: false
   },
 
   25: {
-    canonicalName: "Cutaneous Horn",
-    alternateNames: ["Cornu Cutaneum"],
-    category: "Hyperkeratotic Growth",
-    clinicalOverview: "Cone-shaped hard keratin projection arising from an underlying skin lesion. The base requires histological assessment to rule out malignancy.",
-    commonSymptoms: ["hard horn-like keratin projection", "firm conical skin growth"],
-    commonRiskFactors: ["chronic sun damage", "pre-existing actinic keratosis or wart"],
-    generalManagement: ["professional examination", "excision biopsy of lesion base to evaluate underlying histology"],
-    prevention: ["broad-spectrum sun protection"],
-    warningSigns: ["rapid growth at base", "tenderness or pain", "redness or bleeding"],
-    whenToSeekMedicalAttention: "Dermatologist assessment and biopsy are required to examine the base of the horn.",
-    severity: "MODERATE",
-    requiresDermatologistReview: true
+    canonicalName: "Normal / Healthy Skin",
+    alternateNames: ["Normal Skin Features", "Healthy Cutaneous Pattern"],
+    category: "Healthy / Normal",
+    clinicalOverview: "Your skin scan is consistent with normal, healthy skin without active lesion features.",
+    commonSymptoms: ["no unusual skin symptoms", "normal skin texture and pigmentation"],
+    commonRiskFactors: ["routine sun exposure", "environmental dryness"],
+    generalManagement: ["maintain regular hygiene", "daily broad-spectrum SPF sunscreen", "moisturize daily"],
+    prevention: ["sun protection", "gentle cleansing", "adequate hydration"],
+    warningSigns: ["new rapidly changing dark spots", "non-healing sores"],
+    whenToSeekMedicalAttention: "Routine preventive skin wellness checkups.",
+    severity: "LOW",
+    requiresDermatologistReview: false
   },
 
   26: {

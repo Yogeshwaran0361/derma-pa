@@ -169,7 +169,7 @@ export const Messages: React.FC = () => {
           >
             {consultations.filter(Boolean).map(c => (
               <option key={c.id} value={c.id}>
-                {c.displayTitle} ({new Date(c.createdAt).toLocaleDateString()})
+                {c.displayTitle || c.diseaseName || 'Consultation'} ({new Date(c.createdAt || Date.now()).toLocaleDateString()})
               </option>
             ))}
           </select>

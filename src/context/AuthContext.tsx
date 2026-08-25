@@ -1,17 +1,19 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
+import { onAuthStateChanged, signOut, deleteUser, User as FirebaseUser } from 'firebase/auth';
+import { query, collection, where, getDocs } from 'firebase/firestore';
 import {
   auth,
+  db,
   registerWithEmail as apiRegister,
   loginWithEmail as apiLogin,
-  signUpWithGoogle as apiSignUpGoogle,
-  signInWithGoogle as apiSignInGoogle,
   logoutUser as apiLogout,
-  checkGoogleRedirectResult,
   getUserProfileDoc,
   updateUserProfileDoc,
-  createUserProfile as createUserProfileDoc,
-  UserProfileData
+  createUserProfile,
+  UserProfileData,
+  reloadUserAuth,
+  signUpWithGoogle as apiSignUpGoogle,
+  signInWithGoogle as apiSignInGoogle
 } from '../services/firebase';
 
 export type UserMode = 'AUTHENTICATED' | 'UNAUTHENTICATED' | 'DEMO_MODE';
@@ -20,17 +22,20 @@ interface AuthContextType {
   user: FirebaseUser | null;
   userProfile: UserProfileData | null;
   userMode: UserMode;
+  setUserMode: React.Dispatch<React.SetStateAction<UserMode>>;
+  loginOtpVerified: boolean;
+  setLoginOtpVerified: (verified: boolean) => void;
   loading: boolean;
-  register: (email: string, pass: string, name: string, age: number, gender: string) => Promise<void>;
+  accountStatus: 'PENDING_VERIFICATION' | 'ACTIVE' | 'DISABLED' | 'UNAUTHENTICATED';
   login: (email: string, pass: string) => Promise<void>;
   signUpGoogle: (useRedirectOnMobile?: boolean) => Promise<{ user: FirebaseUser | null; isNewUser: boolean; existingUser: boolean; profileCompleted: boolean }>;
   signInGoogle: (useRedirectOnMobile?: boolean) => Promise<{ user: FirebaseUser | null; notRegistered: boolean; profileCompleted: boolean }>;
-  loginGoogle: (useRedirectOnMobile?: boolean) => Promise<boolean>;
   logout: () => Promise<void>;
   enterDemoMode: () => void;
   exitDemoMode: () => void;
   refreshProfile: () => Promise<void>;
   updateProfile: (updates: Partial<UserProfileData>) => Promise<void>;
+  isEmailVerified: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -39,25 +44,65 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<FirebaseUser | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfileData | null>(null);
   const [userMode, setUserMode] = useState<UserMode>('UNAUTHENTICATED');
+  const [loginOtpVerified, setLoginOtpVerifiedState] = useState<boolean>(() => {
+    try {
+      return sessionStorage.getItem('dermavision_login_otp_verified') === 'true';
+    } catch (e) {
+      return false;
+    }
+  });
+
+  const setLoginOtpVerified = (verified: boolean) => {
+    setLoginOtpVerifiedState(verified);
+    try {
+      if (verified) {
+        sessionStorage.setItem('dermavision_login_otp_verified', 'true');
+      } else {
+        sessionStorage.removeItem('dermavision_login_otp_verified');
+      }
+    } catch (e) {}
+  };
+
   const [loading, setLoading] = useState<boolean>(true);
 
   // Sync Real Firebase Auth State (Source of Truth)
   useEffect(() => {
-    // Check for Google Redirect Result on Mobile
-    checkGoogleRedirectResult().catch(() => {});
-
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       console.log('[AUTH] Firebase Auth State Changed -> UID:', currentUser?.uid || 'NONE', '| Email:', currentUser?.email || 'NONE');
-      setUser(currentUser);
       if (currentUser) {
-        setUserMode('AUTHENTICATED');
         try {
-          const profile = await getUserProfileDoc(currentUser.uid);
-          setUserProfile(profile);
+          let profile = await getUserProfileDoc(currentUser.uid);
+          if (!profile && currentUser.email) {
+            try {
+              const q = query(collection(db, 'users'), where('email', '==', currentUser.email.toLowerCase()));
+              const snap = await getDocs(q);
+              if (!snap.empty) {
+                profile = snap.docs[0].data() as UserProfileData;
+              }
+            } catch (e) {}
+          }
+
+          if (profile && profile.profileCompleted === true) {
+            // VERIFIED REGISTERED USER WHO COMPLETED STEP 3 PASSWORD CREATION!
+            setUser(currentUser);
+            setUserProfile(profile);
+            setUserMode('AUTHENTICATED');
+          } else {
+            // IN-PROGRESS / UNCOMPLETED REGISTRATION — DO NOT GRANT AUTHENTICATED MODE!
+            console.log('[AUTH] User registration in-progress. Firestore profile deferred until Step 3 Password Creation.');
+            setUser(currentUser);
+            setUserProfile(null);
+            setUserMode((prev) => (prev === 'DEMO_MODE' ? 'DEMO_MODE' : 'UNAUTHENTICATED'));
+          }
         } catch (err) {
-          console.warn('[AUTH] Profile fetch notice:', err);
+          console.warn('[AUTH] Profile check error:', err);
+          await signOut(auth);
+          setUser(null);
+          setUserProfile(null);
+          setUserMode((prev) => (prev === 'DEMO_MODE' ? 'DEMO_MODE' : 'UNAUTHENTICATED'));
         }
       } else {
+        setUser(null);
         setUserProfile(null);
         setUserMode((prev) => (prev === 'DEMO_MODE' ? 'DEMO_MODE' : 'UNAUTHENTICATED'));
       }
@@ -77,26 +122,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const refreshProfile = async () => {
     if (user) {
       try {
+        await reloadUserAuth();
         const profile = await getUserProfileDoc(user.uid);
         if (profile) setUserProfile(profile);
       } catch (e) {
         console.warn('[AUTH] Refresh profile notice:', e);
       }
-    }
-  };
-
-  const register = async (email: string, pass: string, name: string, age: number, gender: string) => {
-    setLoading(true);
-    try {
-      const newUser = await apiRegister(email, pass, name, age, gender);
-      setUser(newUser);
-      setUserMode('AUTHENTICATED');
-      await refreshProfile();
-    } catch (err: any) {
-      console.error('[AUTH] Firebase Register Error:', err);
-      throw err;
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -122,8 +153,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const res = await apiSignUpGoogle(useRedirectOnMobile);
       if (res.user) {
         setUser(res.user);
-        setUserMode('AUTHENTICATED');
-        await refreshProfile();
+        // Do not set AUTHENTICATED mode during sign-up registration wizard!
+        // User must fill out patient details and complete OTP verification first!
       }
       return res;
     } catch (err: any) {
@@ -139,10 +170,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       console.log('[AUTH] Initiating Google Sign-In...');
       const res = await apiSignInGoogle(useRedirectOnMobile);
-      if (res.user) {
+      if (res.user && !res.notRegistered) {
         setUser(res.user);
         setUserMode('AUTHENTICATED');
         await refreshProfile();
+      } else {
+        setUser(null);
+        setUserProfile(null);
+        setUserMode((prev) => (prev === 'DEMO_MODE' ? 'DEMO_MODE' : 'UNAUTHENTICATED'));
       }
       return res;
     } catch (err: any) {
@@ -151,11 +186,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } finally {
       setLoading(false);
     }
-  };
-
-  const loginGoogle = async (useRedirectOnMobile = false): Promise<boolean> => {
-    const res = await signUpGoogle(useRedirectOnMobile);
-    return res.isNewUser;
   };
 
   const logout = async () => {
@@ -168,6 +198,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(null);
       setUserProfile(null);
       setUserMode('UNAUTHENTICATED');
+      setLoginOtpVerified(false);
       setLoading(false);
     }
   };
@@ -192,35 +223,54 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUserProfile((prev) => (prev ? { ...prev, ...updates } : null));
   };
 
-  const effectiveUserProfile: UserProfileData = userProfile || {
-    uid: user?.uid || 'guest_user_123',
-    name: user?.displayName || 'Patient User',
-    email: user?.email || 'patient@dermavision.ai',
+  // Determine Exact Account Status
+  const isEmailVerified = Boolean(user?.emailVerified || userProfile?.emailVerified);
+  let accountStatus: 'PENDING_VERIFICATION' | 'ACTIVE' | 'DISABLED' | 'UNAUTHENTICATED' = 'UNAUTHENTICATED';
+  
+  if (user) {
+    if (!isEmailVerified) {
+      accountStatus = 'PENDING_VERIFICATION';
+    } else if (userProfile?.accountStatus === 'DISABLED') {
+      accountStatus = 'DISABLED';
+    } else {
+      accountStatus = 'ACTIVE';
+    }
+  }
+
+  const effectiveUserProfile: UserProfileData | null = userProfile || (user ? {
+    uid: user.uid,
+    name: user.displayName || user.email?.split('@')[0] || 'Patient User',
+    email: user.email || '',
     age: 28,
     gender: 'Prefer not to say',
     authProvider: 'email',
+    emailVerified: isEmailVerified,
     role: 'patient',
+    accountStatus,
     profileCompleted: true,
     preferredLanguage: 'en'
-  };
+  } : null);
 
   return (
     <AuthContext.Provider
       value={{
         user,
         userProfile: effectiveUserProfile,
-        userMode: user ? 'AUTHENTICATED' : 'DEMO_MODE',
+        userMode,
+        setUserMode,
+        loginOtpVerified,
+        setLoginOtpVerified,
         loading,
-        register,
+        accountStatus,
         login,
         signUpGoogle,
         signInGoogle,
-        loginGoogle,
         logout,
         enterDemoMode,
         exitDemoMode,
         refreshProfile,
-        updateProfile
+        updateProfile,
+        isEmailVerified
       }}
     >
       {children}

@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, User, FileText, CheckCircle2, AlertCircle, X, ShieldAlert } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { createPatientAppointment } from '../services/firebase';
+import { createPatientAppointment, getUserScanHistory, SavedScanRecord } from '../services/firebase';
 
 interface BookAppointmentModalProps {
   isOpen: boolean;
   onClose: () => void;
-  reportData: {
-    reportId: string;
+  reportData?: {
+    reportId?: string;
     scanId?: string;
-    diseaseName: string;
-    confidence: number;
+    diseaseName?: string;
+    confidence?: number;
     imageUrl?: string;
-  };
+  } | null;
 }
 
 export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
@@ -25,22 +25,69 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
   const todayStr = new Date().toLocaleDateString('en-CA');
   const [appointmentDate, setAppointmentDate] = useState(todayStr);
   const [appointmentTime, setAppointmentTime] = useState('10:00');
+  const [availableScans, setAvailableScans] = useState<SavedScanRecord[]>([]);
+
+  const [activeReport, setActiveReport] = useState<{
+    reportId?: string;
+    scanId?: string;
+    diseaseName?: string;
+    confidence?: number;
+    imageUrl?: string;
+  }>({
+    reportId: reportData?.reportId || 'RPT_GENERAL',
+    scanId: reportData?.scanId || reportData?.reportId || 'SCAN_GENERAL',
+    diseaseName: reportData?.diseaseName || 'General Dermatology',
+    confidence: reportData?.confidence || 95.0,
+    imageUrl: reportData?.imageUrl || ''
+  });
+
   const [consultationReason, setConsultationReason] = useState(
-    `Consultation for AI screening result: ${reportData?.diseaseName || 'Skin Screening'}`
+    `Consultation for AI screening result: ${reportData?.diseaseName || 'General Dermatology'}`
   );
 
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [bookedApptId, setBookedApptId] = useState<string | null>(null);
 
-  // Sync consultationReason whenever active reportData or modal visibility changes
-  React.useEffect(() => {
+  // Load saved scan records for report selection dropdown
+  useEffect(() => {
+    if (user?.uid && isOpen) {
+      getUserScanHistory(user.uid).then((scans) => {
+        setAvailableScans(scans || []);
+      }).catch(() => {});
+    }
+  }, [user?.uid, isOpen]);
+
+  // Sync activeReport whenever prop reportData changes
+  useEffect(() => {
     if (reportData?.diseaseName) {
+      setActiveReport({
+        reportId: reportData.reportId || 'RPT_GENERAL',
+        scanId: reportData.scanId || reportData.reportId || 'SCAN_GENERAL',
+        diseaseName: reportData.diseaseName,
+        confidence: reportData.confidence || 95.0,
+        imageUrl: reportData.imageUrl || ''
+      });
       setConsultationReason(`Consultation for AI screening result: ${reportData.diseaseName}`);
     }
-  }, [reportData?.diseaseName, isOpen]);
+  }, [reportData, isOpen]);
 
   if (!isOpen) return null;
+
+  const handleSelectReport = (scanId: string) => {
+    const found = availableScans.find((s) => s.id === scanId || s.scanId === scanId);
+    if (found) {
+      const conf = (found.confidence * (found.confidence <= 1 ? 100 : 1));
+      setActiveReport({
+        reportId: found.id,
+        scanId: found.scanId || found.id,
+        diseaseName: found.displayTitle || found.topClass || 'Skin Lesion',
+        confidence: parseFloat(conf.toFixed(1)),
+        imageUrl: found.imageUrl || ''
+      });
+      setConsultationReason(`Consultation for AI screening result: ${found.displayTitle || found.topClass}`);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -83,15 +130,16 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
         patientId: user.uid,
         patientName: userProfile?.name || user.displayName || 'Patient',
         patientEmail: activeEmail,
-        reportId: reportData.reportId,
-        scanId: reportData.scanId || reportData.reportId,
-        diseaseName: reportData.diseaseName,
-        confidence: reportData.confidence,
-        imageUrl: reportData.imageUrl,
+        reportId: activeReport.reportId || 'RPT_GENERAL',
+        scanId: activeReport.scanId || activeReport.reportId || 'SCAN_GENERAL',
+        diseaseName: activeReport.diseaseName || 'General Dermatology',
+        confidence: activeReport.confidence || 95.0,
+        imageUrl: activeReport.imageUrl || '',
         appointmentDate,
         appointmentTime,
-        doctorId: 'dr_sarah_smith',
-        doctorName: 'Dr. Sarah Smith, MD',
+        doctorId: 'Awaiting_Doctor',
+        doctorName: 'Awaiting Doctor Acceptance (Waiting List)',
+        appointmentStatus: 'PENDING_ACCEPTANCE',
         consultationReason
       });
 
@@ -127,15 +175,16 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
           </button>
         </div>
 
+        {/* BOOKED SUCCESS STATE */}
         {bookedApptId ? (
-          /* SUCCESS CONFIRMATION STATE (PART 3) */
-          <div className="flex flex-col items-center text-center gap-5 py-4">
-            <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center animate-bounce">
+          <div className="flex flex-col items-center justify-center text-center gap-5 py-4">
+            <div className="w-16 h-16 rounded-full bg-emerald-500/10 border-2 border-emerald-500/30 text-emerald-400 flex items-center justify-center shadow-lg shadow-emerald-500/10">
               <CheckCircle2 className="w-8 h-8" />
             </div>
+            
             <div>
-              <h3 className="text-xl font-black text-white">Appointment Booked Successfully!</h3>
-              <p className="text-xs text-slate-400 mt-1">Your consultation request has been stored and scheduled.</p>
+              <h3 className="text-xl font-extrabold text-white">Appointment Booked Successfully!</h3>
+              <p className="text-xs text-slate-400 mt-1">Your consultation request has been broadcasted to the Waiting List.</p>
             </div>
 
             <div className="w-full bg-slate-950 p-4 rounded-2xl border border-slate-800 flex flex-col gap-2.5 text-xs text-left font-mono">
@@ -145,7 +194,7 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
               </div>
               <div className="flex justify-between border-b border-slate-800 pb-2">
                 <span className="text-slate-400">Assigned Doctor:</span>
-                <span className="text-slate-200 font-bold">Dr. Sarah Smith, MD</span>
+                <span className="text-amber-400 font-bold">Awaiting Doctor Acceptance (Waiting List)</span>
               </div>
               <div className="flex justify-between border-b border-slate-800 pb-2">
                 <span className="text-slate-400">Date & Time:</span>
@@ -153,11 +202,11 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
               </div>
               <div className="flex justify-between border-b border-slate-800 pb-2">
                 <span className="text-slate-400">Linked Report:</span>
-                <span className="text-slate-200 font-bold">{reportData.diseaseName} ({reportData.confidence}%)</span>
+                <span className="text-slate-200 font-bold">{activeReport.diseaseName || 'General Dermatology'} ({activeReport.confidence || 95}%)</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-400">Status:</span>
-                <span className="text-sky-400 font-bold uppercase">Scheduled</span>
+                <span className="text-amber-400 font-bold uppercase">WAITING_FOR_ACCEPTANCE</span>
               </div>
             </div>
 
@@ -189,12 +238,25 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
                 <span className="text-white font-bold">{userProfile?.name || user?.displayName || 'Patient'}</span>
               </div>
 
-              <div className="flex justify-between items-center border-b border-slate-800 pb-2">
-                <span className="text-slate-400 flex items-center gap-1.5 font-medium">
+              <div className="flex flex-col gap-1.5 pt-1">
+                <label className="text-slate-400 flex items-center gap-1.5 font-medium text-xs">
                   <FileText className="w-3.5 h-3.5 text-emerald-400" />
-                  Selected Screening:
-                </span>
-                <span className="text-emerald-400 font-bold">{reportData.diseaseName}</span>
+                  Select Specific AI Screening Report:
+                </label>
+                <select
+                  value={activeReport.reportId || ''}
+                  onChange={(e) => handleSelectReport(e.target.value)}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-emerald-300 font-bold text-xs focus:border-sky-500 outline-none cursor-pointer"
+                >
+                  <option value={activeReport.reportId || 'RPT_CURRENT'}>
+                    {activeReport.diseaseName} ({activeReport.confidence}% Confidence) - Current Selected Report
+                  </option>
+                  {availableScans.map((scan) => (
+                    <option key={scan.id} value={scan.id}>
+                      {scan.displayTitle || scan.topClass} — ({(scan.confidence * (scan.confidence <= 1 ? 100 : 1)).toFixed(1)}% Conf, {new Date(scan.scanDate).toLocaleDateString()})
+                    </option>
+                  ))}
+                </select>
               </div>
 
             </div>
