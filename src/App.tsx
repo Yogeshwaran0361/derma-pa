@@ -124,8 +124,12 @@ const DemoRouteHandler: React.FC = () => {
   return null;
 };
 
-// Root Landing Route Evaluator (Always lands on Sign In Page /signin)
+// Root Landing Route Evaluator (Renders Home for registered patients, or redirects visitors to /signin)
 const RootLandingHandler: React.FC = () => {
+  const { userMode, loginOtpVerified } = useAuth();
+  if (userMode === 'AUTHENTICATED' && loginOtpVerified) {
+    return <Home />;
+  }
   return <Navigate to="/signin" replace />;
 };
 

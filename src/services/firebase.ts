@@ -29,6 +29,7 @@ import {
   updateDoc,
   onSnapshot,
   addDoc,
+  deleteDoc,
   serverTimestamp
 } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -669,6 +670,42 @@ export async function getUserScanHistory(userId: string): Promise<SavedScanRecor
   return scans;
 }
 
+export async function deleteScanRecord(userId: string, scanId: string): Promise<boolean> {
+  try {
+    const userScanDocRef = doc(db, 'users', userId, 'scans', scanId);
+    await deleteDoc(userScanDocRef);
+  } catch (err) {
+    console.warn('[FIRESTORE DELETE NOTICE] Scan record delete notice:', err);
+  }
+
+  try {
+    const key = `dermavision_scans_${userId}`;
+    const existing = JSON.parse(localStorage.getItem(key) || '[]');
+    const updated = existing.filter((item: any) => (item.id !== scanId && item.scanId !== scanId));
+    localStorage.setItem(key, JSON.stringify(updated));
+  } catch (e) {}
+
+  return true;
+}
+
+export async function deleteAllScanHistory(userId: string): Promise<boolean> {
+  try {
+    const userScansRef = collection(db, 'users', userId, 'scans');
+    const snapshot = await getDocs(userScansRef);
+    const deletePromises = snapshot.docs.map((d) => deleteDoc(d.ref));
+    await Promise.all(deletePromises);
+  } catch (err) {
+    console.warn('[FIRESTORE DELETE ALL NOTICE]:', err);
+  }
+
+  try {
+    const key = `dermavision_scans_${userId}`;
+    localStorage.removeItem(key);
+  } catch (e) {}
+
+  return true;
+}
+
 // Legacy appointment helpers cleaned up - using new comprehensive Appointment system below.
 
 // Doctor Profile Operations & Live Sync
@@ -858,6 +895,47 @@ export function subscribeToPatientConsultation(
   }, (err) => {
     console.warn('[FIRESTORE NOTICE] subscribeToPatientConsultation notice:', err);
   });
+}
+
+export async function deletePatientConsultation(consultationId: string, userId?: string): Promise<boolean> {
+  try {
+    const consultDocRef = doc(db, 'consultations', consultationId);
+    await deleteDoc(consultDocRef);
+  } catch (err) {
+    console.warn('[FIRESTORE DELETE NOTICE] Consultation delete notice:', err);
+  }
+
+  if (userId) {
+    try {
+      const localKey = `dermavision_consultations_${userId}`;
+      const localSaved = JSON.parse(localStorage.getItem(localKey) || '[]');
+      const updated = localSaved.filter((item: any) => item.id !== consultationId);
+      localStorage.setItem(localKey, JSON.stringify(updated));
+    } catch (e) {}
+  }
+
+  return true;
+}
+
+export async function deleteAllPatientConsultations(userId: string): Promise<boolean> {
+  try {
+    const consultRef = collection(db, 'consultations');
+    const q = query(consultRef, where('patientId', '==', userId));
+    const snapshot = await getDocs(q);
+    const deletePromises = snapshot.docs.map((d) => deleteDoc(d.ref));
+    await Promise.all(deletePromises);
+  } catch (err) {
+    console.warn('[FIRESTORE DELETE ALL NOTICE]:', err);
+  }
+
+  if (userId) {
+    try {
+      const localKey = `dermavision_consultations_${userId}`;
+      localStorage.removeItem(localKey);
+    } catch (e) {}
+  }
+
+  return true;
 }
 
 export function subscribeToAllConsultationsForDoctor(

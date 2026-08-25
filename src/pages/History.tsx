@@ -10,7 +10,9 @@ import {
   sendPatientMessage,
   requestDoctorConsultation,
   PatientConsultation,
-  PatientMessage
+  PatientMessage,
+  deleteScanRecord,
+  deleteAllScanHistory
 } from '../services/firebase';
 import { getLocalizedDiseaseInfo, getNormalSkinInfo, formatConfidencePct } from '../services/diseaseInfo';
 import {
@@ -27,7 +29,8 @@ import {
   Pill,
   User,
   ShieldCheck,
-  Mic
+  Mic,
+  Trash2
 } from 'lucide-react';
 import { VoiceRecorder } from '../components/VoiceRecorder';
 
@@ -40,6 +43,34 @@ export const History: React.FC = () => {
   const [scans, setScans] = useState<SavedScanRecord[]>([]);
   const [consultations, setConsultations] = useState<PatientConsultation[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const handleDeleteScan = async (scanId: string) => {
+    if (!user?.uid) return;
+    const confirmMsg = currentLang === 'ta'
+      ? 'இந்த ஸ்கேன் வரலாற்றை நீக்க வேண்டுமா?'
+      : currentLang === 'hi'
+      ? 'क्या आप इस स्कैन रिकॉर्ड को हटाना चाहते हैं?'
+      : 'Are you sure you want to delete this scan record?';
+
+    if (window.confirm(confirmMsg)) {
+      await deleteScanRecord(user.uid, scanId);
+      setScans((prev) => prev.filter((s) => s.id !== scanId && s.scanId !== scanId));
+    }
+  };
+
+  const handleClearAllScans = async () => {
+    if (!user?.uid) return;
+    const confirmMsg = currentLang === 'ta'
+      ? 'அனைத்து ஸ்கேன் வரலாற்றையும் நீக்க வேண்டுமா?'
+      : currentLang === 'hi'
+      ? 'क्या आप सभी स्कैन इतिहास को हटाना चाहते हैं?'
+      : 'Are you sure you want to delete ALL scan history? This action cannot be undone.';
+
+    if (window.confirm(confirmMsg)) {
+      await deleteAllScanHistory(user.uid);
+      setScans([]);
+    }
+  };
 
   // Live Chat Modal State
   const [selectedConsultation, setSelectedConsultation] = useState<PatientConsultation | null>(null);
@@ -234,6 +265,22 @@ export const History: React.FC = () => {
       {/* TAB CONTENT: MY SCAN RECORDS */}
       {activeTab === 'scans' && (
         <div className="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 flex flex-col gap-6 shadow-2xl">
+          {scans.length > 0 && (
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-2">
+              <span className="text-xs text-slate-400 font-bold">
+                {scans.length} {scans.length === 1 ? 'Saved Scan' : 'Saved Scans'}
+              </span>
+              <button
+                type="button"
+                onClick={handleClearAllScans}
+                className="px-3 py-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-xs font-bold border border-rose-500/30 flex items-center gap-1.5 transition-all cursor-pointer"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+                <span>{isTa ? 'அனைத்தையும் நீக்கு' : isHi ? 'सभी स्कैन हटाएं' : 'Clear All Scan History'}</span>
+              </button>
+            </div>
+          )}
+
           {loading ? (
             <div className="flex items-center justify-center py-12 text-slate-400 gap-3">
               <div className="w-6 h-6 border-2 border-sky-400 border-t-transparent rounded-full animate-spin"></div>
@@ -300,7 +347,7 @@ export const History: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap items-center justify-between sm:justify-end gap-3 shrink-0">
+                    <div className="flex flex-wrap items-center justify-between sm:justify-end gap-2.5 shrink-0">
                       <span className={`px-3.5 py-1 rounded-full text-xs font-bold uppercase ${
                         localizedInfo.riskLevel === 'High'
                           ? 'bg-rose-500/10 text-rose-400 border border-rose-500/30'
@@ -332,6 +379,15 @@ export const History: React.FC = () => {
                       >
                         <span>{t.history.viewReport}</span>
                         <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+
+                      {/* Delete Scan Record Button */}
+                      <button
+                        onClick={() => handleDeleteScan(scan.id)}
+                        className="p-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 transition-colors cursor-pointer"
+                        title="Delete Scan Record"
+                      >
+                        <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
                   </div>

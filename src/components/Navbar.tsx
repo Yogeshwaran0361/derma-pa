@@ -35,7 +35,7 @@ export const Navbar: React.FC = () => {
       <div className="hidden md:flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 items-center justify-between">
         
         {/* Brand Logo */}
-        <Link to="/" className="flex items-center gap-3 group">
+        <Link to="/home" className="flex items-center gap-3 group">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-teal-400 p-0.5 shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
             <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center text-sky-400">
               <ScanLine className="w-5 h-5" />
@@ -52,9 +52,9 @@ export const Navbar: React.FC = () => {
         {/* Nav Links */}
         <nav className="flex items-center gap-1">
           <Link
-            to="/"
+            to="/home"
             className={`px-3 py-2 rounded-lg text-xs font-semibold transition-colors ${
-              isActive('/') ? 'bg-slate-800 text-sky-400' : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
+              isActive('/home') || isActive('/') ? 'bg-slate-800 text-sky-400' : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
             }`}
           >
             {t.nav.home}

@@ -17,7 +17,7 @@ export const BottomNav: React.FC = () => {
       id: 'home',
       label: t.nav.home || 'Home',
       icon: Home,
-      path: userMode === 'AUTHENTICATED' ? '/dashboard' : '/home'
+      path: '/home'
     },
     {
       id: 'scan',

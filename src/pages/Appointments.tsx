@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
-import { subscribeToUserAppointments, AppointmentRecord } from '../services/firebase';
+import { subscribeToUserAppointments, AppointmentRecord, deletePatientConsultation, deleteAllPatientConsultations } from '../services/firebase';
 import { AppointmentDetailsModal } from '../components/AppointmentDetailsModal';
 import { BookAppointmentModal } from '../components/BookAppointmentModal';
-import { Calendar, Clock, Video, FileText, Stethoscope, ChevronRight, AlertCircle, PlusCircle, ExternalLink } from 'lucide-react';
+import { Calendar, Clock, Video, FileText, Stethoscope, ChevronRight, AlertCircle, PlusCircle, ExternalLink, Trash2 } from 'lucide-react';
 
 export const Appointments: React.FC = () => {
   const navigate = useNavigate();
@@ -18,6 +18,21 @@ export const Appointments: React.FC = () => {
   const [selectedAppointment, setSelectedAppointment] = useState<AppointmentRecord | null>(null);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [isBookModalOpen, setIsBookModalOpen] = useState(false);
+
+  const handleDeleteAppt = async (apptId: string) => {
+    if (window.confirm('Are you sure you want to cancel/delete this appointment?')) {
+      await deletePatientConsultation(apptId, user?.uid);
+      setAppointments((prev) => prev.filter((a) => a.id !== apptId));
+    }
+  };
+
+  const handleClearAllAppts = async () => {
+    if (!user?.uid) return;
+    if (window.confirm('Are you sure you want to delete ALL appointments? This action cannot be undone.')) {
+      await deleteAllPatientConsultations(user.uid);
+      setAppointments([]);
+    }
+  };
 
   useEffect(() => {
     if (!user?.uid) {
@@ -179,6 +194,17 @@ export const Appointments: React.FC = () => {
                     >
                       <span>View Details</span>
                       <ChevronRight className="w-3.5 h-3.5" />
+                    </button>
+
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeleteAppt(appt.id);
+                      }}
+                      className="p-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 transition-colors cursor-pointer"
+                      title="Cancel / Delete Appointment"
+                    >
+                      <Trash2 className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
