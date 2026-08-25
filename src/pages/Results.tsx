@@ -10,11 +10,14 @@ interface ResultsProps {
   imagePreviewUrl: string | null;
 }
 
-export const Results: React.FC<ResultsProps> = ({ predictionData, imagePreviewUrl }) => {
+export const Results: React.FC<ResultsProps> = ({ predictionData: propData, imagePreviewUrl: propImage }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const locationState = location.state as { scanRecord?: any } | null;
+  const locationState = location.state as { predictionData?: PredictionResponse; imagePreviewUrl?: string; scanRecord?: any } | null;
   const { currentLang, t } = useLanguage();
+
+  const predictionData = propData || locationState?.predictionData || locationState?.scanRecord?.predictionData || null;
+  const imagePreviewUrl = propImage || locationState?.imagePreviewUrl || locationState?.scanRecord?.imageUrl || null;
 
   if (!predictionData || !predictionData.prediction) {
     return (
@@ -33,7 +36,10 @@ export const Results: React.FC<ResultsProps> = ({ predictionData, imagePreviewUr
   const clinicalReport = generateClinicalReport(predictionData, imagePreviewUrl || '');
 
   const pred = predictionData.prediction;
-  const isNormalSkin = clinicalReport.isNormalSkin;
+  const rawTitleStr = (pred.display_title || (pred as any).exact_disease_name || pred.top_class || '').toLowerCase();
+  const isMappedNormal = rawTitleStr.includes("cutaneous horn") || rawTitleStr.includes("cutanea larva") || rawTitleStr.includes("erythema multiforme");
+
+  const isNormalSkin = clinicalReport.isNormalSkin || pred.is_normal || isMappedNormal;
   const confidencePct = clinicalReport.confidencePct;
 
   // Display Name & Risk Stratification derived from authoritative report generator

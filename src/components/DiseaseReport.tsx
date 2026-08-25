@@ -1,6 +1,7 @@
 import React from 'react';
 import { ResolvedDiseaseResult } from '../services/diseaseResolver';
 import { getLocalizedDiseaseInfo } from '../services/diseaseInfo';
+import { HealthySkinReport } from './HealthySkinReport';
 import { useLanguage } from '../context/LanguageContext';
 import { AlertTriangle, Stethoscope, ShieldAlert, Activity, FileText, CheckSquare, Info } from 'lucide-react';
 
@@ -13,6 +14,13 @@ interface DiseaseReportProps {
 export const DiseaseReport: React.FC<DiseaseReportProps> = ({ diseaseResult, confidencePct, scannedImageUrl }) => {
   const { currentLang, t } = useLanguage();
   const { classId, internalClassName, canonicalName, knowledgeBaseEntry } = diseaseResult;
+
+  const rawTitle = (canonicalName || internalClassName || '').toLowerCase();
+  const isMappedNormal = rawTitle.includes("cutaneous horn") || rawTitle.includes("cutanea larva") || rawTitle.includes("erythema multiforme");
+
+  if (isMappedNormal || classId === 101 || classId === 24 || classId === 25 || classId === 44) {
+    return <HealthySkinReport scannedImageUrl={scannedImageUrl} />;
+  }
   const {
     category,
     clinicalOverview,

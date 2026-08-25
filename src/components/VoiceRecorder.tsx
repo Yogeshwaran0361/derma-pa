@@ -3,15 +3,17 @@ import { Mic, Square, Send, RefreshCw } from 'lucide-react';
 
 interface VoiceRecorderProps {
   onSendVoiceNote: (audioUrl: string) => void;
+  disabled?: boolean;
 }
 
-export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({ onSendVoiceNote }) => {
+export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({ onSendVoiceNote, disabled }) => {
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlobUrl, setAudioBlobUrl] = useState<string | null>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
 
   const startRecording = async () => {
+    if (disabled) return;
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       const mediaRecorder = new MediaRecorder(stream);
@@ -63,18 +65,20 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({ onSendVoiceNote })
   return (
     <div className="flex items-center gap-2">
       {audioBlobUrl ? (
-        <div className="flex items-center gap-2 bg-slate-900 border border-slate-700 rounded-xl p-1.5">
-          <audio src={audioBlobUrl} controls className="h-7 max-w-[160px]" />
+        <div className="flex items-center gap-2 bg-slate-900 border border-slate-700 rounded-2xl p-1.5 shadow-lg">
+          <audio src={audioBlobUrl} controls className="h-8 max-w-[160px]" />
           <button
+            type="button"
             onClick={handleSend}
-            className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs flex items-center gap-1 shadow cursor-pointer"
+            className="px-3 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs flex items-center gap-1 shadow cursor-pointer"
           >
             <Send className="w-3.5 h-3.5" />
-            <span>Send Voice</span>
+            <span>Send Audio</span>
           </button>
           <button
+            type="button"
             onClick={handleDiscard}
-            className="p-1.5 rounded-lg bg-slate-800 text-slate-400 hover:text-white"
+            className="p-1.5 rounded-xl bg-slate-800 text-slate-400 hover:text-white cursor-pointer"
             title="Discard"
           >
             <RefreshCw className="w-3.5 h-3.5" />
@@ -82,20 +86,23 @@ export const VoiceRecorder: React.FC<VoiceRecorderProps> = ({ onSendVoiceNote })
         </div>
       ) : isRecording ? (
         <button
+          type="button"
           onClick={stopRecording}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs animate-pulse cursor-pointer shadow-lg shadow-rose-500/20"
+          className="flex items-center gap-2 px-3 py-2 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs animate-pulse cursor-pointer shadow-lg shadow-rose-500/20"
         >
           <Square className="w-3.5 h-3.5 fill-white" />
           <span>Stop Recording...</span>
         </button>
       ) : (
         <button
+          type="button"
+          disabled={disabled}
           onClick={startRecording}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 font-semibold text-xs transition-colors cursor-pointer"
+          className="flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-sky-400 font-bold text-xs transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
           title="Record Audio Voice Note"
         >
-          <Mic className="w-3.5 h-3.5 text-sky-400" />
-          <span>Voice Note</span>
+          <Mic className="w-4 h-4 text-sky-400" />
+          <span className="hidden sm:inline">Voice Note</span>
         </button>
       )}
     </div>

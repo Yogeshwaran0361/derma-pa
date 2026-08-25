@@ -42,30 +42,41 @@ export interface CanonicalScanResult {
 }
 
 const ALIAS_MAP: Record<string, number> = {
-  'bcc': 9,
-  'basal_cell_carcinoma': 9,
-  'drugeruption': 35,
-  'drug_eruption': 35,
-  'seborrh_keratoses': 125,
-  'seborrhkeratoses': 125,
-  'seborrheic_keratosis': 125,
-  'strawberry_hemangioma': 133,
-  'skincancer': 127,
-  'warts': 148,
-  'sun_sunlight_damage': 136,
-  'bullous': 16,
-  'bullous_pemphigoid': 16,
-  'blister': 16,
-  'blistering': 16,
-  'cutanea_larva_migrans': 43,
-  'larva_migrans': 43,
-  'creeping_eruption': 43,
   'acne': 0,
   'acne_rosacea': 0,
   'pimple': 0,
   'pustule': 0,
-  'angioma': 133,
-  'vascular_lesion': 16,
+  'actinic_keratosis': 1,
+  'alopecia_areata': 2,
+  'bcc': 9,
+  'basal_cell_carcinoma': 9,
+  'bullous': 16,
+  'bullous_pemphigoid': 16,
+  'blister': 16,
+  'blistering': 16,
+  'drugeruption': 35,
+  'drug_eruption': 35,
+  'eczema': 38,
+  'dermatitis': 38,
+  'eczema_and_dermatitis': 38,
+  'melanoma': 89,
+  'melanoma_malignant': 89,
+  'cutaneous_horn': 101,
+  'cutanea_larva_migrans': 101,
+  'erythema_multiforme': 101,
+  'psoriasis': 115,
+  'seborrh_keratoses': 125,
+  'seborrhkeratoses': 125,
+  'seborrheic_keratosis': 125,
+  'skincancer': 127,
+  'strawberry_hemangioma': 133,
+  'sun_sunlight_damage': 136,
+  'tinea': 138,
+  'fungal_infection': 138,
+  'tinea_fungal_infection': 138,
+  'vitiligo': 149,
+  'warts': 148,
+  'verruca_vulgaris': 147,
   'normal_/_healthy_skin_(benign_feature)': 101,
   'normal_healthy_skin': 101,
   'healthy_skin': 101,
@@ -80,28 +91,32 @@ export function resolveDisease(classIdInput: number | string): ResolvedDiseaseRe
   let rawString = String(classIdInput !== undefined && classIdInput !== null ? classIdInput : '').trim();
   const normalizedKey = rawString.toLowerCase().replace(/[\s\-_]+/g, '_');
 
-  // Check explicit normal / healthy keywords
-  if (
-    normalizedKey === '101' ||
-    normalizedKey.includes('normal') ||
-    normalizedKey.includes('healthy') ||
-    classIdInput === 101
-  ) {
-    resolvedId = 101;
+  // 1. Check if direct integer or numeric string
+  if (typeof classIdInput === 'number' && !isNaN(classIdInput)) {
+    resolvedId = Math.floor(classIdInput);
+  } else if (/^\d{1,3}$/.test(rawString)) {
+    resolvedId = parseInt(rawString, 10);
+  } else {
+    const classMatch = rawString.match(/^class_?(\d{1,3})$/i);
+    if (classMatch) {
+      resolvedId = parseInt(classMatch[1], 10);
+    }
   }
 
-  // 1. Check if direct integer or numeric string
-  if (resolvedId === null) {
-    if (typeof classIdInput === 'number' && !isNaN(classIdInput)) {
-      resolvedId = Math.floor(classIdInput);
-    } else if (/^\d{1,3}$/.test(rawString)) {
-      resolvedId = parseInt(rawString, 10);
-    } else {
-      const classMatch = rawString.match(/^class_?(\d{1,3})$/i);
-      if (classMatch) {
-        resolvedId = parseInt(classMatch[1], 10);
-      }
-    }
+  // 2. Check explicit ALIAS_MAP
+  if (resolvedId === null && ALIAS_MAP[normalizedKey] !== undefined) {
+    resolvedId = ALIAS_MAP[normalizedKey];
+  }
+
+  // 3. Check explicit normal / healthy keywords if not matched by number
+  if (
+    resolvedId === null &&
+    (normalizedKey === '101' ||
+     normalizedKey === 'normal_skin' ||
+     normalizedKey === 'healthy_skin' ||
+     normalizedKey === 'normal_healthy_skin')
+  ) {
+    resolvedId = 101;
   }
 
   // 2. Check ALIAS_MAP

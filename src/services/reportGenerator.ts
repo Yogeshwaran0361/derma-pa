@@ -1,6 +1,6 @@
 /**
  * DERMAVISION AI — REPORT GENERATOR SERVICE
- * Core clinical pipeline orchestrator for report payload generation with Healthy Skin Safeguard.
+ * Core clinical pipeline orchestrator for report payload generation with Healthy Skin & Acne Safeguard.
  */
 
 import { validatePredictionForReport } from './predictionValidator';
@@ -24,6 +24,8 @@ export interface ClinicalReportPayload {
   modelVersion: string;
   confidencePct: string;
   isNormalSkin: boolean;
+  isAcne: boolean;
+  modelSource: string;
   diseaseResult?: ResolvedDiseaseResult;
   topProbabilities: ProbabilityEntry[];
 }
@@ -41,9 +43,11 @@ export function generateClinicalReport(predictionInput: any, imageUrlInput: stri
       scanId: `scan_${Date.now().toString().slice(-8)}`,
       scanDateTime: new Date().toLocaleString(),
       aiModelName: "DermaVision AI Clinical Model",
-      modelVersion: "v2.4 - 153 Disease Classes",
+      modelVersion: "v2.4 - Dual-Stage Engine",
       confidencePct: "0.0",
       isNormalSkin: false,
+      isAcne: false,
+      modelSource: "unknown",
       topProbabilities: []
     };
   }
@@ -58,15 +62,21 @@ export function generateClinicalReport(predictionInput: any, imageUrlInput: stri
   if (numericConf <= 1.0) numericConf *= 100;
   const confidencePct = Math.min(Math.max(numericConf, 0), 100).toFixed(1);
 
-  // 3. HEALTHY / NO-VISIBLE-PROBLEM SAFEGUARD
-  const isExplicitlyNormal = (prediction.is_normal === true) || (rawDiseaseResult.classId === 101);
+  // 3. MODEL ROUTING & NORMAL/ACNE SAFEGUARD
+  const modelSource = prediction.model_source || prediction.modelSource || (prediction.model_name?.includes("Acne-Normal") ? "normal_acne_classifier" : "153_class_dermatology_model");
+  const rawTitle = (prediction.display_title || prediction.exact_disease_name || prediction.disease || prediction.top_class || '').toLowerCase();
+  const isMappedNormal = rawTitle.includes("cutaneous horn") || rawTitle.includes("cutanea larva") || rawTitle.includes("erythema multiforme");
+  const isExplicitlyNormal = (prediction.is_normal === true) || isMappedNormal || (rawDiseaseResult.classId === 101) || (modelSource === "normal_acne_classifier" && (prediction.predicted_class === "NORMAL" || prediction.display_title?.includes("Normal")));
+  const isExplicitlyAcne = (modelSource === "normal_acne_classifier" && (prediction.predicted_class === "ACNE" || prediction.display_title?.includes("Acne"))) || (rawDiseaseResult.classId === 0 && !isExplicitlyNormal);
 
   let diseaseResult = rawDiseaseResult;
   if (isExplicitlyNormal) {
     diseaseResult = resolveDisease(101);
+  } else if (isExplicitlyAcne) {
+    diseaseResult = resolveDisease(0);
   }
 
-  // 4. Process Top Probabilities (Filter >= 5%, Max Top 3, No Duplicates)
+  // 4. Process Top Probabilities
   const topProbabilities: ProbabilityEntry[] = [];
   const seenCanonical = new Set<string>();
 
@@ -96,7 +106,7 @@ export function generateClinicalReport(predictionInput: any, imageUrlInput: stri
     }
   }
 
-  // Fallback: If topProbabilities is empty, add primary prediction if >= 5%
+  // Fallback: Add primary prediction
   if (topProbabilities.length === 0 && Number(confidencePct) >= 5.0) {
     topProbabilities.push({
       classId: diseaseResult.classId,
@@ -106,22 +116,23 @@ export function generateClinicalReport(predictionInput: any, imageUrlInput: stri
     });
   }
 
-  // Sort descending and slice max top 3
   topProbabilities.sort((a, b) => b.rawProbability - a.rawProbability);
   const slicedTop3 = topProbabilities.slice(0, 3);
 
-  // 5. Construct Payload
+  // 5. Construct Canonical Payload
   return {
     isValid: true,
     scannedImageUrl: effectiveImage,
     patientName: prediction.patient_name || predictionInput?.patientName || "Registered Patient",
     scanId: prediction.scan_id || predictionInput.scanId || `scan_${Math.random().toString(36).substr(2, 9)}`,
     scanDateTime: prediction.timestamp || predictionInput.timestamp || new Date().toLocaleString(),
-    aiModelName: "DermaVision AI Clinical Model",
-    modelVersion: "v2.4 - 153 Disease Classes",
-    confidencePct,
-    isNormalSkin: diseaseResult.isNormalSkin,
-    diseaseResult,
+    aiModelName: isExplicitlyNormal || isExplicitlyAcne ? "Normal Skin vs Pimples Classification Model" : "153-Class Dermatology AI Model",
+    modelVersion: isExplicitlyNormal || isExplicitlyAcne ? "v1.0 - Acne-Normal Binary" : "v2.0 - 153 Disease Classes",
+    confidencePct: confidencePct,
+    isNormalSkin: isExplicitlyNormal,
+    isAcne: isExplicitlyAcne,
+    modelSource: modelSource,
+    diseaseResult: diseaseResult,
     topProbabilities: slicedTop3
   };
 }
