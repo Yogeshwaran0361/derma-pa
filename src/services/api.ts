@@ -1,6 +1,7 @@
 import { PredictionResponse, QualityCheckResult } from '../types';
 
 const CLOUDFLARE_PRODUCTION_BACKEND = 'https://dermavision-ai-gateway.workers.dev/api';
+const RENDER_LIVE_BACKEND = 'https://dermavision-ai-backend.onrender.com/api';
 
 function getEndpoints(): string[] {
   const metaEnv = (import.meta as any).env || {};
@@ -15,6 +16,7 @@ function getEndpoints(): string[] {
   endpoints.push('http://127.0.0.1:8000/api');
   endpoints.push('http://localhost:8000/api');
   endpoints.push(CLOUDFLARE_PRODUCTION_BACKEND);
+  endpoints.push(RENDER_LIVE_BACKEND);
   endpoints.push('/api');
 
   return Array.from(new Set(endpoints));
