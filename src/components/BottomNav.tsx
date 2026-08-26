@@ -33,7 +33,7 @@ export const BottomNav: React.FC = () => {
     },
     {
       id: 'appointments',
-      label: 'Appointments',
+      label: t.nav.appointments || 'Appointments',
       icon: Calendar,
       path: '/appointments'
     },

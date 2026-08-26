@@ -95,7 +95,7 @@ export const Navbar: React.FC = () => {
               isActive('/appointments') ? 'bg-slate-800 text-sky-400' : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
             }`}
           >
-            Appointments
+            {(t.nav as any).appointments || 'Appointments'}
           </Link>
 
           <Link

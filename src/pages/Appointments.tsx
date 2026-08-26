@@ -62,6 +62,16 @@ export const Appointments: React.FC = () => {
     return isStarted && notCompleted && hasUrl;
   });
 
+  const isTa = currentLang === 'ta';
+  const isHi = currentLang === 'hi';
+
+  const pageTag = isTa ? 'நோயாளி தொலைநிலை சுகாதார அட்டவணை' : isHi ? 'रोगी टेली-स्वास्थ्य अनुसूची' : 'Patient Tele-Health Schedule';
+  const pageTitle = isTa ? 'என் சந்திப்புகள்' : isHi ? 'मेरी अपॉइंटमेंट्स' : 'My Appointments';
+  const pageSub = isTa ? 'உங்கள் திட்டமிடப்பட்ட தோல் மருத்துவ ஆலோசனைகளைப் பார்த்து நிர்வகிக்கவும்' : isHi ? 'अपनी निर्धारित त्वचा विज्ञान परामर्श देखें और प्रबंधित करें' : 'View and manage your scheduled dermatology consultations';
+  const bookBtn = isTa ? 'புதிய சந்திப்பை முன்பதிவு செய்' : isHi ? 'नई अपॉइंटमेंट बुक करें' : 'Book New Appointment';
+  const noApptsTitle = isTa ? 'திட்டமிடப்பட்ட சந்திப்புகள் எதுவும் இல்லை' : isHi ? 'कोई निर्धारित अपॉइंटमेंट नहीं' : 'No Scheduled Appointments';
+  const noApptsSub = isTa ? 'உங்களுக்கு வரவிருக்கும் தோல் மருத்துவ ஆலோசனைகள் எதுவும் இல்லை.' : isHi ? 'आपकी कोई आगामी परामर्श निर्धारित नहीं है।' : 'You have no upcoming dermatology consultations scheduled. Click below to schedule a telehealth session.';
+
   return (
     <div className="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8 flex flex-col gap-8 font-sans">
       
@@ -70,10 +80,10 @@ export const Appointments: React.FC = () => {
         <div>
           <div className="flex items-center gap-2 text-sky-400 font-bold text-xs uppercase tracking-wider">
             <Calendar className="w-4 h-4" />
-            <span>Patient Tele-Health Schedule</span>
+            <span>{pageTag}</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-white tracking-tight mt-1">My Appointments</h1>
-          <p className="text-xs text-slate-400">View and manage your scheduled dermatology consultations</p>
+          <h1 className="text-3xl font-extrabold text-white tracking-tight mt-1">{pageTitle}</h1>
+          <p className="text-xs text-slate-400">{pageSub}</p>
         </div>
 
         <button
@@ -81,7 +91,7 @@ export const Appointments: React.FC = () => {
           className="px-4 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-bold text-xs flex items-center gap-2 shadow-lg shadow-sky-500/20 cursor-pointer w-fit"
         >
           <PlusCircle className="w-4 h-4" />
-          <span>Book New Appointment</span>
+          <span>{bookBtn}</span>
         </button>
       </div>
 
@@ -93,19 +103,19 @@ export const Appointments: React.FC = () => {
         {loading ? (
           <div className="flex items-center justify-center py-12 text-slate-400 gap-3">
             <div className="w-6 h-6 border-2 border-sky-400 border-t-transparent rounded-full animate-spin"></div>
-            <span className="text-xs font-semibold">Loading appointments...</span>
+            <span className="text-xs font-semibold">{isTa ? 'சந்திப்புகள் ஏற்றப்படுகின்றன...' : isHi ? 'अपॉइंटमेंट लोड हो रहे हैं...' : 'Loading appointments...'}</span>
           </div>
         ) : appointments.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-center gap-3 bg-slate-950/60 rounded-2xl border border-slate-800 p-6">
             <Calendar className="w-12 h-12 text-slate-600" />
-            <h3 className="text-base font-bold text-slate-200">No Scheduled Appointments</h3>
-            <p className="text-xs text-slate-400 max-w-md">You have no upcoming dermatology consultations scheduled. Click below to schedule a telehealth session with Dr. Priya Sharma.</p>
+            <h3 className="text-base font-bold text-slate-200">{noApptsTitle}</h3>
+            <p className="text-xs text-slate-400 max-w-md">{noApptsSub}</p>
             <button
               onClick={() => setIsBookModalOpen(true)}
               className="mt-2 px-5 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-bold text-xs shadow-md shadow-sky-500/20 cursor-pointer flex items-center gap-1.5"
             >
               <PlusCircle className="w-4 h-4" />
-              <span>Book Consultation Appointment</span>
+              <span>{bookBtn}</span>
             </button>
           </div>
         ) : (

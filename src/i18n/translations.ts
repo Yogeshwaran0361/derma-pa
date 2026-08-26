@@ -14,6 +14,7 @@ export interface Translations {
     exitDemo: string;
     demoBadge: string;
     doctorHub: string;
+    appointments: string;
   };
   home: {
     heroTag: string;
@@ -258,7 +259,8 @@ export const translations: Record<Language, Translations> = {
       signOut: "Sign Out",
       exitDemo: "Exit Demo",
       demoBadge: "Demo Mode",
-      doctorHub: "Doctor Consultation"
+      doctorHub: "Doctor Consultation",
+      appointments: "Appointments"
     },
     home: {
       heroTag: "DermaVision AI • ResNet50 Cutaneous Classifier",
@@ -501,7 +503,8 @@ export const translations: Record<Language, Translations> = {
       signOut: "வெளியேறு",
       exitDemo: "டெமோவிலிருந்து வெளியேறு",
       demoBadge: "டெமோ பயன்முறை",
-      doctorHub: "மருத்துவர் ஆலோசனை"
+      doctorHub: "மருத்துவர் ஆலோசனை",
+      appointments: "சந்திப்புகள்"
     },
     home: {
       heroTag: "DermaVision AI • ResNet50 தோல் நோய் வகைப்படுத்தி",
@@ -744,7 +747,8 @@ export const translations: Record<Language, Translations> = {
       signOut: "साइन आउट",
       exitDemo: "डेमो से बाहर निकलें",
       demoBadge: "डेमो मोड",
-      doctorHub: "डॉक्टर परामर्श"
+      doctorHub: "डॉक्टर परामर्श",
+      appointments: "अपॉइंटमेंट"
     },
     home: {
       heroTag: "DermaVision AI • ResNet50 त्वचा रोग वर्गीकारक",

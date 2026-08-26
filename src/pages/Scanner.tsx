@@ -31,7 +31,21 @@ export const Scanner: React.FC<ScannerProps> = ({ onPredictionComplete }) => {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [showRestrictedModal, setShowRestrictedModal] = useState(false);
 
-  const analysisSteps = [
+  const analysisSteps = currentLang === 'ta' ? [
+    "படத்தைப் பகுப்பாய்வு செய்கிறது...",
+    "படத்தின் தரத்தைச் சரிபார்க்கிறது...",
+    "தோல் அம்சங்களைப் பகுப்பாய்வு செய்கிறது...",
+    "AI நோய் வகைப்பாட்டை இயக்குகிறது...",
+    "153 பயிற்சி பெற்ற நோய்களுடன் ஒப்பிடுகிறது...",
+    "மருத்துவ நோய் கண்டறிதல் அறிக்கையை உருவாக்குகிறது..."
+  ] : currentLang === 'hi' ? [
+    "छवि का विश्लेषण किया जा रहा है...",
+    "छवि गुणवत्ता की जाँच की जा रही है...",
+    "त्वचा की विशेषताओं का विश्लेषण...",
+    "एआई रोग वर्गीकरण चलाया जा रहा है...",
+    "153 प्रशिक्षित रोगों से तुलना की जा रही है...",
+    "नैदानिक रिपोर्ट तैयार की जा रही है..."
+  ] : [
     "Analyzing image...",
     "Checking image quality...",
     "Analyzing skin features...",

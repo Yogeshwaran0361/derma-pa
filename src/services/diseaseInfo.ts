@@ -86,6 +86,48 @@ function translateTextToHi(text: string): string {
   return res;
 }
 
+function translateDiseaseNameToTa(name: string): string {
+  if (!name) return '';
+  const clean = name.toLowerCase().trim();
+  if (clean.includes('healthy') || clean.includes('normal')) return 'ஆரோக்கியமான / சாதாரண தோல் (Healthy Skin)';
+  if (clean.includes('drug eruption') || clean.includes('drugeruption')) return 'மருந்து அழற்சி / தடிப்பு (Drug Eruption)';
+  if (clean.includes('bullous')) return 'கொப்புளம் / புல்லஸ் நோய் (Bullous Pemphigoid)';
+  if (clean.includes('eczema') || clean.includes('dermatitis')) return 'எக்ஸிமா மற்றும் தோல் அழற்சி (Eczema)';
+  if (clean.includes('psoriasis')) return 'சோரியாசிஸ் - காளாஞ்சகப்படை (Psoriasis)';
+  if (clean.includes('vitiligo')) return 'வெண்புள்ளி - விடைப்படை (Vitiligo)';
+  if (clean.includes('melanoma')) return 'மெலனோமா தோல் புற்றுநோய் (Melanoma)';
+  if (clean.includes('basal cell')) return 'பாசல் செல் கார்சினோமா (BCC)';
+  if (clean.includes('wart') || clean.includes('verruca')) return 'மரு / கொப்பளம் (Warts)';
+  if (clean.includes('tinea') || clean.includes('fungal')) return 'படர்தாமரை / பூஞ்சை தொற்று (Tinea)';
+  if (clean.includes('folliculitis')) return 'மயிர்க்கால் பூஞ்சை அழற்சி (Folliculitis)';
+  if (clean.includes('granuloma')) return 'பயோஜெனிக் கிரானுலோமா (Pyogenic Granuloma)';
+  if (clean.includes('acne') || clean.includes('rosacea') || clean.includes('pimple')) return 'முகப்பரு & ரோசேஷியா (Acne)';
+  if (clean.includes('alopecia')) return 'முடி உதிர்தல் / அலோபீசியா (Alopecia)';
+  if (clean.includes('keratosis')) return 'செபோர்ஹெயிக் கெராடோசிஸ் (Keratosis)';
+  return `${name} (${name})`;
+}
+
+function translateDiseaseNameToHi(name: string): string {
+  if (!name) return '';
+  const clean = name.toLowerCase().trim();
+  if (clean.includes('healthy') || clean.includes('normal')) return 'स्वस्थ / सामान्य त्वचा (Healthy Skin)';
+  if (clean.includes('drug eruption') || clean.includes('drugeruption')) return 'दवा से होने वाले चकत्ते (Drug Eruption)';
+  if (clean.includes('bullous')) return 'छालों से युक्त त्वचा रोग (Bullous Pemphigoid)';
+  if (clean.includes('eczema') || clean.includes('dermatitis')) return 'एक्जिमा और त्वचा शोथ (Eczema)';
+  if (clean.includes('psoriasis')) return 'सोरायसिस - त्वचा विकार (Psoriasis)';
+  if (clean.includes('vitiligo')) return 'सफेद दाग (Vitiligo)';
+  if (clean.includes('melanoma')) return 'मेलेनोमा त्वचा कैंसर (Melanoma)';
+  if (clean.includes('basal cell')) return 'बेसल सेल कार्सिनोमा (BCC)';
+  if (clean.includes('wart') || clean.includes('verruca')) return 'मस्से (Warts)';
+  if (clean.includes('tinea') || clean.includes('fungal')) return 'दाद / कवक संक्रमण (Tinea)';
+  if (clean.includes('folliculitis')) return 'हेयर फॉलिकल कवक संक्रमण (Folliculitis)';
+  if (clean.includes('granuloma')) return 'पायोजेनिक ग्रैनुलोमा (Pyogenic Granuloma)';
+  if (clean.includes('acne') || clean.includes('rosacea') || clean.includes('pimple')) return 'मुहासे और रोसासिया (Acne)';
+  if (clean.includes('alopecia')) return 'बाल झड़ना / एलोपेसिया (Alopecia)';
+  if (clean.includes('keratosis')) return 'केराटोफिब्रोमा (Keratosis)';
+  return `${name} (${name})`;
+}
+
 function convertKnowledgeSchemaToDetail(schema: DiseaseKnowledgeSchema, lang: Language = 'en'): LocalizedDiseaseDetail {
   const riskColor = schema.severity === 'HIGH' ? 'rose' : schema.severity === 'MODERATE' ? 'amber' : 'emerald';
   const riskLevel: 'Low' | 'Moderate' | 'High' = schema.severity === 'HIGH' ? 'High' : schema.severity === 'MODERATE' ? 'Moderate' : 'Low';
@@ -100,6 +142,7 @@ function convertKnowledgeSchemaToDetail(schema: DiseaseKnowledgeSchema, lang: La
   let medicalAttention = schema.whenToSeekMedicalAttention;
 
   if (lang === 'ta') {
+    name = translateDiseaseNameToTa(name);
     description = translateTextToTa(description);
     symptoms = symptoms.map(s => translateTextToTa(s));
     causes = causes.map(c => translateTextToTa(c));
@@ -108,6 +151,7 @@ function convertKnowledgeSchemaToDetail(schema: DiseaseKnowledgeSchema, lang: La
     warningSigns = warningSigns.map(w => translateTextToTa(w));
     medicalAttention = translateTextToTa(medicalAttention);
   } else if (lang === 'hi') {
+    name = translateDiseaseNameToHi(name);
     description = translateTextToHi(description);
     symptoms = symptoms.map(s => translateTextToHi(s));
     causes = causes.map(c => translateTextToHi(c));
