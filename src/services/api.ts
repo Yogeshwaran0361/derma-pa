@@ -1,21 +1,23 @@
 import { PredictionResponse, QualityCheckResult } from '../types';
 
+const CLOUDFLARE_PRODUCTION_BACKEND = 'https://dermavision-ai-gateway.workers.dev/api';
 const RENDER_LIVE_BACKEND = 'https://dermavision-ai-backend.onrender.com/api';
 
 function getEndpoints(): string[] {
-  const endpoints: string[] = [
-    'http://127.0.0.1:8000/api',
-    'http://localhost:8000/api',
-    RENDER_LIVE_BACKEND,
-    '/api'
-  ];
-
   const metaEnv = (import.meta as any).env || {};
-  const envApi = metaEnv.VITE_API_URL || metaEnv.VITE_BACKEND_URL;
+  const envApi = metaEnv.VITE_AI_API_URL || metaEnv.VITE_CLOUDFLARE_WORKER_URL || metaEnv.VITE_API_URL || metaEnv.VITE_BACKEND_URL;
+
+  const endpoints: string[] = [];
 
   if (envApi && typeof envApi === 'string' && envApi.trim() !== '') {
-    endpoints.unshift(envApi.trim().replace(/\/$/, ''));
+    endpoints.push(envApi.trim().replace(/\/$/, ''));
   }
+
+  endpoints.push('http://127.0.0.1:8000/api');
+  endpoints.push('http://localhost:8000/api');
+  endpoints.push(CLOUDFLARE_PRODUCTION_BACKEND);
+  endpoints.push(RENDER_LIVE_BACKEND);
+  endpoints.push('/api');
 
   return Array.from(new Set(endpoints));
 }
