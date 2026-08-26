@@ -204,9 +204,28 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const enterDemoMode = () => {
-    setUser(null);
-    setUserProfile(null);
+    setUser({
+      uid: 'demo_visitor_id',
+      email: 'demo@dermavision.ai',
+      displayName: 'Demo Visitor',
+      emailVerified: true
+    } as any);
+    setUserProfile({
+      uid: 'demo_visitor_id',
+      name: 'Demo Visitor',
+      email: 'demo@dermavision.ai',
+      role: 'patient',
+      profileCompleted: true,
+      age: 30,
+      gender: 'other',
+      preferredLanguage: 'en',
+      authProvider: 'demo'
+    } as any);
     setUserMode('DEMO_MODE');
+    setLoginOtpVerified(true);
+    try {
+      localStorage.setItem('dermavision_user_mode', 'DEMO_MODE');
+    } catch (e) {}
   };
 
   const exitDemoMode = () => {

@@ -118,16 +118,16 @@ const DemoRouteHandler: React.FC = () => {
 
   useEffect(() => {
     enterDemoMode();
-    navigate('/home', { replace: true });
+    navigate('/scanner', { replace: true });
   }, [enterDemoMode, navigate]);
 
   return null;
 };
 
-// Root Landing Route Evaluator (Renders Home for registered patients, or redirects visitors to /signin)
+// Root Landing Route Evaluator (Renders Home for registered patients & demo users)
 const RootLandingHandler: React.FC = () => {
   const { userMode, loginOtpVerified } = useAuth();
-  if (userMode === 'AUTHENTICATED' && loginOtpVerified) {
+  if ((userMode === 'AUTHENTICATED' && loginOtpVerified) || userMode === 'DEMO_MODE') {
     return <Home />;
   }
   return <Navigate to="/signin" replace />;

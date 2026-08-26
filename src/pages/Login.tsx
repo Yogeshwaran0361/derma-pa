@@ -470,7 +470,7 @@ export const Login: React.FC = () => {
                   type="button"
                   onClick={() => {
                     enterDemoMode();
-                    navigate('/');
+                    navigate('/scanner');
                   }}
                   className="w-full py-3 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-slate-950 text-xs font-black shadow-[0_0_25px_rgba(245,158,11,0.55)] flex items-center justify-center gap-2 cursor-pointer transition-all hover:scale-[1.02] border border-amber-300/40 uppercase tracking-wider"
                 >
